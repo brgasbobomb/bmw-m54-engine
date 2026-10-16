@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>BMW M54 Engine 3D Model</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js",
+      "three/addons/": "./vendor/addons/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <div id="canvas-container">
+      <div id="removed-parts-bar" class="removed-parts-bar">
+        <div class="removed-parts-label">Removed Parts:</div>
+        <div id="removed-parts-icons" class="removed-parts-icons"></div>
+      </div>
+    </div>
+
+    <div class="ui-panel">
+      <div class="panel-header">
+        <h2 id="model-title">BMW M54 Engine</h2>
+        <div class="panel-header-actions">
+          <button id="load-model-btn" class="btn btn-secondary">Load .glb…</button>
+          <button id="reset-btn" class="btn btn-primary">Reset All</button>
+        </div>
+      </div>
+      <input type="file" id="model-file" accept=".glb,.gltf" style="display:none">
+      <div id="model-status" class="model-status"></div>
+
+      <div class="part-info">
+        <div class="info-section">
+          <h3 id="part-name">Engine Block</h3>
+          <div class="info-details">
+            <div class="info-item">
+              <span class="label">Type:</span>
+              <span id="part-type">-</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Weight:</span>
+              <span id="part-weight">-</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Material:</span>
+              <span id="part-material">-</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Assembly:</span>
+              <span id="part-assembly">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h4>Relationships</h4>
+          <div id="part-relationships" class="relationships-list">
+            <p class="placeholder">Select a part to view relationships</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="parts-list-section">
+        <h4>Part Categories</h4>
+        <div id="parts-list" class="parts-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div class="controls-section">
+        <h4>Camera Controls</h4>
+        <p class="hint">Drag to rotate • Scroll to zoom • Middle mouse to pan</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- app.js (classic) defines classes + registers DOMContentLoaded; boot.js (module) sets window.THREE/GLTFLoader before DOMContentLoaded fires -->
+  <script src="src/app.js"></script>
+  <script type="module" src="src/boot.js"></script>
+</body>
+</html>

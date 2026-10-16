@@ -1,0 +1,391 @@
+{
+  "engineBlock": {
+    "id": "engine-block",
+    "name": "Engine Block",
+    "type": "Main Assembly",
+    "weight": "130 kg",
+    "material": "Aluminum Alloy with Cast-Iron Liners",
+    "assembly": "Block",
+    "specs": "3.0L Inline-6, 84mm bore, 89.6mm stroke",
+    "relationships": [
+      "Crankshaft",
+      "Connecting Rods",
+      "Pistons",
+      "Cylinder Head"
+    ]
+  },
+  "crankshaft": {
+    "id": "crankshaft",
+    "name": "Crankshaft",
+    "type": "Rotating Assembly",
+    "weight": "28 kg",
+    "material": "Forged Steel",
+    "assembly": "Block",
+    "specs": "12 counterweights, 7 main bearings, 60mm main journals, 45mm crankpins",
+    "relationships": [
+      "Engine Block",
+      "Connecting Rods",
+      "Main Bearings"
+    ]
+  },
+  "connectingRods": {
+    "id": "connecting-rods",
+    "name": "Connecting Rods (6 pcs)",
+    "type": "Rotating Assembly",
+    "weight": "18 kg",
+    "material": "Forged Steel",
+    "assembly": "Block",
+    "specs": "135mm length, 22mm piston pins, precision construction",
+    "relationships": [
+      "Crankshaft",
+      "Pistons"
+    ]
+  },
+  "pistons": {
+    "id": "pistons",
+    "name": "Pistons & Rings (6 pcs)",
+    "type": "Reciprocating Assembly",
+    "weight": "2.4 kg",
+    "material": "Aluminum with Graphite Coating",
+    "assembly": "Block",
+    "specs": "84mm diameter, 3-ring design, 313g each",
+    "relationships": [
+      "Connecting Rods",
+      "Cylinder Head"
+    ]
+  },
+  "cylinderHead": {
+    "id": "cylinder-head",
+    "name": "Cylinder Head",
+    "type": "Main Assembly",
+    "weight": "35 kg",
+    "material": "Aluminum Alloy",
+    "assembly": "Head",
+    "specs": "DOHC, 24 valves (4 per cylinder), crossflow configuration",
+    "relationships": [
+      "Engine Block",
+      "Camshafts",
+      "Intake Manifold",
+      "Exhaust Manifold"
+    ]
+  },
+  "camshafts": {
+    "id": "camshafts",
+    "name": "Camshafts (2 pcs)",
+    "type": "Rotating Assembly",
+    "weight": "8 kg",
+    "material": "Forged Steel",
+    "assembly": "Head",
+    "specs": "Intake & Exhaust, VANOS variable timing actuators",
+    "relationships": [
+      "Cylinder Head",
+      "Timing Chain",
+      "VANOS Actuators"
+    ]
+  },
+  "valves": {
+    "id": "valves",
+    "name": "Valves & Springs (24 pcs)",
+    "type": "Valve Train",
+    "weight": "3.2 kg",
+    "material": "Steel/Titanium",
+    "assembly": "Head",
+    "specs": "Intake 33mm, Exhaust 30.5mm diameter, 240°/244° duration",
+    "relationships": [
+      "Cylinder Head",
+      "Camshafts"
+    ]
+  },
+  "timingChain": {
+    "id": "timing-chain",
+    "name": "Timing Chain & Tensioners",
+    "type": "Drive System",
+    "weight": "2.5 kg",
+    "material": "Steel",
+    "assembly": "Head",
+    "specs": "Chain-driven from crankshaft, hydraulic compensators",
+    "relationships": [
+      "Camshafts",
+      "Crankshaft"
+    ]
+  },
+  "intakeManifold": {
+    "id": "intake-manifold",
+    "name": "Intake Manifold",
+    "type": "Intake System",
+    "weight": "6.5 kg",
+    "material": "Aluminum",
+    "assembly": "Intake",
+    "specs": "DISA variable intake, VANOS integrated",
+    "relationships": [
+      "Cylinder Head",
+      "Fuel Injectors",
+      "Throttle Body"
+    ]
+  },
+  "fuelInjectors": {
+    "id": "fuel-injectors",
+    "name": "Fuel Injectors (6 pcs)",
+    "type": "Fuel System",
+    "weight": "0.8 kg",
+    "material": "Plastic/Metal",
+    "assembly": "Intake",
+    "specs": "Siemens direct injection, one per cylinder",
+    "relationships": [
+      "Intake Manifold"
+    ]
+  },
+  "throttleBody": {
+    "id": "throttle-body",
+    "name": "Throttle Body",
+    "type": "Intake System",
+    "weight": "1.2 kg",
+    "material": "Aluminum/Plastic",
+    "assembly": "Intake",
+    "specs": "Electronic throttle, no mechanical backup",
+    "relationships": [
+      "Intake Manifold"
+    ]
+  },
+  "exhaustManifold": {
+    "id": "exhaust-manifold",
+    "name": "Exhaust Manifold",
+    "type": "Exhaust System",
+    "weight": "8.5 kg",
+    "material": "Cast Iron",
+    "assembly": "Exhaust",
+    "specs": "Integrated with cylinder head",
+    "relationships": [
+      "Cylinder Head",
+      "Oxygen Sensors"
+    ]
+  },
+  "oxygenSensors": {
+    "id": "oxygen-sensors",
+    "name": "Oxygen Sensors (2 pcs)",
+    "type": "Exhaust System",
+    "weight": "0.4 kg",
+    "material": "Ceramic/Steel",
+    "assembly": "Exhaust",
+    "specs": "Upstream & downstream for emissions monitoring",
+    "relationships": [
+      "Exhaust Manifold"
+    ]
+  },
+  "waterPump": {
+    "id": "water-pump",
+    "name": "Water Pump",
+    "type": "Cooling System",
+    "weight": "2.8 kg",
+    "material": "Aluminum",
+    "assembly": "Cooling",
+    "specs": "Belt-driven, impeller-type, ~100k mile service life",
+    "relationships": [
+      "Engine Block",
+      "Serpentine Belt"
+    ]
+  },
+  "thermostat": {
+    "id": "thermostat",
+    "name": "Thermostat Housing",
+    "type": "Cooling System",
+    "weight": "1.1 kg",
+    "material": "Plastic/Metal",
+    "assembly": "Cooling",
+    "specs": "ECM-controlled, plastic housing prone to warping",
+    "relationships": [
+      "Cylinder Head",
+      "Coolant Lines"
+    ]
+  },
+  "coolantTank": {
+    "id": "coolant-tank",
+    "name": "Coolant Expansion Tank",
+    "type": "Cooling System",
+    "weight": "0.9 kg",
+    "material": "Plastic",
+    "assembly": "Cooling",
+    "specs": "Integrated level sensor, BMW-approved coolant",
+    "relationships": [
+      "Water Pump",
+      "Radiator"
+    ]
+  },
+  "radiator": {
+    "id": "radiator",
+    "name": "Radiator",
+    "type": "Cooling System",
+    "weight": "5.2 kg",
+    "material": "Aluminum",
+    "assembly": "Cooling",
+    "specs": "Electric cooling fan",
+    "relationships": [
+      "Coolant Tank",
+      "Cooling Fan"
+    ]
+  },
+  "oilPan": {
+    "id": "oil-pan",
+    "name": "Oil Pan",
+    "type": "Lubrication System",
+    "weight": "2.1 kg",
+    "material": "Aluminum/Steel",
+    "assembly": "Oil",
+    "specs": "6.5L capacity, drain plug, sump design",
+    "relationships": [
+      "Engine Block",
+      "Oil Pump"
+    ]
+  },
+  "oilPump": {
+    "id": "oil-pump",
+    "name": "Oil Pump",
+    "type": "Lubrication System",
+    "weight": "1.8 kg",
+    "material": "Aluminum/Steel",
+    "assembly": "Oil",
+    "specs": "Gear-driven from crankshaft, pressure relief valve",
+    "relationships": [
+      "Crankshaft",
+      "Oil Filter Housing"
+    ]
+  },
+  "oilFilter": {
+    "id": "oil-filter",
+    "name": "Oil Filter Housing",
+    "type": "Lubrication System",
+    "weight": "0.6 kg",
+    "material": "Aluminum",
+    "assembly": "Oil",
+    "specs": "Spin-on filter, integral passages",
+    "relationships": [
+      "Oil Pump"
+    ]
+  },
+  "alternator": {
+    "id": "alternator",
+    "name": "Alternator",
+    "type": "Electrical System",
+    "weight": "4.5 kg",
+    "material": "Aluminum/Copper",
+    "assembly": "Accessories",
+    "specs": "Left side, belt-driven, 13.2-14.5V output",
+    "relationships": [
+      "Serpentine Belt"
+    ]
+  },
+  "sparkPlugs": {
+    "id": "spark-plugs",
+    "name": "Spark Plugs (6 pcs)",
+    "type": "Ignition System",
+    "weight": "0.24 kg",
+    "material": "Ceramic/Metal",
+    "assembly": "Ignition",
+    "specs": "Coil-on-plug direct ignition, 60-80k mile interval",
+    "relationships": [
+      "Ignition Coils"
+    ]
+  },
+  "ignitionCoils": {
+    "id": "ignition-coils",
+    "name": "Ignition Coils (6 pcs)",
+    "type": "Ignition System",
+    "weight": "1.2 kg",
+    "material": "Plastic/Copper",
+    "assembly": "Ignition",
+    "specs": "Individual coil-on-plug mounted on spark plugs",
+    "relationships": [
+      "Cylinder Head"
+    ]
+  },
+  "starter": {
+    "id": "starter-motor",
+    "name": "Starter Motor",
+    "type": "Electrical System",
+    "weight": "3.2 kg",
+    "material": "Copper/Steel",
+    "assembly": "Accessories",
+    "specs": "Integrated with flywheel ring gear",
+    "relationships": [
+      "Flywheel"
+    ]
+  },
+  "serpentineBelt": {
+    "id": "serpentine-belt",
+    "name": "Serpentine Belts (2 pcs)",
+    "type": "Drive System",
+    "weight": "1.4 kg",
+    "material": "Rubber/Cord",
+    "assembly": "Accessories",
+    "specs": "Dual belt system with independent tensioning",
+    "relationships": [
+      "Water Pump",
+      "Alternator",
+      "Power Steering Pump",
+      "AC Compressor"
+    ]
+  },
+  "pulleys": {
+    "id": "pulleys",
+    "name": "Pulleys & Tensioners",
+    "type": "Drive System",
+    "weight": "3.8 kg",
+    "material": "Steel/Aluminum",
+    "assembly": "Accessories",
+    "specs": "Alternator, water pump, power steering, AC, tensioner, idler pulleys",
+    "relationships": [
+      "Serpentine Belt",
+      "Water Pump",
+      "Alternator"
+    ]
+  },
+  "powerSteeringPump": {
+    "id": "power-steering-pump",
+    "name": "Power Steering Pump",
+    "type": "Accessories",
+    "weight": "2.4 kg",
+    "material": "Aluminum",
+    "assembly": "Accessories",
+    "specs": "Belt-driven, front-left location",
+    "relationships": [
+      "Serpentine Belt"
+    ]
+  },
+  "acCompressor": {
+    "id": "ac-compressor",
+    "name": "AC Compressor",
+    "type": "Accessories",
+    "weight": "3.6 kg",
+    "material": "Aluminum",
+    "assembly": "Accessories",
+    "specs": "Secondary belt-driven, front-right location",
+    "relationships": [
+      "Serpentine Belt"
+    ]
+  },
+  "vanosActuators": {
+    "id": "vanos-actuators",
+    "name": "VANOS Actuators (2 pcs)",
+    "type": "Valve Timing",
+    "weight": "2.1 kg",
+    "material": "Aluminum",
+    "assembly": "Head",
+    "specs": "Intake & exhaust, solenoid-controlled oil pressure",
+    "relationships": [
+      "Camshafts"
+    ]
+  },
+  "flywheel": {
+    "id": "flywheel",
+    "name": "Flywheel",
+    "type": "Rotating Assembly",
+    "weight": "12 kg",
+    "material": "Cast Iron",
+    "assembly": "Block",
+    "specs": "Ring gear for starter, bolted to crankshaft",
+    "relationships": [
+      "Crankshaft",
+      "Starter Motor"
+    ]
+  }
+}
