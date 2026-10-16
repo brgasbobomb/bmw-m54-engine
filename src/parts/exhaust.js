@@ -54,7 +54,7 @@ export function build(c) {
 
   // Per bank: flange plate with copper nuts, 3 runners into a collector
   const banks = [
-    { ports: [0, 1, 2], C: V(cx(1), py - 26, -57) },     // rear, cyl 4-6
+    { ports: [0, 1, 2], C: V(cx(1), py - 26, -66) },     // rear, cyl 4-6 (further out, see the rear cat)
     { ports: [3, 4, 5], C: V(cx(4) + 4, py - 24, -57) }  // front, cyl 1-3
   ];
   const nutGeo = new T.CylinderGeometry(2.3, 2.3, 2.2, 6), blobGeo = new T.SphereGeometry(1, 20, 14);
@@ -75,15 +75,18 @@ export function build(c) {
   });
   const [B, A] = banks.map(b => b.C);
 
-  // Rear bank: cat straight off the collector, diagonal down and back, short pipe
-  const dB = V(-0.7, -0.72, 0).normalize(), outB = cat(V(B.x - 2, B.y - 3, -58), dB);
-  pipe([outB, outB.clone().addScaledVector(dB, 6), V(-124, -39, -58), V(-134, -40, -58), V(-150, -40, -58)]);
+  // Rear bank: cat straight off the collector, diagonal down and back, short pipe. Cat at Z -70 so it
+  // passes outboard of the block's side boss (X -116..-84, Y -21..-7, out to Z -58).
+  const dB = V(-0.7, -0.72, 0).normalize(), outB = cat(V(B.x - 2, B.y - 3, -70), dB);
+  pipe([outB, outB.clone().addScaledVector(dB, 6), V(-124, -39, -70), V(-134, -40, -70), V(-150, -40, -70)]);
   // Front bank: elbow down from the collector, cat along the block past the flange end, S-bend outboard of the rear cat
   const dA = V(-1, -0.12, 0).normalize(), inA = V(56, 8, -60);
   detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(
     [A, V(A.x - 2, 15, -59), V(60, 8.5, -60), inA.clone().addScaledVector(dA, 2)]), 16, 6.5, 14, false), matExhaust), exGrp);
   const outA = cat(inA, dA);
-  pipe([outA, outA.clone().addScaledVector(dA, 6), V(-40, -28, -72), V(-62, -40, -77), V(-100, -40, -77), V(-150, -40, -77)]);
+  // S-bend spread over even steps: its tightest bend (~15) must stay above the pipe radius 6.5 or the inner wall folds
+  pipe([outA, outA.clone().addScaledVector(dA, 6), V(-36, -6, -63), V(-52, -20, -74), V(-68, -35, -86),
+    V(-84, -40, -89), V(-100, -40, -89), V(-150, -40, -89)]);
   reg(exGrp, 'exhaust-manifold');
 
   // ----- O2 SENSORS (4: before and after each cat) -----
@@ -100,6 +103,6 @@ export function build(c) {
     o2Grp.add(s);
   };
   [A, B].forEach(C => o2(V(C.x + 6, C.y, C.z - 7), V(0, 0.8, -0.6)));   // pre-cat, on the collector
-  [-58, -77].forEach(z => o2(V(-138, -35, z - 2), V(0, 1, -0.3)));     // post-cat, just before the outlet flange
+  [-70, -89].forEach(z => o2(V(-138, -35, z - 2), V(0, 1, -0.3)));     // post-cat, just before the outlet flange
   reg(o2Grp, 'oxygen-sensors');
 }

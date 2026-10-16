@@ -26,6 +26,9 @@ No ruler in any photo, so proportions only. The notes below cover both photos; n
 - Front/rear is not labeled in the photos. Assumed A = front bank (cyl 1–3; its S-bend passes outboard of the rear
   cat) and B = rear bank (cyl 4–6).
 - Both pipes end at X ≈ -150 (behind the block), heading rearward.
+- The rear bank's collector and cat sit about 10 further out than the front bank's (cat at Z -70), so the cat
+  clears the block's side boss (X -116..-84, out to Z -58). This comes from the model, not the photos. The front
+  pipe runs outboard of it at Z -89.
 
 ## Not modeled yet
 - Heat shields (image_25, not opened), the S-bend heat-shield sleeve, the connector clip, the cat logo, port holes
