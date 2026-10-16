@@ -1,36 +1,64 @@
 # Intake (src/parts/intake.js) — reference notes
 
 Photos in this folder:
-- `user-engine-stand-photo.webp`: the user's own M54 on a red engine stand, seen from above on the intake side (front, alternator and throttle body at the left). Best view of the real shape. Seen once, don't re-open.
-- `realoem-intake-diagram.webp`: RealOEM exploded diagram, items 01–17 (manifold, gaskets, DISA, idle valve, sensors, hardware). Seen once, don't re-open.
-- `air intake hose.jpeg`: not viewed yet (presumably the inlet boot; look at it before refining the boot/throttle end).
+- `user-engine-stand-photo.webp`: the user's M54 on an engine stand, intake side from above. Viewed; findings below.
+- `realoem-intake-diagram.webp`: RealOEM exploded diagram of the M54 intake manifold, items 1–17. Viewed; findings below.
+- `air intake hose.jpeg`: not viewed yet, probably the inlet boot. Look at it before refining the boot or its airbox end.
 
-Catalog photos (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`, `image_31.jpg`, `image_32.jpg`) were used for the first version. Where they disagree with the two photos above (boxy plenum, U-rim "comb" on the runners), the user's photos win.
+Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
+- `image_31.jpg`, `image_32.jpg`: loose OEM manifold with DISA, rail and injectors (basis of the older b4de238 model).
+- `image_33.jpg` is an aftermarket welded-aluminium short-runner manifold, not OEM. Only its head flange is useful:
+  rounded-rect ports wider than tall, staggered upper/lower bolt holes, scalloped bosses. Don't open it again.
 
-## What the photos show (seen once, don't re-open)
-- Black moulded plastic. Six large smooth arched runner humps side by side, each about one pitch wide minus a narrow slot. Each hump has a moulded double ridge along its top. Steep on the head side, long slope down to the outer wall.
-- A dark rectangular pocket in each slot, near the head end.
-- A long dark weld-seam rail with small clip tabs along the outer side at the hump base; the lower shell continues below it.
-- Along the head side, between the humps and the valve cover edge: a long flat dark distribution trough with screws in the slots and six pink/magenta connector tabs (fuel injector plugs).
-- Throttle body (silver alloy) at the front (+X) end next to the alternator, with a thick black ribbed rubber elbow boot leaving it down and outward.
-- Diagram: items 01 manifold 11617525753, 02 set of profile gaskets (six separate stadium-shaped), 03 intake air temp sensor, 04 O-ring 8X3, 05 distribution piece 11611440318 (the trough, six pipes), 06 O-ring 7X3 x6, 07 adjuster unit (DISA) 11617544805, 08 T-shaped idle regulating valve, 10 plug, 11 ring/boot, 13 screw, 14–17 nuts/studs. Flange has bolt ears; DISA sits mid-length on the outer/lower face.
+## Stand photo (seen once, don't re-open)
+- Six smooth, separate runner humps, each with a moulded double ridge along the top.
+- Profile: steep rise from the head side to a crest, then a long gentle slope outward down to a straight dark weld-seam
+  rail with clip tabs; the lower shell (plenum) continues below the rail.
+- Dark pockets in the slots between the humps near the head end.
+- Between the humps and the valve cover: a flat dark strip with silver screws (injector harness over the fuel rail)
+  and six pink injector connector tabs.
+- Silver throttle body at the front end, at plenum level, above the alternator. A thick black elbow boot leaves it
+  forward and outward at about 45° and curves down.
 
-## As modelled (units ≈ 0.45 per real mm; z from the head intake face = BW/2, y from headY)
-- Hump: arch profile extruded 34 wide (x), bevel 2.5, one per cylinder at cx(i). Profile: floor y = -6 from z = 4 to the outer wall z = 52, wall up to y = 8, then a bezier over the top (control points (48, 27), (20, 37)) down to (7.5, 12) at the head side. Peak ≈ y = 27 at z ≈ 27. Two ridges (tube r 0.9) at x = ±10.
-- Lower shell: rounded box (run + 34) x 14 x 40, z = 12…52, y = -6…8. Weld-seam rail 233 x 3 x 4 at z = 52, y = 7; clip tabs 6 x 5 x 3 per runner at z = 54, y = 4.
-- Head flange plate (run + 54) x 22 x 4 at y = 5 (bottom y = -6 to clear the oil filter cap, whose top is at headY - 7); 7 hex bolts r 3 at y = 3, one in each runner gap and one past each end.
-- Trough: rounded box 235 x 6 x 9 at y = 17, z = 4; 7 screws r 2.2 on top.
-- DISA: housing 20 x 14 x 7 at mid-length (x = middle of the six runners), y = -1, z = 54.5; dark steel can r 6 x 8, alloy cap r 6.4, vacuum nipple r 1.4 on top.
-- Throttle body: alloy r 12 x 18 at x = manifold end + 9, y = 6, z = 30, axis along X, flange r 13.4, actuator box 8 x 12 x 12 on the +Z side. Boot r 11 on a 4-point curve: 8…16 straight forward, then down 12 and out 8; four ribs, clamps at both ends, dark cap.
-- Fuel rail 4.5 square at y = 26, z = 1.5 (above the trough); injectors r 2.3→1.8 x 14 hanging from it per cylinder, connector block and pink tab (0xd0407f) on the outer side.
+## RealOEM diagram (seen once, don't re-open)
+- 1 manifold: two shells, horizontal seam around the outer side plus a vertical seam at mid-length; two "eyes" (lugs)
+  on the bottom. 2 gaskets.
+- 3 intake air temperature sensor on top at the rear end, head side, washer 4.
+- 5 distribution piece (idle air) along the head side, looping into a nipple on each runner; O-rings 6.
+- 7 DISA adjuster on the outer wall at mid-length near the bottom, screw 12.
+- 8 idle valve under the manifold: bracket 9, plug 10, rubber mount 11.
+- 13 screw, 14 collar nuts on the head flange, 15/17 studs, 16 cap nut.
 
-## Not modelled (shortcuts)
-- The dark pocket in each slot (the open gap between humps and the open strip behind the lower shell stand in for it), the six profile gaskets, studs/posts, intake air temp sensor, T-shaped idle valve, DISA vacuum hose and electrical lead, rail clips, the airbox end of the boot.
-
-## Uncertain (seen, not confirmed)
-- Hump profile (peak height, how far the steep head side reaches) was matched by eye.
-- Boot direction (down and outward) comes from the stand photo only; the `air intake hose.jpeg` has not been checked.
-- DISA position along X (modelled at mid-length) and that it hangs on the outer face rather than on top.
+## Uncertain
+- Real outward reach is about 110 units; the model stops at about 67 because the expansion tank sits behind the
+  plenum at the rear (x −113…−87), which is not where the E46 has it (next to the radiator).
+- Crest height and slope of the humps are by eye from one photo angle.
 
 ## Still missing (catalog list)
-- Square-on outer-wall elevation at manifold height, removed DISA cartridge, verified factory barcode/sticker location, direct top plan, lower support-bolt close-up.
+- Square-on outer-wall elevation at manifold height, removed DISA cartridge, verified factory barcode/sticker
+  location, direct top plan, lower support-bolt close-up, underside (idle valve, bottom lugs).
+
+## As modelled (units ≈ 0.45 per real mm, +Z = intake side; z′ = out from the head face z = BW/2 + 1, y′ = up from headY)
+- Hump and shell profiles are shapes in (z′, y′) extruded along X with a bevel b; the visible surface is b outside the
+  contour.
+- Humps: 6 × 33 wide (slot ~7.7), bevel 5. Neck face z′ 1, y′ −5…15; steep face to the crest (z′ 26, y′ 30); long
+  arched top down to the rail shoulder (z′ 67.4, y′ 1.5). Underside y′ −5 out to z′ 33 (clears the oil-filter cap),
+  then hidden in the shell. Double ridge: two tubes r 0.9 at x ±3 following the top.
+- Lower shell: one extrusion 248 long (x −120…128), bevel 4. Inner wall z′ 28 (clear of the oil filter), floor y′ −30
+  (3 over the oil cooler). Outer wall leans 30° in the part frame so it stands vertical in the car at world z 66,
+  4 short of the expansion tank.
+- Outer wall (upright frame at the rail, z′ 67.4): seam rail 2.4 × 3 full length, six clip tabs under it, vertical
+  seam rib at mid-length; DISA at mid-length 16 below the rail (flange r 9.6, body r 8 × 6, actuator box 11 × 9 × 7
+  at x +12.5, connector on top).
+- Head flange 256 × 22 × 4 (y′ −6…16, bottom 1 over the oil-filter housing); 14 collar nuts in two rows (y′ 12.5 and
+  −2.5) at the 5 slots and past both ends; a web closes each slot at y′ 5–7.
+- Injector boss r 3.4 on each neck (z′ 3.5); idle-air nipple at cx + 8; distribution rail r 1.1 at (z′ −2.2, y′ 18.2)
+  with a half loop (R 3.8) into each nipple.
+- IAT sensor: boss r 2.6 + connector on the shell top at the rear end (x −117, z′ 33).
+- Throttle body: alloy r 12 × 18 at the +X end (x 137, y′ −16, z′ 45), axis along X, actuator box on the outer side.
+  Boot r 11 on a cubic Bezier, forward then outward and down at 45°, ending near x 169, y′ −28, z′ 57; minimum bend
+  radius 20 (a Catmull-Rom path folded the inner wall). Four ribs, clamps at both ends, dark cap.
+- Fuel rail 4.5 square at y′ 25.5, z′ 3.5; harness strip on top with a silver screw at each slot; injectors
+  r 2.3→1.8 × 9 under the rail; pink connector (0xd0407f) on the head side of each.
+- Not modelled: idle valve with bracket/plug/mount (8–11), gaskets, studs, cap nut, DISA screw, bottom lugs, rail
+  clips and feed line, airbox end of the boot.
