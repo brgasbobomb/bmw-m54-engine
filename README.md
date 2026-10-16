@@ -57,22 +57,20 @@ This will launch the Electron application with the BMW M54 engine 3D model.
 ```
 bmw-m54-engine/
 ├── src/
-│   ├── main.js                 # Electron main process
-│   ├── preload.js              # Security preload script
-│   ├── renderer.js             # Main render process & initialization
-│   ├── Scene.js                # Three.js scene setup
-│   ├── EngineModel.js          # 3D engine geometry generation
-│   ├── PartHierarchy.js        # Part tree structure management
-│   ├── InteractionManager.js   # Click detection & selection
-│   ├── AnimationController.js  # Part removal animations
-│   └── UIPanel.js              # Information panel UI
-├── data/
-│   └── parts-database.json     # Engine part specifications
-├── styles/
-│   └── main.css                # UI styling
-├── index.html                  # Main HTML template
-├── package.json                # Dependencies
-└── README.md
+│   ├── main.js            # Electron main process
+│   ├── boot.js            # Loads Three.js + GLTFLoader as globals
+│   ├── app.js             # Scene, interaction, animation, UI, app init
+│   └── parts/             # Procedural M54 geometry, one file per part
+│       ├── index.js       # Build order + shared context
+│       ├── materials.js   # Shared materials
+│       ├── helpers.js     # reg/detail, roundedBox, pulleys, belts
+│       ├── layout.js      # Shared dimensions (LEN, BW, headY, cx(i)…)
+│       └── vanos.js, oil-pan.js, intake.js, …
+├── refs/                  # Reference photos + notes.md, one folder per part
+├── data/parts-database.json
+├── styles/main.css
+├── index.html
+└── CLAUDE.md              # Working rules for Claude Code sessions
 ```
 
 ## Controls

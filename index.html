@@ -81,8 +81,8 @@
     </div>
   </div>
 
-  <!-- app.js (classic) defines classes + registers DOMContentLoaded; boot.js (module) sets window.THREE/GLTFLoader before DOMContentLoaded fires -->
-  <script src="src/app.js"></script>
+  <!-- Modules run in order before DOMContentLoaded: boot.js sets window.THREE/GLTFLoader, then app.js (imports src/parts/) -->
   <script type="module" src="src/boot.js"></script>
+  <script type="module" src="src/app.js"></script>
 </body>
 </html>

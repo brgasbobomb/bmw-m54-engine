@@ -1,0 +1,30 @@
+# BMW M54B30 3D engine viewer
+
+Electron + Three.js r160. Procedural M54B30 built from primitives; each removable part is its own file.
+
+## Where things are
+- `src/parts/<part>.js` — geometry for one part. Each exports `build(c)`; `c` holds `T` (THREE),
+  materials (`matBlock`, `matAlu`, …), helpers (`reg`, `detail`, `roundedBox`, `ribbedPulley`, …)
+  and layout (`LEN`, `BW`, `BH`, `headY`, `coverY`, `span`, `cx(i)`).
+- `src/parts/materials.js`, `helpers.js`, `layout.js` — shared. Read these only if the task needs them.
+- `src/parts/index.js` — build order. A new part file must be imported and added to `PARTS` here.
+- `src/app.js` — scene, camera, picking, removal animation, UI. Not needed for geometry work.
+- `data/parts-database.json` — part names/specs shown in the UI. Part ids must match `reg(mesh, '<id>')`.
+- `refs/<part>/` — reference photos + `notes.md`.
+
+## Rules (keep sessions cheap)
+1. One part per session. Read only that part's file plus whatever shared file it actually needs.
+   Never read all of `src/parts/` or `app.js` to "get context".
+2. Do not read `vendor/`, `node_modules/` or `models/`. Three.js API questions: answer from knowledge.
+3. Reference photos: read `refs/<part>/notes.md` first. Open at most 1–2 photos, and only if the notes
+   don't cover what you need. If you do look at photos, write what you learned into that `notes.md`
+   before finishing, so the next session doesn't have to look again.
+4. Make targeted edits (Edit tool) instead of rewriting whole files. Don't re-read a file after editing it.
+5. Visual check: at most one screenshot at the end of the task, not after every change.
+6. New shared material/helper/dimension → add it to the shared file and return it from there.
+   Something used only by one part stays in that part's file.
+7. Axes: X = crank axis (+X = front/pulley end), Y = up, Z = intake (+) / exhaust (−).
+   Parts registered with `reg(mesh, id)` sit in the 30° slanted group; pass `false` as the
+   third argument for parts that stay upright (radiator, expansion tank).
+8. Commit after each finished part (`git commit`) so a bad change can be undone with git
+   instead of a repair session.
