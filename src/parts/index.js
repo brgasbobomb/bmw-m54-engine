@@ -58,10 +58,19 @@ export function buildProceduralEngine(model) {
   const T = window.THREE;
   const c = { T, ...makeMaterials(T) };
 
+  // Root group, mirrored across Z. Part files are written with +Z = intake, which in this
+  // right-handed scene would put the intake on the car's right. The real M54 has the intake on
+  // the left (driver side) and exhaust on the right, so the whole engine is flipped once here.
+  // Don't flip individual parts.
+  const rootGrp = new T.Group();
+  rootGrp.scale.z = -1;
+  model.engineGroup.add(rootGrp);
+  c.rootGrp = rootGrp;
+
   // Slanted engine group (rotated 30 degrees toward the exhaust side)
   const slantedGrp = new T.Group();
   slantedGrp.rotation.x = -30 * Math.PI / 180;
-  model.engineGroup.add(slantedGrp);
+  rootGrp.add(slantedGrp);
   c.slantedGrp = slantedGrp;
 
   Object.assign(c, makeHelpers(c, model), makeLayout());

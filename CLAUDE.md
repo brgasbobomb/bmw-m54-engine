@@ -23,7 +23,10 @@ Electron + Three.js r160. Procedural M54B30 built from primitives; each removabl
 5. Visual check: at most one screenshot at the end of the task, not after every change.
 6. New shared material/helper/dimension → add it to the shared file and return it from there.
    Something used only by one part stays in that part's file.
-7. Axes: X = crank axis (+X = front/pulley end), Y = up, Z = intake (+) / exhaust (−).
+7. Axes inside part files: X = crank axis (+X = front/pulley end), Y = up, Z = intake (+) / exhaust (−).
+   `index.js` mirrors the whole engine across Z once, so on screen the intake ends up on the car's
+   left and the exhaust on the right, like the real E46. Keep writing parts with +Z = intake; never
+   mirror a single part.
    Parts registered with `reg(mesh, id)` sit in the 30° slanted group; pass `false` as the
    third argument for parts that stay upright (radiator, expansion tank).
 8. Commit after each finished part (`git commit`) so a bad change can be undone with git

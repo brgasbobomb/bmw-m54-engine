@@ -10,7 +10,7 @@ export function makeHelpers(c, model) {
     if (isSlanted) {
       slantedGrp.add(mesh);
     } else {
-      model.engineGroup.add(mesh);
+      c.rootGrp.add(mesh);
     }
     if (!model.parts3D.has(id)) model.parts3D.set(id, mesh);
     model.storeOriginalTransform(id, mesh);
