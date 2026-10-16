@@ -3,10 +3,12 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 window.THREE = THREE;
 window.GLTFLoader = GLTFLoader;
 window.RoomEnvironment = RoomEnvironment;
+window.OrbitControls = OrbitControls;
 
 // Startup model. null => boot to the built-in procedural M54 (no external asset).
 // To auto-load a model on startup instead, set this to a path, e.g.

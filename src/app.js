@@ -111,18 +111,15 @@ class Scene {
   }
 
   setupControls() {
-    this.controls = {
-      autoRotate: false,
-      autoRotateSpeed: 2,
-      enableZoom: true,
-      enablePan: true,
-      enableRotate: true,
-      dampingFactor: 0.05
-    };
+    this.controls = new window.OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.target.set(-10, 12, 8); // same point initCamera looks at
+    this.controls.mouseButtons.MIDDLE = window.THREE.MOUSE.PAN; // sidebar hint says "Middle mouse to pan"
+    this.controls.enableDamping = true;
+    this.controls.minDistance = 50;
+    this.controls.maxDistance = 1000;
 
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
     document.addEventListener('mousedown', (e) => this.onMouseDown(e));
-    this.container.addEventListener('wheel', (e) => this.onMouseWheel(e));
   }
 
   onMouseMove(event) {
@@ -134,18 +131,6 @@ class Scene {
   onMouseDown(event) {
     if (event.button === 0 && event.target.tagName === 'CANVAS') {
       this.updatePickedObject();
-    }
-  }
-
-  onMouseWheel(event) {
-    event.preventDefault();
-    const zoomSpeed = 0.1;
-    const direction = this.camera.position.clone().normalize();
-    const distance = this.camera.position.length();
-    const newDistance = distance + (event.deltaY > 0 ? zoomSpeed * 10 : -zoomSpeed * 10);
-
-    if (newDistance > 50 && newDistance < 400) {
-      this.camera.position.copy(direction.multiplyScalar(newDistance));
     }
   }
 
@@ -171,23 +156,7 @@ class Scene {
   }
 
   render() {
-    if (this.controls.autoRotate) {
-      const speed = this.controls.autoRotateSpeed * 0.01;
-      const center = new window.THREE.Vector3(0, 0, 0);
-      const position = this.camera.position;
-      const radius = position.distanceTo(center);
-      const theta = Math.atan2(position.z, position.x);
-      const phi = Math.acos(position.y / radius);
-
-      const newTheta = theta + speed;
-      const newX = radius * Math.sin(phi) * Math.cos(newTheta);
-      const newY = radius * Math.cos(phi);
-      const newZ = radius * Math.sin(phi) * Math.sin(newTheta);
-
-      this.camera.position.set(newX, newY, newZ);
-      this.camera.lookAt(center);
-    }
-
+    this.controls.update(); // damping needs a per-frame update
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -449,6 +418,7 @@ class InteractionManager {
 
   setupEventListeners() {
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
+    document.addEventListener('pointerdown', (e) => { this.downX = e.clientX; this.downY = e.clientY; });
     document.addEventListener('click', (e) => this.onClick(e));
   }
 
@@ -482,6 +452,8 @@ class InteractionManager {
   onClick(event) {
     const canvas = event.target;
     if (canvas.tagName !== 'CANVAS') return;
+    // a camera drag also ends in a click; only a still click selects a part
+    if (Math.hypot(event.clientX - this.downX, event.clientY - this.downY) > 5) return;
 
     const intersects = this.getIntersects();
 
