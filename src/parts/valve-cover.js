@@ -1,28 +1,34 @@
 // Valve cover
 export function build(c) {
-  const { T, matCover, matCoverAcc, reg, detail, roundedBox, LEN, BW, COVER_H, coverY } = c;
-  // ----- VALVE COVER (Iconic black plastic + dual silver stripes + BMW badge) -----
+  const { T, matCover, matSteel, reg, detail, roundedBox, LEN, BW, COVER_H, coverY, cx } = c;
+  // ----- VALVE COVER (matte black plastic: raised intake-side plateau, exhaust-side coil trough, front nose) -----
+  // Local y: 0 = cover centre, `top` = plateau. The trough floor is 4 lower; the coils (bottom at top+3) stand on the plug-well rims.
+  const top = COVER_H / 2, floor = top - 4;
   const coverGrp = new T.Group();
-  // Matte black main cover
-  const coverBase = detail(roundedBox(LEN - 10, COVER_H, BW - 8, 9, matCover), coverGrp);
-  // Styling lines & Raised coil cover beauty plates
-  const beautyPlate = detail(roundedBox(LEN - 28, 4, BW - 22, 2, matCover), coverGrp);
-  beautyPlate.position.set(2, COVER_H / 2 + 2, -2);
-  // Dual silver stripes
-  const stripe1 = detail(new T.Mesh(new T.BoxGeometry(LEN - 45, 1, 1.8), matCoverAcc), coverGrp);
-  stripe1.position.set(2, COVER_H / 2 + 4.1, 12);
-  const stripe2 = detail(new T.Mesh(new T.BoxGeometry(LEN - 45, 1, 1.8), matCoverAcc), coverGrp);
-  stripe2.position.set(2, COVER_H / 2 + 4.1, 8);
-  // BMW brand plate
-  const badge = detail(new T.Mesh(new T.BoxGeometry(32, 1, 12), matCoverAcc), coverGrp);
-  badge.position.set(-30, COVER_H / 2 + 4.1, -12);
-  // Textured Oil cap
-  const oilCap = detail(new T.Mesh(new T.CylinderGeometry(9, 9, 6, 24), matCover), coverGrp);
-  oilCap.position.set(-LEN / 2 + 34, COVER_H / 2 + 3, 18);
-  // VANOS front beauty bulge
-  const coverVanosBulge = detail(new T.Mesh(new T.CylinderGeometry(15, 15, BW - 10, 24), matCover), coverGrp);
-  coverVanosBulge.rotation.x = Math.PI / 2;
-  coverVanosBulge.position.set(LEN / 2 - 12, 0, 0);
+  // Trough-level body over the full footprint
+  const coverBase = detail(roundedBox(LEN - 10, COVER_H - 4, BW - 8, 3, matCover), coverGrp);
+  coverBase.position.y = -2;
+  // Raised plateau on the intake half (label, oil cap, bolts); x runs from 10 in from the rear end to the nose apex
+  const plateau = detail(roundedBox(LEN - 27, 6, 32, 2, matCover), coverGrp);
+  plateau.position.set(1.5, top - 3, 19);
+  // Low rim along the exhaust edge of the trough
+  const rim = detail(roundedBox(LEN - 14, 4, 3, 1, matCover), coverGrp);
+  rim.position.set(0, floor + 1, -33);
+  // Six plug wells in line with the coils and plugs (z = -6)
+  const wellGeo = new T.LatheGeometry([[5.2, 0], [8, 0], [8, 7], [5.2, 7], [5.2, 0]].map(([r, y]) => new T.Vector2(r, y)), 20);
+  for (let i = 0; i < 6; i++) detail(new T.Mesh(wellGeo, matCover), coverGrp).position.set(cx(i), floor, -6);
+  // Front nose over the VANOS: full-width bullnose, same height as the plateau
+  const nose = detail(new T.Mesh(new T.CylinderGeometry(12, 12, BW - 10, 24), matCover), coverGrp);
+  nose.rotation.x = Math.PI / 2;
+  nose.position.set(LEN / 2 - 12, top - 12, 0);
+  // Oil filler cap: front third of the plateau, between the 2nd and 3rd coil from the front
+  const oilCap = detail(new T.Mesh(new T.CylinderGeometry(7, 8, 6, 24), matCover), coverGrp);
+  oilCap.position.set(cx(4) - 15, top + 3, 12);
+  // Bolt + washer along the intake edge of the plateau
+  for (const i of [1, 3, 5]) {
+    detail(new T.Mesh(new T.CylinderGeometry(3, 3, 0.8, 16), matSteel), coverGrp).position.set(cx(i), top + 0.4, 30);
+    detail(new T.Mesh(new T.CylinderGeometry(2, 2, 2, 6), matSteel), coverGrp).position.set(cx(i), top + 1.8, 30);
+  }
 
   coverGrp.position.y = coverY;
   reg(coverGrp, 'cylinder-head'); // Tagged under cylinder-head removable block
