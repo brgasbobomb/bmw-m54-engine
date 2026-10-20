@@ -1,4 +1,4 @@
-// Intake manifold (moulded black plastic): six arched runner humps over a lower-shell plenum, weld-seam rail,
+// Intake manifold (moulded black plastic): six arched runner humps with a U-rib comb over a lower-shell plenum, weld-seam rail,
 // DISA on the outer wall, idle-air distribution piece, head flange with two rows of collar nuts;
 // throttle body + inlet boot; fuel rail + injectors. Proportions and details: refs/intake/notes.md
 export function build(c) {
@@ -22,27 +22,42 @@ export function build(c) {
     return m;
   };
 
-  // Lower shell (plenum): the outer wall leans 30 deg here so it stands vertical in the car, 4 short of the
-  // expansion tank; floor 3 above the oil cooler, inner wall just outside the oil filter
-  const shell = new T.Shape().moveTo(32, -7.5).lineTo(59.9, -4).lineTo(49.5, -22).quadraticCurveTo(47.2, -26, 43.2, -26)
-    .lineTo(36, -26).quadraticCurveTo(32, -26, 32, -22).lineTo(32, -7.5);
+  // Lower shell (plenum), about 0.4 x its length deep as in the top-view photo: outer wall vertical in the car
+  // (it leans 30 deg in this frame) 97 out from the head face, floor level in the car beyond the oil cooler and
+  // 3 above it, inner wall just outside the oil filter
+  const shell = new T.Shape().moveTo(32, -7.5).lineTo(93, -24.5).lineTo(81.9, -43.7).quadraticCurveTo(79.9, -47.2, 76.4, -45.2)
+    .lineTo(43.2, -26).lineTo(36, -26).quadraticCurveTo(32, -26, 32, -22).lineTo(32, -7.5);
   detail(extrude(shell, PX, 4, 3), intakeGrp).position.set(xm, headY, zF);
 
-  // Runner humps: neck off the flange, steep face up from the head side, long arched top (about level in the car)
-  // down to the seam rail. The underside clears the oil-filter cap, then dives into the shell.
-  const top = p => p.bezierCurveTo(13, 18, 18, 25, 26, 25).bezierCurveTo(41, 25, 51.3, 10.6, 60.3, 1.6);
+  // Runner humps: neck off the flange, steep face up from the head side to the crest, then a long gentle slope (car
+  // frame) out to the seam rail; the end face stands vertical in the car just inside the shell wall. The underside
+  // clears the oil-filter cap, then dives into the shell.
+  const top = p => p.bezierCurveTo(13, 18, 17, 22, 26, 22).bezierCurveTo(38, 22, 70.7, -0.7, 91.9, -21.9);
   const hump = new T.Group();
   detail(extrude(top(new T.Shape().moveTo(6, 0).lineTo(6, 10).lineTo(10, 10))
-    .lineTo(49, -10).lineTo(38, -10).lineTo(38, 0).lineTo(6, 0), W, 5, 4), hump);
-  // Moulded double ridge: the top path pushed out onto the visible surface
-  const rp = top(new T.Path().moveTo(10, 10)).getPoints(8);
-  const ridgeGeo = new T.TubeGeometry(new T.CatmullRomCurve3(rp.slice(2, -1).map((p, i) => {
-    const d = rp[i + 3].clone().sub(rp[i + 1]).normalize();
-    return new T.Vector3(0, p.y + 5.3 * d.x, p.x - 5.3 * d.y);
-  })), 24, 0.9, 6, false);
-  for (const s of [-1, 1]) detail(new T.Mesh(ridgeGeo, matIntake), hump).position.x = 3 * s;
+    .lineTo(86.9, -30.55).lineTo(33, -10).lineTo(33, 0).lineTo(6, 0), W, 5, 4), hump);
+  // Rib comb: a flat U strip on each hump, legs from the crest, round end down the head-side face toward the
+  // injector. Drawn flat in (x, s = arc length from the crest) and wrapped onto the top path; the base starts
+  // below the bevelled side edges, so the outer lip shows as a rim there.
+  const topPath = top(new T.Path().moveTo(10, 10)), L = topPath.getLength(), sC = 42.5;   // crest: top level in the car
+  const uGeo = new T.ExtrudeGeometry(new T.Shape().moveTo(15, 0).lineTo(15, 8).lineTo(15, 16)
+    .absarc(0, 16, 15, 0, Math.PI, false).lineTo(-15, 8).lineTo(-15, 0).lineTo(-8.5, 0).lineTo(-8.5, 8)
+    .lineTo(-8.5, 16).absarc(0, 16, 8.5, Math.PI, 0, true).lineTo(8.5, 8).lineTo(8.5, 0).lineTo(15, 0),
+    { depth: 3.3, bevelEnabled: false });
+  const pos = uGeo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const u = (sC - pos.getY(i)) / L, h = 3 + pos.getZ(i), p = topPath.getPointAt(u), t = topPath.getTangentAt(u);
+    pos.setXYZ(i, pos.getX(i), p.y + h * t.x, p.x - h * t.y);        // h out along the path normal
+  }
+  uGeo.computeVertexNormals();
+  detail(new T.Mesh(uGeo, matIntake), hump);
   hump.position.set(0, headY, zF);
   for (let i = 0; i < 6; i++) { const h = hump.clone(); h.position.x = cx(i); intakeGrp.add(h); }
+  // Comb spine: full length along the crest, bridging the slots
+  const pC = topPath.getPointAt(sC / L);
+  const spine = detail(roundedBox(run + 30, 2.6, 7, 0.9, matIntake), intakeGrp);
+  spine.rotation.x = Math.PI / 6;                                    // level in the car
+  spine.position.set(xm, headY + pC.y + 5.2, zF + pC.x + 3);         // 6 out along the crest normal: 0.3 sunk
 
   // Head flange; collar nuts in two rows, in the slots and past each end. A web under each slot closes the
   // dark pocket seen from above.
@@ -94,12 +109,12 @@ export function build(c) {
   detail(new T.Mesh(new T.BoxGeometry(11, 9, 7), matCover), wall).position.set(12.5, -16, 3.5);   // DISA actuator
   detail(new T.Mesh(new T.BoxGeometry(4, 4, 4), matCoil), wall).position.set(12.5, -9.5, 3.5);    // its connector
   wall.rotation.x = Math.PI / 6;
-  wall.position.set(xm, headY + 1, zF + 67.4);
+  wall.position.set(xm, headY - 23.3, zF + 98.3);    // car frame: 96.8 out, 29 up from (zF, headY)
   intakeGrp.add(wall);
 
   // Inlet boot: elbow forward off the throttle body, then outward and down; four ribs, hose clamps at both ends,
   // dark cap for the open end
-  const xT = xm + PX / 2 + 9, yT = headY - 16, zT = zF + 45;     // throttle body centre, on the shell's front end
+  const xT = xm + PX / 2 + 9, yT = headY - 20, zT = zF + 50;    // throttle body centre, on the shell's front end
   // Bezier keeps the bend radius near 20, well above the tube radius, so the inner wall doesn't fold
   const boot = new T.CubicBezierCurve3(...[[8, 0, 0], [20, 0, 0], [26.2, -6.2, 6.2], [32, -12, 12]]
     .map(([x, y, z]) => new T.Vector3(xT + x, yT + y, zT + z)));
