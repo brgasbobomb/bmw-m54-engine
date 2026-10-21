@@ -92,33 +92,53 @@ export function build(c) {
   dist.rotation.z = Math.PI / 2;
   dist.position.set(xm + 8, headY + 18.2, zF - 2.2);
 
-  // Inlet boot: elbow forward off the throttle body, then outward and down; four ribs, hose clamps at both ends,
-  // dark cap for the open end
-  // throttle body centre on the plenum's front end, plenum centre turned back into the slanted frame
-  const xT = xm + PX / 2 + 9, yT = headY - 0.5 * plO + 0.866 * plU, zT = zF + 0.866 * plO + 0.5 * plU;
-  // Bezier keeps the bend radius near 20, well above the tube radius, so the inner wall doesn't fold
-  const boot = new T.CubicBezierCurve3(...[[8, 0, 0], [20, 0, 0], [26.2, -6.2, 6.2], [32, -12, 12]]
-    .map(([x, y, z]) => new T.Vector3(xT + x, yT + y, zT + z)));
+  // Throttle mount (3D scans): a neck under the plenum at mid-length, a little toward the front, ending in a square
+  // 4-bolt flange that faces outward; a sheet bracket hangs from its foot toward the block.
+  const xT = xm + 8, uT = pl.u0 - 15, oT = 66;  // throttle bore centre (car frame); flange face at oT + 7
+  detail(roundedBox(34, 30, 22, 4, matIntake), car).position.set(xT, uT + 4, oT - 4);
+  detail(roundedBox(36, 36, 3, 3, matIntake), car).position.set(xT, uT, oT + 5.5);
+  detail(new T.Mesh(new T.BoxGeometry(22, 26, 1.6), matIntake), car).position.set(xT + 4, uT - 28, oT + 2);
+
+  // Idle valve under the plenum behind the throttle neck, on its rubber-mounted bracket
+  const iv = detail(new T.Mesh(new T.CylinderGeometry(5, 5, 26, 14), matCover), car);
+  iv.rotation.z = Math.PI / 2;
+  iv.position.set(xT - 34, uT + 2, oT - 6);
+
+  // Inlet boot: out of the throttle body outward, 90 deg bend toward the front, then forward along the outer side
+  // of the manifold toward the airbox; ribs, hose clamps at both ends, dark cap for the open end
+  const b0 = oT + 24, xB = xm + PX / 2 + 24;
+  const boot = new T.CurvePath();
+  // Bezier keeps the bend radius near 28, well above the tube radius, so the inner wall doesn't fold
+  boot.add(new T.CubicBezierCurve3(...[[0, 0], [0, 16], [12, 28], [28, 28]].map(([x, o]) => new T.Vector3(xT + x, uT, b0 + o))));
+  boot.add(new T.LineCurve3(new T.Vector3(xT + 28, uT, b0 + 28), new T.Vector3(xB, uT - 6, b0 + 28)));
   const axisZ = new T.Vector3(0, 0, 1);
   const onBoot = (mesh, t) => {
     mesh.position.copy(boot.getPointAt(t));
     mesh.quaternion.setFromUnitVectors(axisZ, boot.getTangentAt(t));
-    return detail(mesh, intakeGrp);
+    return detail(mesh, car);
   };
-  detail(new T.Mesh(new T.TubeGeometry(boot, 24, 11, 20, false), matIntake), intakeGrp);
-  const ribGeo = new T.TorusGeometry(11, 0.9, 6, 20), clampGeo = new T.TorusGeometry(11.3, 1.3, 6, 20);
-  for (const t of [0.2, 0.4, 0.6, 0.8]) onBoot(new T.Mesh(ribGeo, matIntake), t);
-  for (const t of [0.04, 0.96]) onBoot(new T.Mesh(clampGeo, matSteelDk), t);
-  onBoot(new T.Mesh(new T.CircleGeometry(10.5, 20), matCoil), 1);
+  detail(new T.Mesh(new T.TubeGeometry(boot, 48, 14, 20, false), matIntake), car);
+  const ribGeo = new T.TorusGeometry(14, 1, 6, 20), clampGeo = new T.TorusGeometry(14.3, 1.4, 6, 20);
+  for (const t of [0.45, 0.55, 0.65, 0.75, 0.85]) onBoot(new T.Mesh(ribGeo, matIntake), t);
+  for (const t of [0.02, 0.97]) onBoot(new T.Mesh(clampGeo, matSteelDk), t);
+  onBoot(new T.Mesh(new T.CircleGeometry(13.5, 20), matCoil), 1);
   reg(intakeGrp, 'intake-manifold');
 
-  // Throttle body: alloy housing, flange on the shell end, actuator motor on the outer side
+  // Throttle body: alloy housing bolted to the flange, axis outward; 4 bolts, actuator motor on the front side
   const throttleGrp = new T.Group();
-  detail(new T.Mesh(new T.CylinderGeometry(12, 12, 18, 24), matAluDark), throttleGrp);
-  detail(new T.Mesh(new T.CylinderGeometry(13.4, 13.4, 2.4, 24), matAluDark), throttleGrp).position.y = 7.8;
-  detail(new T.Mesh(new T.BoxGeometry(8, 12, 12), matCover), throttleGrp).position.set(0, -1, 11);
-  throttleGrp.rotation.z = Math.PI / 2;
-  throttleGrp.position.set(xT, yT, zT);
+  throttleGrp.rotation.x = Math.PI / 6;     // same upright frame as `car`
+  throttleGrp.position.set(0, headY, zF);
+  const tb = (geo, mat, x, u, o) => {
+    const m = detail(new T.Mesh(geo, mat), throttleGrp);
+    m.rotation.x = Math.PI / 2;
+    m.position.set(x, u, o);
+    return m;
+  };
+  tb(new T.CylinderGeometry(13, 13, 16, 24), matAluDark, xT, uT, oT + 15);
+  tb(new T.CylinderGeometry(15, 15, 2.4, 24), matAluDark, xT, uT, oT + 8.2);
+  const boltGeo = new T.CylinderGeometry(2, 2, 3, 6);
+  for (const dx of [-13, 13]) for (const du of [-13, 13]) tb(boltGeo, matSteel, xT + dx, uT + du, oT + 8.5);
+  detail(new T.Mesh(new T.BoxGeometry(10, 16, 13), matCover), throttleGrp).position.set(xT + 18, uT, oT + 15);
   reg(throttleGrp, 'throttle-body');
 
   // Fuel rail over the injectors, harness strip with screws on top, pink connector on each injector (head side)

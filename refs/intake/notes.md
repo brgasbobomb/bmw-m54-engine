@@ -46,6 +46,13 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - 8 idle valve under the manifold: bracket 9, plug 10, rubber mount 11.
 - 13 screw, 14 collar nuts on the head flange, 15/17 studs, 16 cap nut.
 
+## User's 3D scans (2026-10-21, pasted in chat, not saved in refs/)
+- Elevation of the outer/under side: long plenum with a flat lid and seam lip, two big drop bulges, square 4-bolt
+  throttle flange (~95 mm) with ~70 mm bore at mid-length below the plenum, DISA bore with screws above it, sheet
+  bracket below, hoses/ICV to the side, "B" moulded at one end.
+- Oblique views: tall U-loop idle-air distribution frame (one U per runner on a straight spine) along the head
+  flange is a prominent feature; still modelled only as small half-rings.
+
 ## Uncertain
 - Crest height and position are by eye: top kept near the previous model (world y 108 vs coil tops 94); the crest
   sits ~0.33 of the depth out vs ~0.25 in image_32.
@@ -66,7 +73,12 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - Runners: TubeGeometry r 10 scaled 1.5 in X (30 wide), three cubic Beziers in (out, up):
   (−2, 4.5) → crest (36, 37) → outer drop (88, 14) → end inside the plenum (72, 6). Top surface ≈ up 47.
 - Plenum: rounded box out 34…90, up −3…22 (+3 bevel), length run + 46; inner wall clear of the oil-filter cap,
-  floor above the oil cooler. Throttle body on its front end at the plenum centre.
+  floor above the oil cooler.
+- Throttle (from the user's 3D scans, 2026-10-21): NOT on the plenum end. A neck under the plenum at mid-length
+  (xm + 8, slightly toward the front) ends in a square 4-bolt flange facing outward (car frame up −18, out 73); a
+  sheet bracket hangs below it toward the block, round DISA bore above it on the outer wall. Throttle body bolts on
+  axis outward; the boot leaves outward, bends 90° forward and runs along the outer side past the front end.
+  Idle valve: cylinder along X under the plenum behind the neck.
 - The comb ribs / spine / weld rail / clip tabs of the previous model were dropped (not in the diagram).
 - Not modelled: idle valve with bracket/plug/mount (8–11), gaskets, studs, cap nut, DISA screw, bottom lugs, rail
   clips and feed line, airbox end of the boot.
