@@ -56,38 +56,17 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
   one end), mounted top plan (image_32 is the loose part), lower support-bolt close-up, underside (idle valve,
   bottom lugs).
 
-## As modelled (units ≈ 0.45 per real mm, +Z = intake side; z′ = out from the head face z = BW/2 + 1, y′ = up from headY)
-- Hump and shell profiles are shapes in (z′, y′) extruded along X with a bevel b; the visible surface is b outside the
-  contour.
-- Car frame below = the part frame turned 30° about X, measured from (z′ 0, y′ 0): out = 0.866 z′ − 0.5 y′,
-  up = 0.5 z′ + 0.866 y′.
-- Humps: 6 × 33 wide (slot ~7.7), bevel 5. Neck face z′ 1, y′ −5…15; steep face to the crest (car out 32, up 40);
-  long gentle slope (car frame) to an end face vertical in the car at out 95.5, top up ~31. Underside y′ −5 out to
-  z′ 28 (clears the oil-filter cap), where it meets the shell's inner wall; below that it is flush with or inside
-  the shell (contour corner at z′ 33 is a reflex corner, so the bevel pulls the surface back to 28).
-- Comb: per hump a flat U strip wrapped onto the top path, outer R 15 / inner R 8.5 (width 30, opening 17), legs 16
-  from the crest, tip 31 down the head-side face (arc length). Base 3 out from the contour, top 6.3 (1.3 proud on
-  the flat, a ~2.7 rim at the bevelled side edges). Spine: rounded bar 233 × 2.6 × 7 along the crest, level in
-  the car, 2.3 proud. Crest at arc length 42.5 of the top path (where it runs level in the car).
-- Lower shell: one extrusion 248 long (x −120…128), bevel 4, ~97 deep (0.4 × length, as image_32). Inner wall z′ 28
-  (clear of the oil filter), floor y′ −30 over the oil cooler (3 clear), then level in the car at up −4.9. Outer wall
-  vertical in the car at out 96.8, top corner up 29.8; the top rises ~14° outward between the humps.
-- Outer wall (upright frame, origin at car out 96.8 / up 29 = z′ 98.3, y′ −23.3): seam rail 2.4 × 3 full length,
-  six clip tabs under it, vertical seam rib at mid-length; DISA at mid-length 16 below the rail (flange r 9.6, body
-  r 8 × 6, actuator box 11 × 9 × 7 at x +12.5, connector on top).
-- Head flange 256 × 22 × 4 (y′ −6…16, bottom 1 over the oil-filter housing); 14 collar nuts in two rows (y′ 12.5 and
-  −2.5) at the 5 slots and past both ends; a web closes each slot at y′ 5–7.
-- Injector boss r 3.4 on each neck (z′ 3.5); idle-air nipple at cx + 8; distribution rail r 1.1 at (z′ −2.2, y′ 18.2)
-  with a half loop (R 3.8) into each nipple.
-- IAT sensor: boss r 2.6 + connector on the shell top at the rear end (x −117, z′ 33).
-- Throttle body: alloy r 12 × 18 at the +X end (x 137, y′ −20, z′ 50, on the shell's front end face, inner half),
-  axis along X, actuator box on the outer side. Clash-checked clear of the alternator and pulleys.
-  Boot r 11 on a cubic Bezier, forward then outward and down at 45°, ending near x 169, y′ −32, z′ 62; minimum bend
-  radius 20 (a Catmull-Rom path folded the inner wall). Four ribs, clamps at both ends, dark cap.
-- Fuel rail 4.5 square at y′ 25.5, z′ 3.5; harness strip on top with a silver screw at each slot; injectors
-  r 2.3→1.8 × 9 under the rail; pink connector (0xd0407f) on the head side of each.
+## As modelled (rebuilt from zero after the RealOEM diagram 138359; units ≈ 0.45 per real mm, +Z = intake side)
+- Runners and plenum sit in a `car` group turned 30° about X, so they are drawn upright in the car:
+  (out, up) from the head face centre (z′ 0, y′ 0). Flange, nuts, idle-air piece and fuel rail stay in the slanted frame.
+- Diagram read: six separate round runners leave the flange rising, arch over the top and drop down the outer side
+  into the plenum under the arch; the outer face is one smooth skin with the runner drops as shallow ribs; seam lip
+  along the bottom of the outer wall, vertical seam at mid-length; DISA (7) on the outer wall at mid-length near the
+  bottom; small vacuum stubs on the runner tops; IAT sensor (3) on top at the rear end.
+- Runners: TubeGeometry r 10 scaled 1.5 in X (30 wide), three cubic Beziers in (out, up):
+  (−2, 4.5) → crest (36, 37) → outer drop (88, 14) → end inside the plenum (72, 6). Top surface ≈ up 47.
+- Plenum: rounded box out 34…90, up −3…22 (+3 bevel), length run + 46; inner wall clear of the oil-filter cap,
+  floor above the oil cooler. Throttle body on its front end at the plenum centre.
+- The comb ribs / spine / weld rail / clip tabs of the previous model were dropped (not in the diagram).
 - Not modelled: idle valve with bracket/plug/mount (8–11), gaskets, studs, cap nut, DISA screw, bottom lugs, rail
-  clips and feed line, airbox end of the boot; edge lips on the comb strip (flat), pill boss beyond the spine,
-  barcode sticker, brass fitting under the DISA, hoses and bracket clips on the outer side.
-- Known difference: image_31 has the idle-air nipple and hose loop inside each U; the model keeps them on the neck
-  just head-side of the U tip, because higher up they would hit the fuel rail.
+  clips and feed line, airbox end of the boot.
