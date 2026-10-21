@@ -421,6 +421,18 @@ class InteractionManager {
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
     document.addEventListener('pointerdown', (e) => { this.downX = e.clientX; this.downY = e.clientY; });
     document.addEventListener('click', (e) => this.onClick(e));
+    document.addEventListener('pointerup', (e) => this.onRightClick(e));
+  }
+
+  // Still right-click on a part: remove everything else (right-drag still pans).
+  onRightClick(event) {
+    if (event.button !== 2 || event.target.tagName !== 'CANVAS') return;
+    if (Math.hypot(event.clientX - this.downX, event.clientY - this.downY) > 5) return;
+    for (const hit of this.getIntersects()) {
+      let o = hit.object;
+      while (o && !o.userData.partId) o = o.parent;
+      if (o?.visible) { this.onPartIsolate?.(o.userData.partId); return; }  // hidden parts still raycast
+    }
   }
 
   onMouseMove(event) {
@@ -893,6 +905,7 @@ window.addEventListener('DOMContentLoaded', async () => {
           engineModel,
           (partId) => handlePartSelected(partId)
         );
+        interactionManager.onPartIsolate = (partId) => handlePartIsolate(partId);
 
         console.log('Setting up animation controller...');
         animationController = new AnimationController(engineModel);
@@ -981,23 +994,27 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     function handlePartClick(partId) {
-      const part3D = engineModel.getPart3D(partId);
-      if (!part3D) return;
+      if (!engineModel.getPart3D(partId)) return;
+      // every object registered under this id (the valve cover shares 'cylinder-head')
+      const objects = explodeParts.filter(p => p.userData.partId === partId);
 
       const hierarchy = engineModel.getHierarchy();
 
       if (hierarchy.isPartVisible(partId)) {
         hierarchy.removePart(partId);
         uiPanel.addRemovedPart(partId);
-        animationController.removePart(part3D, () => {
-          part3D.visible = false;
-        });
+        objects.forEach(o => animationController.removePart(o, () => { o.visible = false; }));
       } else {
         hierarchy.restorePart(partId);
         uiPanel.removeFromRemovedParts(partId);
-        animationController.restorePart(part3D, () => {
-          part3D.visible = true;
-        });
+        objects.forEach(o => animationController.restorePart(o, () => { o.visible = true; }));
+      }
+    }
+
+    function handlePartIsolate(partId) {
+      const hierarchy = engineModel.getHierarchy();
+      for (const id of engineModel.getAllParts3D().keys()) {
+        if (id !== partId && hierarchy.isPartVisible(id)) handlePartClick(id);
       }
     }
 
@@ -1005,7 +1022,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       explodeSlider.value = 0;
       animationController.explodeAmount = 0;
       const hierarchy = engineModel.getHierarchy();
-      const allParts = Array.from(engineModel.getAllParts3D().values());
+      const allParts = explodeParts;
 
       allParts.forEach(part => {
         if (part.userData?.partId && !hierarchy.isPartVisible(part.userData.partId)) {
