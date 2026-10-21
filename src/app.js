@@ -1,4 +1,5 @@
 import { buildProceduralEngine } from './parts/index.js';
+import { initExplode, explodedPosition } from './explode.js';
 
 // BMW M54 Engine 3D Model - Consolidated App
 // All code in one file to avoid module resolution issues in Electron
@@ -522,6 +523,7 @@ class AnimationController {
     this.engineModel = engineModel;
     this.activeAnimations = new Map();
     this.animationFrameId = null;
+    this.explodeAmount = 0; // restored parts return to their exploded spot
   }
 
   setOpacityRecursive(object, opacity) {
@@ -615,7 +617,8 @@ class AnimationController {
       const stored = this.engineModel.getOriginalTransform(partObject.userData.partId);
       if (stored) {
         return {
-          pos: stored.position,
+          pos: partObject.userData.explodeBase
+            ? explodedPosition(partObject, this.explodeAmount) : stored.position,
           rot: stored.rotation
         };
       }
@@ -853,6 +856,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log('Loading BMW M54 Engine Application...');
 
     let scene, engineModel, interactionManager, animationController, uiPanel;
+    let explodeParts = [], explodeCur = 0;
+    const explodeSlider = document.getElementById('explode-slider');
     const canvasContainer = document.getElementById('canvas-container');
 
     async function loadPartsDatabase() {
@@ -897,6 +902,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         uiPanel.setResetCallback(() => handleResetAll());
         uiPanel.setPartClickCallback((partId) => handlePartClick(partId));
 
+        explodeParts = initExplode(engineModel.getEngineGroup());
+        explodeSlider.addEventListener('input', () => {
+          animationController.explodeAmount = Number(explodeSlider.value);
+        });
+
         setupModelLoader();
 
         console.log('✓ Application loaded successfully!');
@@ -930,6 +940,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         uiPanel.updateRemovedPartsBar();
         uiPanel.displayDefaultInfo();
         uiPanel.clearHighlight();
+        explodeParts = initExplode(engineModel.getEngineGroup());
         if (title) title.textContent = name.replace(/\.(glb|gltf)$/i, '');
         setStatus('Loaded ' + count + ' parts from ' + name, false);
         return count;
@@ -991,6 +1002,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     function handleResetAll() {
+      explodeSlider.value = 0;
+      animationController.explodeAmount = 0;
       const hierarchy = engineModel.getHierarchy();
       const allParts = Array.from(engineModel.getAllParts3D().values());
 
@@ -1016,9 +1029,20 @@ window.addEventListener('DOMContentLoaded', async () => {
       }, 1500);
     }
 
+    // Eases toward the slider value; parts that are removed or mid-animation are left alone.
+    function updateExplode() {
+      const target = animationController.explodeAmount;
+      if (explodeCur === target) return;
+      explodeCur = Math.abs(target - explodeCur) < 0.002 ? target : explodeCur + (target - explodeCur) * 0.15;
+      explodeParts.forEach(p => {
+        if (p.visible && !animationController.isAnimating(p)) p.position.copy(explodedPosition(p, explodeCur));
+      });
+    }
+
     function startRenderLoop() {
       function animate() {
         requestAnimationFrame(animate);
+        updateExplode();
         scene.render();
       }
       animate();

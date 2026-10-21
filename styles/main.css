@@ -233,6 +233,19 @@ canvas {
   line-height: 1.5;
 }
 
+.explode-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.explode-control input {
+  flex: 1;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
