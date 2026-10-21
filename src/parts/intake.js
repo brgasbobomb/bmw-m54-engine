@@ -78,19 +78,23 @@ export function build(c) {
     }
   }
 
-  // Idle-air nipple on each runner near the flange; the distribution piece runs along the head side and loops
-  // over into every nipple
-  const nipGeo = new T.CylinderGeometry(1.3, 1.3, 3.2, 8);
-  const loopGeo = new T.TorusGeometry(3.8, 1, 6, 12, Math.PI);
+  // Idle-air distribution frame (3D scans): a spine along the runner crests and one U per runner lying on the
+  // runner top, legs 17 apart, round end toward the head; an idle-air nipple stands inside each U.
+  // Frame plane follows the runner top slope: up = 38 at out 16, rising 2/3 per unit out (car frame).
+  const upAt = o => 38 + (o - 16) * 2 / 3;
+  const uPts = [];
+  for (let k = 0; k <= 4; k++) uPts.push([-8.5, 36 - 5 * k]);
+  for (let k = 1; k < 12; k++) { const a = Math.PI * k / 12; uPts.push([-8.5 * Math.cos(a), 16 - 8.5 * Math.sin(a)]); }
+  for (let k = 0; k <= 4; k++) uPts.push([8.5, 16 + 5 * k]);
+  const uGeo = new T.TubeGeometry(new T.CatmullRomCurve3(uPts.map(([x, o]) => new T.Vector3(x, upAt(o), o))), 48, 2.6, 8, false);
+  const nipGeo = new T.CylinderGeometry(1.3, 1.6, 5, 8);
   for (let i = 0; i < 6; i++) {
-    detail(new T.Mesh(nipGeo, matIntake), intakeGrp).position.set(cx(i) + 8, headY + 16.6, zF + 5.4);
-    const loop = detail(new T.Mesh(loopGeo, matCover), intakeGrp);
-    loop.rotation.y = Math.PI / 2;            // half ring standing in the (z', y') plane
-    loop.position.set(cx(i) + 8, headY + 18.2, zF + 1.6);
+    detail(new T.Mesh(uGeo, matIntake), car).position.x = cx(i);
+    detail(new T.Mesh(nipGeo, matIntake), car).position.set(cx(i), upAt(24) - 0.5, 24);
   }
-  const dist = detail(new T.Mesh(new T.CylinderGeometry(1.1, 1.1, run + 16, 10), matCover), intakeGrp);
-  dist.rotation.z = Math.PI / 2;
-  dist.position.set(xm + 8, headY + 18.2, zF - 2.2);
+  const spine = detail(new T.Mesh(new T.BoxGeometry(run + 22, 4, 8), matIntake), car);
+  spine.rotation.x = -Math.atan(2 / 3);      // lies in the frame plane
+  spine.position.set(xm, upAt(37), 37);
 
   // Throttle mount (3D scans): a neck under the plenum at mid-length, a little toward the front, ending in a square
   // 4-bolt flange that faces outward; a sheet bracket hangs from its foot toward the block.

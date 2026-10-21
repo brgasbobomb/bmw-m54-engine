@@ -50,8 +50,10 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - Elevation of the outer/under side: long plenum with a flat lid and seam lip, two big drop bulges, square 4-bolt
   throttle flange (~95 mm) with ~70 mm bore at mid-length below the plenum, DISA bore with screws above it, sheet
   bracket below, hoses/ICV to the side, "B" moulded at one end.
-- Oblique views: tall U-loop idle-air distribution frame (one U per runner on a straight spine) along the head
-  flange is a prominent feature; still modelled only as small half-rings.
+- Oblique views: U-loop idle-air distribution frame (one U per runner on a straight spine) along the head
+  flange is a prominent feature. Modelled (car frame): tube r 2.6, legs 17 apart from the spine at out 36 to the
+  round end centred at out 16 (tip ~7.5), lying in a plane up = 38 + (out − 16)·2/3 just above the runner tops;
+  spine is a 4×8 strip in that plane at out 37; nipple inside each U at out 24. Old flange half-rings removed.
 
 ## Uncertain
 - Crest height and position are by eye: top kept near the previous model (world y 108 vs coil tops 94); the crest
