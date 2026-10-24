@@ -3,12 +3,19 @@
 Photos in this folder:
 - `user-engine-stand-photo.webp`: the user's M54 on an engine stand, intake side from above. Viewed; findings below.
 - `realoem-intake-diagram.webp`: RealOEM exploded diagram of the M54 intake manifold, items 1–17. Viewed; findings below.
-- `air intake hose.jpeg`: not viewed yet, probably the inlet boot. Look at it before refining the boot or its airbox end.
+- `air intake hose.jpeg`: the loose inlet boot (MAF → throttle). Viewed; findings below.
 
 Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - `image_31.jpg`, `image_32.jpg`: loose OEM manifold with DISA, rail and injectors. Viewed; findings below.
 - `image_33.jpg` is an aftermarket welded-aluminium short-runner manifold, not OEM. Only its head flange is useful:
   rounded-rect ports wider than tall, staggered upper/lower bolt holes, scalloped bosses. Don't open it again.
+
+## Inlet boot photo (seen once, don't re-open)
+- One short, fat elbow (not a long hose): smooth body with a raised cage of 3–4 hoop ribs crossed by lengthwise ribs.
+- One end: plain flat cuff with a square tab hanging off it. Other end opens wider.
+- A thin corrugated hose (idle-air) leaves the side of the body and ends in a plain cuff.
+- Modelled: cubic elbow from the throttle (out) to the MAF (forward, slightly up), radius 15 → 19, 4 hoops + 4
+  lengthwise ribs, cuff + tab at the throttle end, clamp at the MAF, corrugated hose to the idle valve's rear end.
 
 ## Stand photo (seen once, don't re-open)
 - Six smooth, separate runner humps, each with a moulded double ridge along the top (image_31: the two lips of

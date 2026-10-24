@@ -17,6 +17,7 @@ import { build as crankshaft } from './crankshaft.js';
 import { build as pistonsRods } from './pistons-rods.js';
 import { build as oilPump } from './oil-pump.js';
 import { build as intake } from './intake.js';
+import { build as airbox } from './airbox.js';
 import { build as exhaust } from './exhaust.js';
 import { build as oilPan } from './oil-pan.js';
 import { build as frontDrive } from './front-drive.js';
@@ -42,6 +43,7 @@ const PARTS = [
   pistonsRods,
   oilPump,
   intake,
+  airbox,
   exhaust,
   oilPan,
   frontDrive,

@@ -147,6 +147,31 @@
       "Intake Manifold"
     ]
   },
+  "mafSensor": {
+    "id": "maf-sensor",
+    "name": "Mass Air Flow Sensor (HFM)",
+    "type": "Intake System",
+    "weight": "0.4 kg",
+    "material": "Plastic",
+    "assembly": "Intake",
+    "specs": "Hot-film air mass meter, bolted to the airbox outlet",
+    "relationships": [
+      "Airbox",
+      "Throttle Body"
+    ]
+  },
+  "airbox": {
+    "id": "airbox",
+    "name": "Airbox (Air Filter Housing)",
+    "type": "Intake System",
+    "weight": "1.5 kg",
+    "material": "Plastic",
+    "assembly": "Intake",
+    "specs": "Panel air filter, lid clipped on, intake-side front corner",
+    "relationships": [
+      "Mass Air Flow Sensor (HFM)"
+    ]
+  },
   "exhaustManifold": {
     "id": "exhaust-manifold",
     "name": "Exhaust Manifold",

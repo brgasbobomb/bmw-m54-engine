@@ -108,24 +108,52 @@ export function build(c) {
   iv.rotation.z = Math.PI / 2;
   iv.position.set(xT - 34, uT + 2, oT - 6);
 
-  // Inlet boot: out of the throttle body outward, 90 deg bend toward the front, then forward along the outer side
-  // of the manifold toward the airbox; ribs, hose clamps at both ends, dark cap for the open end
-  const b0 = oT + 24, xB = xm + PX / 2 + 24;
-  const boot = new T.CurvePath();
-  // Bezier keeps the bend radius near 28, well above the tube radius, so the inner wall doesn't fold
-  boot.add(new T.CubicBezierCurve3(...[[0, 0], [0, 16], [12, 28], [28, 28]].map(([x, o]) => new T.Vector3(xT + x, uT, b0 + o))));
-  boot.add(new T.LineCurve3(new T.Vector3(xT + 28, uT, b0 + 28), new T.Vector3(xB, uT - 6, b0 + 28)));
-  const axisZ = new T.Vector3(0, 0, 1);
+  // Inlet boot (refs/intake/air intake hose.jpeg): one fat elbow out of the throttle body outward, bending forward
+  // and rising a little to the MAF on the airbox (airbox.js builds from `bootEnd`). Radius grows from the throttle to
+  // the MAF; raised rib cage over the body, flat cuff with a tab at the throttle end, clamp at the MAF end, and a
+  // corrugated idle-air hose off its rear side to the idle valve.
+  const V = (x, u, o) => new T.Vector3(x, u, o);
+  const org = V(0, headY, zF).applyAxisAngle(V(1, 0, 0), -Math.PI / 6);  // car-group origin, upright engine frame
+  const bootEnd = V(95, 52, 125);                                          // MAF rear face, upright engine frame
+  const e = bootEnd.clone().sub(org), b0 = oT + 22;
+  const boot = new T.CubicBezierCurve3(V(xT, uT, b0), V(xT, uT, b0 + 26), V(e.x - 42, e.y, e.z), e);
+  const TS = 48, RS = 24, rB = t => 15 + 4 * t * t * (3 - 2 * t);
+  const bootGeo = new T.TubeGeometry(boot, TS, 1, RS, false);
+  const bp = bootGeo.attributes.position, q = V(0, 0, 0);
+  for (let k = 0; k < bp.count; k++) {        // scale each ring of the unit tube to rB (vertex rings follow getPointAt)
+    const t = Math.floor(k / (RS + 1)) / TS, p0 = boot.getPointAt(t);
+    q.fromBufferAttribute(bp, k).sub(p0).multiplyScalar(rB(t)).add(p0);
+    bp.setXYZ(k, q.x, q.y, q.z);
+  }
+  detail(new T.Mesh(bootGeo, matIntake), car);
+  const axisZ = V(0, 0, 1);
   const onBoot = (mesh, t) => {
     mesh.position.copy(boot.getPointAt(t));
     mesh.quaternion.setFromUnitVectors(axisZ, boot.getTangentAt(t));
     return detail(mesh, car);
   };
-  detail(new T.Mesh(new T.TubeGeometry(boot, 48, 14, 20, false), matIntake), car);
-  const ribGeo = new T.TorusGeometry(14, 1, 6, 20), clampGeo = new T.TorusGeometry(14.3, 1.4, 6, 20);
-  for (const t of [0.45, 0.55, 0.65, 0.75, 0.85]) onBoot(new T.Mesh(ribGeo, matIntake), t);
-  for (const t of [0.02, 0.97]) onBoot(new T.Mesh(clampGeo, matSteelDk), t);
-  onBoot(new T.Mesh(new T.CircleGeometry(13.5, 20), matCoil), 1);
+  for (const t of [0.3, 0.45, 0.6, 0.75]) onBoot(new T.Mesh(new T.TorusGeometry(rB(t) + 0.4, 1.1, 6, 28), matIntake), t);
+  for (let a = 0; a < 4; a++) {               // lengthwise cage ribs, a quarter turn apart
+    const pts = [];
+    for (let i = 10; i <= 38; i += 2) {
+      const t = i / TS, n = bootGeo.normals[i], bn = bootGeo.binormals[i], r = rB(t) + 0.4;
+      pts.push(boot.getPointAt(t).addScaledVector(n, r * Math.cos(a * Math.PI / 2)).addScaledVector(bn, r * Math.sin(a * Math.PI / 2)));
+    }
+    detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 24, 1.1, 6, false), matIntake), car);
+  }
+  onBoot(new T.Mesh(new T.CylinderGeometry(16.6, 16.6, 9, 28).rotateX(Math.PI / 2), matIntake), 0.035);
+  detail(new T.Mesh(new T.BoxGeometry(12, 9, 3), matIntake), car).position.set(xT, uT - 20, b0 + 4);
+  onBoot(new T.Mesh(new T.TorusGeometry(rB(1) + 0.3, 1.4, 6, 28), matSteelDk), 0.96);
+  // Idle-air hose: corrugated, from the boot's rear side round to the idle valve's rear end
+  const icv = new T.CatmullRomCurve3([V(xT - 14, uT - 2, b0 + 8), V(xT - 28, uT - 4, b0 + 4), V(xT - 50, uT - 2, oT + 10),
+                                      V(xT - 58, uT + 2, oT - 2), V(xT - 48, uT + 2, oT - 6)]);
+  detail(new T.Mesh(new T.TubeGeometry(icv, 40, 2.8, 10, false), matIntake), car);
+  const corrGeo = new T.TorusGeometry(3.1, 0.8, 5, 12);
+  for (let t = 0.12; t < 0.86; t += 0.035) {
+    const m = detail(new T.Mesh(corrGeo, matIntake), car);
+    m.position.copy(icv.getPointAt(t));
+    m.quaternion.setFromUnitVectors(axisZ, icv.getTangentAt(t));
+  }
   reg(intakeGrp, 'intake-manifold');
 
   // Throttle body: alloy housing bolted to the flange, axis outward; 4 bolts, actuator motor on the front side
@@ -161,4 +189,5 @@ export function build(c) {
     detail(new T.Mesh(conGeo, matPink), injectorsGrp).position.set(cx(i), railY - 3, railZ - 4.5);
   }
   reg(injectorsGrp, 'fuel-injectors');
+  return { bootEnd };
 }

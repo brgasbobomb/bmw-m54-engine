@@ -18,6 +18,8 @@ export const EXPLODE = {
   'oil-pan':            [0, -1, 0, 95],
   'intake-manifold':    [0, 0.2, 1, 90],
   'throttle-body':      [0.4, 0.2, 1, 120],
+  'maf-sensor':         [0.5, 0.3, 1, 110],
+  'airbox':             [0.6, 0.3, 1, 140],
   'fuel-injectors':     [0, 0.3, 1, 55],
   'exhaust-manifold':   [0, -0.2, -1, 90],
   'oxygen-sensors':     [0, -0.2, -1, 120],

@@ -1,0 +1,37 @@
+// Airbox + MAF (E46 M54): black airbox in the intake-side front corner beside the radiator, MAF on its
+// rear-inboard corner pointing back to the inlet boot (refs/engine-bay/notes.md). Both stay upright.
+// Built from `bootEnd` (MAF rear face, returned by intake.js), axis along +X.
+export function build(c) {
+  const { T, matCover, matCoil, matIntake, matSteelDk, reg, detail, roundedBox, bootEnd } = c;
+  const { x: x0, y, z } = bootEnd;
+  const alongX = geo => geo.rotateZ(-Math.PI / 2);   // cylinder axis Y -> X
+
+  // MAF (HFM5): round black body between two flanges, sensor housing with its plug on top
+  const L = 44;
+  const maf = new T.Group();
+  detail(new T.Mesh(alongX(new T.CylinderGeometry(17, 17, L, 28)), matCover), maf).position.set(x0 + L / 2, y, z);
+  const flGeo = alongX(new T.CylinderGeometry(19.5, 19.5, 5, 28));
+  for (const dx of [2.5, L - 2.5]) detail(new T.Mesh(flGeo, matCover), maf).position.set(x0 + dx, y, z);
+  detail(roundedBox(22, 9, 14, 2, matCover), maf).position.set(x0 + L / 2, y + 19, z);
+  detail(roundedBox(9, 8, 10, 1.5, matCoil), maf).position.set(x0 + L / 2 - 13, y + 19, z);   // plug
+  reg(maf, 'maf-sensor', false);
+
+  // Airbox: lower housing + lid on a seam lip with clips, outlet neck for the MAF on the rear face, inlet snorkel
+  // low on the front face. Inboard face z0 stays clear of the expansion tank (z ≤ 92).
+  const A = { x0: x0 + L + 6, x1: 244, y0: 8, y1: 72, z0: z - 22, z1: z + 76 }, seam = 34;
+  const ax = (A.x0 + A.x1) / 2, az = (A.z0 + A.z1) / 2, aw = A.x1 - A.x0, ad = A.z1 - A.z0;
+  const ab = new T.Group();
+  detail(roundedBox(aw - 4, seam - A.y0, ad - 4, 6, matIntake), ab).position.set(ax, (A.y0 + seam) / 2, az);
+  detail(roundedBox(aw, A.y1 - seam, ad, 6, matIntake), ab).position.set(ax, (seam + A.y1) / 2, az);
+  detail(roundedBox(aw + 3, 3, ad + 3, 1.5, matIntake), ab).position.set(ax, seam, az);
+  detail(new T.Mesh(alongX(new T.CylinderGeometry(18, 19, 6, 28)), matIntake), ab).position.set(A.x0 - 3, y, z);
+  const clipGeo = new T.BoxGeometry(8, 12, 3);
+  for (const f of [0.2, 0.5, 0.8]) detail(new T.Mesh(clipGeo, matSteelDk), ab).position.set(A.x0 + f * aw, seam, A.z1 + 2);
+  for (const f of [0.3, 0.7]) {
+    const clip = detail(new T.Mesh(clipGeo, matSteelDk), ab);
+    clip.rotation.y = Math.PI / 2;
+    clip.position.set(A.x1 + 2, seam, A.z0 + f * ad);
+  }
+  detail(roundedBox(12, 16, 30, 3, matIntake), ab).position.set(A.x1 + 4, 20, A.z1 - 26);
+  reg(ab, 'airbox', false);
+}

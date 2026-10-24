@@ -25,6 +25,10 @@ Photos in this folder:
 - Expansion tank (`expansion-tank.js`): upright 26 × 44 × 22 box at x 225…251, y 12…56, z 70…92. It sits 1 unit
   off the radiator's +Z side, front faces flush, tops level.
 
+- Airbox + MAF (`airbox.js`, upright): MAF axis along X at y 52, z 125, x 95…139; airbox x 145…244, y 8…72,
+  z 103…201, seam lip at y 34 with clips, outlet neck on the rear face for the MAF, snorkel low on the front face.
+  Sizes are by eye (no airbox close-up yet).
+
 ## Still missing
-- Tank cap, bleed screw and hose spigots; airbox, MAF and intake boot are not modelled at all.
+- Tank cap, bleed screw and hose spigots; airbox lid detail (filter-cover ribs, intake snorkel route) by eye only.
 - Check whether the model's upper radiator hose (it ends at the radiator's −Z top) should go to the +Z corner instead.
