@@ -412,5 +412,30 @@
       "Crankshaft",
       "Starter Motor"
     ]
+  },
+  "carBody": {
+    "id": "car-body",
+    "name": "E46 Saloon Body Shell",
+    "type": "Body",
+    "weight": "approx. 340 kg",
+    "material": "Sheet Steel",
+    "assembly": "Body",
+    "specs": "BMW E46 4-door saloon, Oriental Blau metallic (420), bare shell with glass",
+    "relationships": [
+      "Bonnet",
+      "Engine Block"
+    ]
+  },
+  "bonnet": {
+    "id": "bonnet",
+    "name": "Bonnet",
+    "type": "Body Panel",
+    "weight": "approx. 17 kg",
+    "material": "Sheet Steel",
+    "assembly": "Body",
+    "specs": "Oriental Blau metallic, hinged at the cowl",
+    "relationships": [
+      "E46 Saloon Body Shell"
+    ]
   }
 }

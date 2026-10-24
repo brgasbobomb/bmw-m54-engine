@@ -43,7 +43,7 @@ class Scene {
   initCamera() {
     const width = this.container.clientWidth;
     const height = this.container.clientHeight;
-    this.camera = new window.THREE.PerspectiveCamera(48, width / height, 0.1, 2000);
+    this.camera = new window.THREE.PerspectiveCamera(48, width / height, 0.1, 5000);
     this.camera.position.set(360, 165, 245);
     this.camera.lookAt(-10, 12, 8);
   }
@@ -117,7 +117,7 @@ class Scene {
     this.controls.mouseButtons.MIDDLE = window.THREE.MOUSE.PAN; // sidebar hint says "Middle mouse to pan"
     this.controls.enableDamping = true;
     this.controls.minDistance = 50;
-    this.controls.maxDistance = 1000;
+    this.controls.maxDistance = 2500;
 
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
     document.addEventListener('mousedown', (e) => this.onMouseDown(e));

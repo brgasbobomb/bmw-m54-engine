@@ -18,5 +18,7 @@ export function makeMaterials(T) {
   const matGold     = new T.MeshStandardMaterial({ color: 0xc89e4c, metalness: 0.85, roughness: 0.25 }); // brass/copper
   const matRadiator = new T.MeshStandardMaterial({ color: 0x242426, metalness: 0.25, roughness: 0.75 }); // radiator fins
   const matHose     = new T.MeshStandardMaterial({ color: 0x181819, metalness: 0.05, roughness: 0.85 }); // black coolant hoses
-  return { matBlock, matCover, matCoverAcc, matIntake, matExhaust, matAlu, matAluDark, matSteel, matSteelDk, matBelt, matCoil, matCeramic, matBlueCap, matFace, matGold, matRadiator, matHose };
+  const matBody     = new T.MeshPhysicalMaterial({ color: 0x1b4478, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.06, side: T.DoubleSide }); // Oriental Blau metallic (BMW 420)
+  const matGlass    = new T.MeshPhysicalMaterial({ color: 0x0c1418, metalness: 0, roughness: 0.05, transparent: true, opacity: 0.5, side: T.DoubleSide }); // tinted glass
+  return { matBody, matGlass, matBlock, matCover, matCoverAcc, matIntake, matExhaust, matAlu, matAluDark, matSteel, matSteelDk, matBelt, matCoil, matCeramic, matBlueCap, matFace, matGold, matRadiator, matHose };
 }

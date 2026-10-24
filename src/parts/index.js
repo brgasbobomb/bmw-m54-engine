@@ -28,6 +28,7 @@ import { build as flywheel } from './flywheel.js';
 import { build as radiator } from './radiator.js';
 import { build as hoses } from './hoses.js';
 import { build as expansionTank } from './expansion-tank.js';
+import { build as body } from './body.js';
 
 const PARTS = [
   block,
@@ -53,7 +54,8 @@ const PARTS = [
   flywheel,
   radiator,
   hoses,
-  expansionTank
+  expansionTank,
+  body
 ];
 
 export function buildProceduralEngine(model) {
