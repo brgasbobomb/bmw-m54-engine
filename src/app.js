@@ -924,6 +924,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         console.log('✓ Application loaded successfully!');
 
+        // the opaque shell hides the engine from the start camera; open on the bare engine (Reset All brings it back)
+        ['bonnet', 'car-body'].forEach(id => handlePartClick(id));
+
         startRenderLoop();
       } catch (err) {
         console.error('Error during initialization:', err);
