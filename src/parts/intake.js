@@ -80,21 +80,30 @@ export function build(c) {
 
   // Idle-air distribution frame (3D scans): a spine along the runner crests and one U per runner lying on the
   // runner top, legs 17 apart, round end toward the head; an idle-air nipple stands inside each U.
-  // Frame plane follows the runner top slope: up = 38 at out 16, rising 2/3 per unit out (car frame).
-  const upAt = o => 38 + (o - 16) * 2 / 3;
+  // Moulded into the runner skin (stand photo: a low ridge on each hump), so the rib follows the runner top surface.
+  // surf(x, o): up of the runner top at lateral offset x (scaled-ellipse section, r 10 × 15) and out o, rising arch.
+  const rise = path.curves[0].getPoints(60), surf = (x, o) => {
+    const h = 10 * Math.sqrt(1 - (x / 15) ** 2);
+    let best = -1e9;
+    for (let k = 1; k < rise.length; k++) {
+      const a = rise[k - 1], b = rise[k], dz = b.z - a.z, dy = b.y - a.y, l = Math.hypot(dz, dy);
+      const so = a.z - dy / l * h, su = a.y + dz / l * h;   // surface point above a
+      if (Math.abs(so - o) < 1.5) best = Math.max(best, su);
+    }
+    return best;
+  };
   const uPts = [];
   for (let k = 0; k <= 4; k++) uPts.push([-8.5, 36 - 5 * k]);
   for (let k = 1; k < 12; k++) { const a = Math.PI * k / 12; uPts.push([-8.5 * Math.cos(a), 16 - 8.5 * Math.sin(a)]); }
   for (let k = 0; k <= 4; k++) uPts.push([8.5, 16 + 5 * k]);
-  const uGeo = new T.TubeGeometry(new T.CatmullRomCurve3(uPts.map(([x, o]) => new T.Vector3(x, upAt(o), o))), 48, 2.6, 8, false);
+  const uGeo = new T.TubeGeometry(new T.CatmullRomCurve3(uPts.map(([x, o]) => new T.Vector3(x, surf(x, o) + 0.3, o))), 48, 1.6, 8, false);
   const nipGeo = new T.CylinderGeometry(1.3, 1.6, 5, 8);
   for (let i = 0; i < 6; i++) {
     detail(new T.Mesh(uGeo, matIntake), car).position.x = cx(i);
-    detail(new T.Mesh(nipGeo, matIntake), car).position.set(cx(i), upAt(24) - 0.5, 24);
+    detail(new T.Mesh(nipGeo, matIntake), car).position.set(cx(i), surf(0, 24) + 1.5, 24);
   }
-  const spine = detail(new T.Mesh(new T.BoxGeometry(run + 22, 4, 8), matIntake), car);
-  spine.rotation.x = -Math.atan(2 / 3);      // lies in the frame plane
-  spine.position.set(xm, upAt(37), 37);
+  // Spine along the crest, half sunk into the runner tops (top 47)
+  detail(new T.Mesh(new T.BoxGeometry(run + 22, 3, 7), matIntake), car).position.set(xm, 46.5, 37);
 
   // Throttle mount (3D scans): a neck under the plenum at mid-length, a little toward the front, ending in a square
   // 4-bolt flange that faces outward; a sheet bracket hangs from its foot toward the block.
@@ -117,7 +126,7 @@ export function build(c) {
   const bootEnd = V(95, 52, 125);                                          // MAF rear face, upright engine frame
   const e = bootEnd.clone().sub(org), b0 = oT + 22;
   const boot = new T.CubicBezierCurve3(V(xT, uT, b0), V(xT, uT, b0 + 26), V(e.x - 42, e.y, e.z), e);
-  const TS = 48, RS = 24, rB = t => 15 + 4 * t * t * (3 - 2 * t);
+  const TS = 48, RS = 24, rB = t => 13.6 + 2 * t * t * (3 - 2 * t);   // stand photo: OD ≈ throttle body
   const bootGeo = new T.TubeGeometry(boot, TS, 1, RS, false);
   const bp = bootGeo.attributes.position, q = V(0, 0, 0);
   for (let k = 0; k < bp.count; k++) {        // scale each ring of the unit tube to rB (vertex rings follow getPointAt)
@@ -141,8 +150,8 @@ export function build(c) {
     }
     detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 24, 1.1, 6, false), matIntake), car);
   }
-  onBoot(new T.Mesh(new T.CylinderGeometry(16.6, 16.6, 9, 28).rotateX(Math.PI / 2), matIntake), 0.035);
-  detail(new T.Mesh(new T.BoxGeometry(12, 9, 3), matIntake), car).position.set(xT, uT - 20, b0 + 4);
+  onBoot(new T.Mesh(new T.CylinderGeometry(14.8, 14.8, 8, 28).rotateX(Math.PI / 2), matIntake), 0.035);
+  detail(new T.Mesh(new T.BoxGeometry(10, 7, 3), matIntake), car).position.set(xT, uT - 17.5, b0 + 4);
   onBoot(new T.Mesh(new T.TorusGeometry(rB(1) + 0.3, 1.4, 6, 28), matSteelDk), 0.96);
   // Idle-air hose: corrugated, from the boot's rear side round to the idle valve's rear end
   const icv = new T.CatmullRomCurve3([V(xT - 14, uT - 2, b0 + 8), V(xT - 28, uT - 4, b0 + 4), V(xT - 50, uT - 2, oT + 10),
