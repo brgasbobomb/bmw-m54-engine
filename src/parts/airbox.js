@@ -2,23 +2,24 @@
 // rear-inboard corner pointing back to the inlet boot (refs/engine-bay/notes.md). Both stay upright.
 // Built from `bootEnd` (MAF rear face, returned by intake.js), axis along +X.
 export function build(c) {
-  const { T, matCover, matCoil, matIntake, matSteelDk, reg, detail, roundedBox, bootEnd } = c;
+  const { T, matCover, matCoil, matIntake, matSteelDk, reg, detail, roundedBox, bootEnd, span, BW } = c;
   const { x: x0, y, z } = bootEnd;
   const alongX = geo => geo.rotateZ(-Math.PI / 2);   // cylinder axis Y -> X
 
   // MAF (HFM5): round black body between two flanges, sensor housing with its plug on top
-  const L = 44;
+  const L = 40;
   const maf = new T.Group();
   detail(new T.Mesh(alongX(new T.CylinderGeometry(17, 17, L, 28)), matCover), maf).position.set(x0 + L / 2, y, z);
-  const flGeo = alongX(new T.CylinderGeometry(19.5, 19.5, 5, 28));
-  for (const dx of [2.5, L - 2.5]) detail(new T.Mesh(flGeo, matCover), maf).position.set(x0 + dx, y, z);
+  const flGeo = alongX(new T.CylinderGeometry(19.5, 19.5, 5, 28));   // front flange only: the boot clamps over the rear spigot
+  detail(new T.Mesh(flGeo, matCover), maf).position.set(x0 + L - 2.5, y, z);
   detail(roundedBox(22, 9, 14, 2, matCover), maf).position.set(x0 + L / 2, y + 19, z);
   detail(roundedBox(9, 8, 10, 1.5, matCoil), maf).position.set(x0 + L / 2 - 13, y + 19, z);   // plug
   reg(maf, 'maf-sensor', false);
 
   // Airbox: lower housing + lid on a seam lip with clips, outlet neck for the MAF on the rear face, inlet snorkel
   // low on the front face. Inboard face z0 stays clear of the expansion tank (z ≤ 92).
-  const A = { x0: x0 + L + 6, x1: 244, y0: 8, y1: 72, z0: z - 22, z1: z + 76 }, seam = 34;
+  // Size from the photos: airbox length ≈ 0.33 × valve cover length (6·span), width ≈ 1.1 × BW, low (refs/airbox/notes.md).
+  const A = { x0: x0 + L + 6, x1: x0 + L + 6 + 0.33 * 6 * span, y0: 14, y1: 52, z0: z - 20, z1: z - 20 + 1.1 * BW }, seam = 32;
   const ax = (A.x0 + A.x1) / 2, az = (A.z0 + A.z1) / 2, aw = A.x1 - A.x0, ad = A.z1 - A.z0;
   const ab = new T.Group();
   detail(roundedBox(aw - 4, seam - A.y0, ad - 4, 6, matIntake), ab).position.set(ax, (A.y0 + seam) / 2, az);
