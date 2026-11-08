@@ -31,3 +31,7 @@ Electron + Three.js r160. Procedural M54B30 built from primitives; each removabl
    third argument for parts that stay upright (radiator, expansion tank).
 8. Commit after each finished part (`git commit`) so a bad change can be undone with git
    instead of a repair session.
+9. Max 3 sessions per part. If a part is still wrong after 3, stop and list what's wrong instead of
+   rebuilding again.
+10. Commit after each working step, not only at the end.
+11. Every `refs/<part>/notes.md` ends with a "Still off" list. Read it first in the next session on that part.
