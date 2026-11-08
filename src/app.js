@@ -868,7 +868,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log('Loading BMW M54 Engine Application...');
 
     let scene, engineModel, interactionManager, animationController, uiPanel;
-    let explodeParts = [], explodeCur = 0;
+    let explodeParts = [], explodeCur = 0, camK = 0; // camK: explode amount the camera distance already accounts for (null = Reset All, skip until back at 0)
     const explodeSlider = document.getElementById('explode-slider');
     const canvasContainer = document.getElementById('canvas-container');
 
@@ -1082,6 +1082,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       BODY_IDS.forEach(id => hierarchy.removePart(id)); // start view: body hidden
       bodyToggle.checked = false;
       frameView(false);
+      camK = null;
       uiPanel.displayDefaultInfo();
       uiPanel.clearHighlight();
       uiPanel.updateRemovedPartsBar();
@@ -1100,6 +1101,12 @@ window.addEventListener('DOMContentLoaded', async () => {
       const target = animationController.explodeAmount;
       if (explodeCur === target) return;
       explodeCur = Math.abs(target - explodeCur) < 0.002 ? target : explodeCur + (target - explodeCur) * 0.15;
+      // ease the camera out along its view ray so the exploded engine stays in frame
+      if (camK !== null) {
+        const cam = scene.getCamera(), tgt = scene.controls.target, k = 1.6;
+        cam.position.sub(tgt).multiplyScalar((1 + k * explodeCur) / (1 + k * camK)).add(tgt);
+        camK = explodeCur;
+      } else if (explodeCur === 0) camK = 0;
       explodeParts.forEach(p => {
         if (p.visible && !animationController.isAnimating(p)) p.position.copy(explodedPosition(p, explodeCur));
       });

@@ -4,39 +4,39 @@
 // the nth registered object gets the nth entry, in build order (src/parts/index.js).
 // The engine block stays put; ids not listed don't move.
 // Global spread factor: raise to push every part further apart at 100%.
-const EXPLODE_SCALE = 2;
+const EXPLODE_SCALE = 1;
 export const EXPLODE = {
-  'cylinder-head':      [[0, 1, 0, 110], [0, 1, 0, 190]], // head, valve cover
-  'ignition-coils':     [0, 1, 0, 270],
-  'spark-plugs':        [0, 1, 0, 230],
-  'camshafts':          [0, 1, 0, 150],
-  'valves':             [0, 1, 0, 80],
-  'vanos-actuators':    [1, 1, 0, 90],
-  'timing-chain':       [1, 0, 0, 60],
-  'pistons':            [0, 1, 0, 45],
-  'connecting-rods':    [0, 1, 0, 15],
-  'crankshaft':         [0, -1, 0, 35],
-  'oil-pump':           [0, -1, 0, 60],
-  'oil-pan':            [0, -1, 0, 95],
-  'intake-manifold':    [0, 0.2, 1, 90],
-  'throttle-body':      [0.4, 0.2, 1, 120],
-  'maf-sensor':         [0.5, 0.3, 1, 110],
-  'airbox':             [0.6, 0.3, 1, 140],
-  'fuel-injectors':     [0, 0.3, 1, 55],
-  'exhaust-manifold':   [0, -0.2, -1, 90],
-  'oxygen-sensors':     [0, -0.2, -1, 120],
-  'pulleys':            [[1, 0, 0, 110], [1, 0, 0, 90]], // crank damper, idler/tensioner pulleys
-  'serpentine-belt':    [[1, 0, 0, 130], [1, 0, 0, 130]],
-  'water-pump':         [1, 0, 0, 70],
-  'alternator':         [1, 0.3, 1, 90],
-  'power-steering-pump': [1, 0, -1, 90],
-  'ac-compressor':      [1, -0.3, 1, 90],
-  'thermostat':         [[1, 0.5, 0, 70], [1, 0.5, 0, 50]], // thermostat, hoses
-  'oil-filter':         [0.3, 0.5, 1, 70],
-  'flywheel':           [-1, 0, 0, 70],
-  'starter-motor':      [-1, 0, 1, 90],
-  'radiator':           [1, 0, 0, 90],
-  'coolant-tank':       [1, 0, 1, 90],
+  'cylinder-head':      [[0, 1, 0, 180], [0, 1, 0, 400]], // head, valve cover
+  'ignition-coils':     [0, 1, 0, 560],
+  'spark-plugs':        [0, 1, 0, 480],
+  'camshafts':          [0, 1, 0, 320],
+  'valves':             [0, 1, 0, 250],
+  'vanos-actuators':    [1, 1, 0, 300],
+  'timing-chain':       [1, 0.3, 0, 200],
+  'pistons':            [0, 1, 0, 110],
+  'connecting-rods':    [0, 1, 0, 50],
+  'crankshaft':         [0, -1, 0, 90],
+  'oil-pump':           [0, -1, 0, 170],
+  'oil-pan':            [0, -1, 0, 260],
+  'intake-manifold':    [0, 0.3, 1, 200],
+  'throttle-body':      [0.4, 0.3, 1, 290],
+  'maf-sensor':         [0.5, 0.4, 1, 380],
+  'airbox':             [0.6, 0.4, 1, 470],
+  'fuel-injectors':     [0, 0.5, 1, 120],
+  'exhaust-manifold':   [0, -0.2, -1, 200],
+  'oxygen-sensors':     [0, -0.2, -1, 300],
+  'pulleys':            [[1, 0, 0, 220], [1, 0.3, 0, 280]], // crank damper, idler/tensioner pulleys
+  'serpentine-belt':    [[1, 0, 0, 340], [1, 0, 0, 340]],
+  'water-pump':         [1, -0.3, 0, 180],
+  'alternator':         [1, 0.3, 1, 260],
+  'power-steering-pump': [1, 0, -1, 260],
+  'ac-compressor':      [1, -0.3, 1, 260],
+  'thermostat':         [[1, 0.6, 0, 160], [1, 0.8, 0, 120]], // thermostat, hoses
+  'oil-filter':         [0.3, 0.2, 1, 200],
+  'flywheel':           [-1, 0, 0, 160],
+  'starter-motor':      [-1, 0, 1, 230],
+  'radiator':           [1, 0, 0, 480],
+  'coolant-tank':       [1, 0.3, 1, 400],
 };
 
 // Top-level part objects (registered with reg()), in build order. Each gets
