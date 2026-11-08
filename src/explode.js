@@ -3,16 +3,18 @@
 // An id registered more than once (valve cover reuses 'cylinder-head') takes a list:
 // the nth registered object gets the nth entry, in build order (src/parts/index.js).
 // The engine block stays put; ids not listed don't move.
+// Global spread factor: raise to push every part further apart at 100%.
+const EXPLODE_SCALE = 2;
 export const EXPLODE = {
-  'cylinder-head':      [[0, 1, 0, 55], [0, 1, 0, 120]], // head, valve cover
-  'ignition-coils':     [0, 1, 0, 160],
-  'spark-plugs':        [0, 1, 0, 140],
-  'camshafts':          [0, 1, 0, 85],
-  'valves':             [0, 1, 0, 70],
+  'cylinder-head':      [[0, 1, 0, 110], [0, 1, 0, 190]], // head, valve cover
+  'ignition-coils':     [0, 1, 0, 270],
+  'spark-plugs':        [0, 1, 0, 230],
+  'camshafts':          [0, 1, 0, 150],
+  'valves':             [0, 1, 0, 80],
   'vanos-actuators':    [1, 1, 0, 90],
   'timing-chain':       [1, 0, 0, 60],
-  'pistons':            [0, 1, 0, 25],
-  'connecting-rods':    [0, 1, 0, 10],
+  'pistons':            [0, 1, 0, 45],
+  'connecting-rods':    [0, 1, 0, 15],
   'crankshaft':         [0, -1, 0, 35],
   'oil-pump':           [0, -1, 0, 60],
   'oil-pan':            [0, -1, 0, 95],
@@ -57,7 +59,7 @@ export function initExplode(engineGroup) {
     if (!e) { p.userData.explodeDir = new T.Vector3(); return; }
     const toParent = new T.Matrix4().copy(p.parent.matrixWorld).invert().multiply(tableToGroup);
     p.userData.explodeDir = new T.Vector3(e[0], e[1], e[2]).normalize()
-      .transformDirection(toParent).multiplyScalar(e[3]);
+      .transformDirection(toParent).multiplyScalar(e[3] * EXPLODE_SCALE);
   });
   return parts;
 }
