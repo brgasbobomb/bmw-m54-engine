@@ -30,11 +30,12 @@ right-hand ear. Pulley is black plastic with radial ribs and a large smooth dust
 No verified B30/E46 photo exists. Modelled as a plastic duct from the rear cap, round the outside of the
 alternator, opening forward. **Unverified** — replace when a photo turns up.
 
+## Fan mounting
+front-drive.js returns `fanMount` (fan-clutch boss nose, upright frame); radiator.js hangs the viscous fan,
+shroud hole and ring on it. The radiator is lifted to `radY` (layout.js, blockY + 38) so the offset fan fits the
+shroud; the expansion tank and radiator-hose ends follow `radY`.
+
 ## Still off
-- Radiator viscous fan is not on the water pump axis. Fan sits at radiator centre (upright frame y 0, z 0);
-  the pump pulley nose is at about y 44, z -19 (upright frame, before the Z mirror). The radiator is too low:
-  fixing it means raising the radiator (and its hoses + expansion tank) about 40 units, or a shroud with an
-  offset hole. Radiator session, not this one.
 - PS reservoir still sits on the pump instead of up by the oil filter housing.
 - Pulley sizes are eyeballed from a perspective photo, not measured.
 - Alternator cooling duct shape is a guess (see above).

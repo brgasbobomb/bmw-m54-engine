@@ -185,4 +185,9 @@ export function build(c) {
     beltX2, 8, 4
   );
   reg(belt2, 'serpentine-belt'); // share ID with belt1 so they disassemble together
+
+  // Fan-clutch boss nose in the upright (radiator) frame; radiator.js hangs the viscous fan here.
+  const fanMount = new T.Vector3(beltX1 + 14, A.waterPump.y, A.waterPump.z)
+    .applyAxisAngle(new T.Vector3(1, 0, 0), c.slantedGrp.rotation.x);
+  return { fanMount };
 }

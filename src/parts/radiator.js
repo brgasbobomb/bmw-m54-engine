@@ -1,7 +1,9 @@
 // Radiator: aluminium crossflow core, plastic end tanks, fan shroud and belt-driven viscous fan.
 // Envelope is unchanged (x ±6, y ±56, z ±69) so the expansion tank beside it still lines up.
 export function build(c) {
-  const { T, matCover, matSteelDk, matRadiator, reg, detail, LEN, blockY } = c;
+  const { T, matCover, matSteelDk, matRadiator, reg, detail, radX, radY, fanMount } = c;
+  // Fan axis = water pump fan boss (front-drive.js), in this group's frame
+  const fy = fanMount.y - radY, fz = fanMount.z;
   const radGrp = new T.Group();
 
   // Core: fine vertical fins between horizontal tube rows, drawn into a texture.
@@ -45,23 +47,24 @@ export function build(c) {
 
   // Fan shroud: plate with a round opening, plus the fan ring behind it
   const shape = new T.Shape();
-  shape.moveTo(-61, -50); shape.lineTo(61, -50); shape.lineTo(61, 50); shape.lineTo(-61, 50); shape.closePath();
-  const hole = new T.Path(); hole.absarc(0, 0, 44, 0, Math.PI * 2, true); shape.holes.push(hole);
+  shape.moveTo(-66, -50); shape.lineTo(66, -50); shape.lineTo(66, 50); shape.lineTo(-66, 50); shape.closePath();
+  const hole = new T.Path(); hole.absarc(-fz, fy, 44, 0, Math.PI * 2, true); shape.holes.push(hole);
   const plate = detail(new T.Mesh(new T.ExtrudeGeometry(shape, { depth: 3, bevelEnabled: false, curveSegments: 40 }), matCover), radGrp);
   plate.rotation.y = Math.PI / 2;   // extrude along +X
   plate.position.x = -9;
   const matRing = matCover.clone(); matRing.side = T.DoubleSide;
   const ring = detail(new T.Mesh(new T.CylinderGeometry(45, 45, 13, 40, 1, true), matRing), radGrp);
   ring.rotation.z = Math.PI / 2;
-  ring.position.x = -15.5;
+  ring.position.set(-15.5, fy, fz);
 
   // Belt-driven viscous fan: clutch hub, 9 pitched blades, short drive stub toward the water pump
   const fan = new T.Group();
-  fan.position.x = -17;
+  fan.position.set(-17, fy, fz);
   const hub = detail(new T.Mesh(new T.CylinderGeometry(12, 12, 9, 24), matSteelDk), fan);
   hub.rotation.z = Math.PI / 2; hub.position.x = -4;
-  const stub = detail(new T.Mesh(new T.CylinderGeometry(3.5, 3.5, 36, 12), matSteelDk), fan);
-  stub.rotation.z = Math.PI / 2; stub.position.x = -26;
+  const s0 = fanMount.x - radX + 17;   // pump boss nose, in fan-group x
+  const stub = detail(new T.Mesh(new T.CylinderGeometry(3.5, 3.5, -8.5 - s0, 12), matSteelDk), fan);
+  stub.rotation.z = Math.PI / 2; stub.position.x = (s0 - 8.5) / 2;
   for (let b = 0; b < 9; b++) {
     const arm = new T.Group();
     arm.rotation.x = (b / 9) * Math.PI * 2;
@@ -72,6 +75,6 @@ export function build(c) {
   }
   radGrp.add(fan);
 
-  radGrp.position.set(LEN / 2 + 105, blockY, 0);
+  radGrp.position.set(radX, radY, 0);
   reg(radGrp, 'radiator', false); // Radiator sits straight, NOT slanted!
 }
