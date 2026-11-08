@@ -10,7 +10,7 @@ export function makeMaterials(T) {
   const matAluDark  = new T.MeshStandardMaterial({ color: 0x767c85, metalness: 0.62, roughness: 0.48 }); // cast alloy dark
   const matSteel    = new T.MeshStandardMaterial({ color: 0xe0e4eb, metalness: 0.94, roughness: 0.18 }); // polished steel
   const matSteelDk  = new T.MeshStandardMaterial({ color: 0x38393e, metalness: 0.88, roughness: 0.32 }); // dark iron/steel
-  const matBelt     = new T.MeshStandardMaterial({ color: 0x121213, metalness: 0.02, roughness: 0.94 }); // rubber
+  const matBelt     = new T.MeshStandardMaterial({ color: 0x121213, metalness: 0.02, roughness: 0.94, side: T.DoubleSide }); // rubber
   const matCoil     = new T.MeshStandardMaterial({ color: 0x1a1a1c, metalness: 0.10, roughness: 0.78 }); // black plastic
   const matCeramic  = new T.MeshStandardMaterial({ color: 0xfbfaee, metalness: 0.12, roughness: 0.52 }); // white spark plug ceramic
   const matBlueCap  = new T.MeshStandardMaterial({ color: 0x1a3d90, metalness: 0.22, roughness: 0.50 }); // oil filter blue cap
