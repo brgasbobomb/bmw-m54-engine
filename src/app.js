@@ -872,6 +872,41 @@ window.addEventListener('DOMContentLoaded', async () => {
     const explodeSlider = document.getElementById('explode-slider');
     const canvasContainer = document.getElementById('canvas-container');
 
+    const BODY_IDS = ['bonnet', 'car-body'];
+    const bodyToggle = document.getElementById('body-toggle');
+    const isBody = p => BODY_IDS.includes(p.userData?.partId);
+
+    // Aim the camera at the engine (or whole car) from the front-left corner, slightly above.
+    // Front = +X, car's left = intake = -Z on screen (engine is mirrored across Z once).
+    function frameView(wholeCar) {
+      const group = engineModel.getEngineGroup();
+      group.updateMatrixWorld(true);
+      const T = window.THREE;
+      const box = new T.Box3();
+      explodeParts.filter(p => wholeCar || !isBody(p)).forEach(p => box.expandByObject(p));
+      const sphere = box.getBoundingSphere(new T.Sphere());
+      const cam = scene.getCamera();
+      const halfFov = Math.min(cam.fov, 2 * Math.atan(Math.tan(cam.fov * Math.PI / 360) * cam.aspect) * 180 / Math.PI) * Math.PI / 360;
+      const dist = sphere.radius / Math.sin(halfFov) * 1.05;
+      const dir = new T.Vector3(1, 0.45, -1).normalize();
+      const place = d => {
+        cam.position.copy(sphere.center).addScaledVector(dir, d);
+        cam.lookAt(sphere.center);
+        cam.updateMatrixWorld(true);
+      };
+      place(dist);
+      // the sphere is loose for an elongated engine: rescale so the box corners just touch the frame
+      let ext = 0;
+      for (let i = 0; i < 8; i++) {
+        const c = new T.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, i & 4 ? box.max.z : box.min.z);
+        c.project(cam);
+        ext = Math.max(ext, Math.abs(c.x), Math.abs(c.y));
+      }
+      place(dist * ext * 1.05);
+      scene.controls.target.copy(sphere.center);
+      scene.controls.update();
+    }
+
     async function loadPartsDatabase() {
       const response = await fetch('./data/parts-database.json');
       return await response.json();
@@ -924,8 +959,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         console.log('✓ Application loaded successfully!');
 
-        // the opaque shell hides the engine from the start camera; open on the bare engine (Reset All brings it back)
-        ['bonnet', 'car-body'].forEach(id => handlePartClick(id));
+        // the opaque shell hides the engine from the start camera; open on the bare engine
+        BODY_IDS.forEach(id => handlePartClick(id));
+        frameView(false);
+        bodyToggle.addEventListener('change', () => {
+          BODY_IDS.forEach(id => {
+            if (engineModel.getHierarchy().isPartVisible(id) !== bodyToggle.checked) handlePartClick(id);
+          });
+          frameView(bodyToggle.checked);
+        });
 
         startRenderLoop();
       } catch (err) {
@@ -1028,7 +1070,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       const allParts = explodeParts;
 
       allParts.forEach(part => {
-        if (part.userData?.partId && !hierarchy.isPartVisible(part.userData.partId)) {
+        if (!isBody(part) && part.userData?.partId && !hierarchy.isPartVisible(part.userData.partId)) {
           animationController.restorePart(part, () => {
             part.visible = true;
             animationController.setOpacityRecursive(part, 1.0);
@@ -1037,12 +1079,16 @@ window.addEventListener('DOMContentLoaded', async () => {
       });
 
       hierarchy.resetAll();
+      BODY_IDS.forEach(id => hierarchy.removePart(id)); // start view: body hidden
+      bodyToggle.checked = false;
+      frameView(false);
       uiPanel.displayDefaultInfo();
       uiPanel.clearHighlight();
       uiPanel.updateRemovedPartsBar();
 
       setTimeout(() => {
         allParts.forEach(part => {
+          if (isBody(part)) { part.visible = false; return; }
           part.visible = true;
           animationController.setOpacityRecursive(part, 1.0);
         });
