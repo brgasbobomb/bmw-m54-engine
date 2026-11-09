@@ -30,16 +30,13 @@ Group origin is (LEN/2 - 4, headY + 4, 0). Local +X = front, +Z = intake.
 - Oil feed fitting on +Z: arm, boxy head with 3 bolts on its +X face, neck, steel union nut, black hose down.
 - Materials: `matBlock` casting, `matAlu` machined flanges, `matGold` hubs, `matCoil` solenoids, `matHose` hose.
 
-## Still missing
-
-- The steel bracket around the fitting head and the thin black oil pipe from the fitting to the oil filter housing.
-- Sprocket plates and chain belong to `timing-chain.js`, not here.
-- Check `vanos3`–`vanos6` for the real unit's solenoid positions and top face, then correct the layout above.
+## Done (fix session)
+- Fitting head: 3 Torx-style screws (round head, two crossed hex sockets), steel L-bracket (plate on +Z end + flange over top, centre bolt), black connector plug on -Z side of neck, hose clamp band + screw housing.
+- Housing casting detail: 3 ribs on the bridge, rear rims on both barrels, parting-line slab on the lower body, two bolt lugs. Fitting position unchanged (x=4, y=-9, z=44.5).
 
 ## Still off
-- Steel L-bracket on the fitting head and the thin black oil pipe to the filter housing: missing (see also oil-filter.js VANOS line; check the two meet).
-- Black rectangular connector plug beside the fitting neck: missing. Fitting screws are hex, photo shows Torx (3 in a triangle: layout matches).
-- Hose boot has no clamp; the hose is a short stub that stops in mid-air.
-- Solenoid positions, top face and overall housing shape are unverified: `vanos3`–`vanos6` were never opened.
-- Housing is a generic rounded box; real unit is grimy dull cast aluminium with more casting detail.
-- Hubs are flat gold discs; toothed plates and chain are in timing-chain.js, so check they line up with the hub centres.
+- Not visually verified: preview showed a blank canvas in the narrow pane; check the bracket/plug placement against `vanos.jpeg` by eye (bracket side and plug side are guesses).
+- Thin black oil pipe from the hose to the oil filter housing still missing; hose is still a short stub (oil-filter.js owns the VANOS line end; check the two meet).
+- Solenoid positions, top face and overall housing shape unverified: `vanos3`-`vanos6` never opened.
+- Hubs are flat gold discs; toothed plates and chain live in timing-chain.js, check they line up with the hub centres.
+- Bracket flange is a flat plate, not the curved flange in the photo.
