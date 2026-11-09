@@ -17,6 +17,7 @@ Looked at: `oil-filter-1.webp` (bmwfans exploded parts diagram), `oil-filter-2.j
 
 ## Still off
 - Lower bracket (the long ear that bolts down to the block) is not modelled; the body is a simple box.
-- VANOS line route and union position at the head are guessed; check against vanos.js.
+- VANOS line now ends under the `vanos.js` feed hose bottom (local 58, 14, -9.5 = world x LEN/2, y headY-26.9, z 44.5);
+  the route between banjo and union is still a guessed curve (could clip the block pad near z=-10). Fixed by arithmetic, not looked at.
 - Reservoir sits on the pump group, so it is removed together with the pump; hose ends at the pump are approximate.
-- Not visually checked close-up: the airbox hides the housing from the intake side in the default view.
+- Never visually checked close-up: static preview (python http.server) renders a blank canvas, so use Electron (`npm run dev`) and remove the airbox.

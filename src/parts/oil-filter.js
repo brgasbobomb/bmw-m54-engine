@@ -32,13 +32,13 @@ export function build(c) {
     add(new T.CylinderGeometry(2.4, 2.4, 7, 10), matSteel, x, y, 9, ZAX);
     add(new T.BoxGeometry(4, 4, 5), matCover, x, y, 14);
   }
-  // Line connections: VANOS feed from a banjo under the housing, running forward (+X) and up to the head
+  // Line connections: VANOS feed from a banjo under the housing, running forward (+X) and up to the VANOS feed hose
   add(new T.CylinderGeometry(3.2, 3.2, 3, 12), matSteel, 0, -6, 8, XAX);                 // banjo eye
   add(new T.CylinderGeometry(1.8, 1.8, 7, 8), matSteel, 0, -6, 8, ZAX).position.set(0, -6, 11); // banjo bolt
   const line = new T.CatmullRomCurve3([
-    new T.Vector3(3, -6, 8), new T.Vector3(10, -9, 8), new T.Vector3(22, -8, 6), new T.Vector3(34, 0, 2), new T.Vector3(40, 12, 0)]);
+    new T.Vector3(3, -6, 8), new T.Vector3(10, -9, 8), new T.Vector3(28, -8, 2), new T.Vector3(50, 0, -7), new T.Vector3(58, 6, -9.5), new T.Vector3(58, 14, -9.5)]);
   detail(new T.Mesh(new T.TubeGeometry(line, 24, 1.6, 8, false), matSteel), g);
-  add(new T.CylinderGeometry(2.6, 2.6, 5, 8), matSteel, 41, 14, 0);                         // union at the head
+  add(new T.CylinderGeometry(2.6, 2.6, 4, 8), matSteel, 58, 12.5, -9.5);                    // union under vanos.js feed hose end (world x=LEN/2, y=headY-26.9, z=44.5)
 
   g.position.set(LEN / 2 - 58, blockY + 12, BW / 2 + 15);
   reg(g, 'oil-filter');
