@@ -16,14 +16,14 @@ Catalog `image_36.jpg` (Z4 M54 bay from the front-left, viewed). Findings below;
   front end (x to 244), which hid the front of the engine.
 
 ## As modelled
-- MAF rear face (`bootEnd`, from intake.js) at x 34, y 36, z 108; MAF L 40, front flange only (the boot clamps over the
+- MAF rear face (`bootEnd`, from intake.js) at x 28, y 42, z 108 (moved 2026-11-09 to shorten the boot; airbox follows, x ≈ 74…154); MAF L 40, front flange only (the boot clamps over the
   rear spigot). Airbox starts 6 past the MAF front, so x ≈ 80…160.
 - Boot (intake.js, only the boot changed): short cubic elbow, 16/20 handle lengths, radius 13.6 at the throttle flaring
-  to 17.8 at the MAF, runs 9 over the MAF spigot; clamp ring at the end.
+  to 17 at the MAF, runs 9 over the MAF spigot; clamp ring at the end.
 - Explode (src/explode.js): maf-sensor 270, airbox 330 (was 380 / 470).
 
 ## Still off
-- Positions (y 36, z 108) are by eye; the boot's start height in the upright frame wasn't computed. Check the elbow
+- Positions (y 42, z 108) are by eye; the boot's start height in the upright frame wasn't computed. Check the elbow
   from the intake side that it meets the throttle flange cleanly.
 - Explode view at 100% not viewed; distances reduced by calculation only.
 - Airbox lid detail (filter cover ribs, snorkel route, MAF plug direction) by eye only.
