@@ -437,5 +437,18 @@
     "relationships": [
       "E46 Saloon Body Shell"
     ]
+  },
+  "ccv": {
+    "id": "ccv",
+    "name": "Crankcase Ventilation (CCV)",
+    "type": "Emissions / Breather",
+    "weight": "approx. 0.4 kg",
+    "material": "Plastic separator box, rubber hose, steel clamps",
+    "assembly": "Cylinder Head",
+    "specs": "Hose from the valve cover front intake corner to the intake manifold; separator box returns oil, blow-by gas is drawn into the plenum",
+    "relationships": [
+      "Valve Cover",
+      "Intake Manifold"
+    ]
   }
 }

@@ -28,6 +28,7 @@ import { build as flywheel } from './flywheel.js';
 import { build as radiator } from './radiator.js';
 import { build as hoses } from './hoses.js';
 import { build as expansionTank } from './expansion-tank.js';
+import { build as ccv } from './ccv.js';
 import { build as body } from './body.js';
 
 const PARTS = [
@@ -55,6 +56,7 @@ const PARTS = [
   radiator,
   hoses,
   expansionTank,
+  ccv,
   body
 ];
 
