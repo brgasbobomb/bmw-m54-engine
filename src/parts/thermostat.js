@@ -1,6 +1,6 @@
 // Thermostat housing (E46 M54, OEM 11531436823): cast-alu flange + two necks, exposed thermostat, 2-pin sensor
 export function build(c) {
-  const { T, matAlu, matHose, reg, detail, LEN, blockY, headY } = c;
+  const { T, matAlu, matHose, reg, detail, LEN, headY } = c;
   const g = new T.Group();
   const ORG = new T.Vector3(LEN / 2 + 2, headY, -8);
   const matBrass = new T.MeshStandardMaterial({ color: 0xb8892f, metalness: 0.8, roughness: 0.35 });
@@ -13,24 +13,24 @@ export function build(c) {
   };
   const V = (x, y, z) => new T.Vector3(x, y, z);
 
-  // Cylinder between two points (group space), with ribbed end ring where the hose clamps on.
-  const neck = (a, b, r) => {
-    const d = b.clone().sub(a), len = d.length();
-    const mid = a.clone().add(b).multiplyScalar(0.5);
-    const q = new T.Quaternion().setFromUnitVectors(V(0, 1, 0), d.normalize());
-    const m = add(new T.CylinderGeometry(r, r * 1.08, len, 16), matAlu, mid);
-    m.quaternion.copy(q);
-    for (const t of [0.8, 0.92]) {
-      const ring = add(new T.TorusGeometry(r * 1.05, 0.9, 6, 16), matAlu, a.clone().lerp(b, t));
-      ring.quaternion.copy(q).multiply(new T.Quaternion().setFromAxisAngle(V(1, 0, 0), Math.PI / 2));
+  // Elbowed neck: polyline of cylinders joined by ball elbows; ribbed hose-bead rings on the last leg.
+  const neck = (pts, r) => {
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1], d = b.clone().sub(a);
+      const q = new T.Quaternion().setFromUnitVectors(V(0, 1, 0), d.clone().normalize());
+      add(new T.CylinderGeometry(r, r, d.length(), 16), matAlu, a.clone().add(b).multiplyScalar(0.5)).quaternion.copy(q);
+      if (i > 0) add(new T.SphereGeometry(r, 14, 10), matAlu, a);
+      if (i === pts.length - 2) for (const t of [0.75, 0.93]) {
+        const ring = add(new T.TorusGeometry(r * 1.05, 0.9, 6, 16), matAlu, a.clone().lerp(b, t));
+        ring.quaternion.copy(q).multiply(new T.Quaternion().setFromAxisAngle(V(1, 0, 0), Math.PI / 2));
+      }
     }
   };
 
-  // Hose start points from hoses.js, relative to this group's origin.
-  const upper = V(LEN / 2 + 14, headY - 14, -14).sub(ORG);   // upper hose start
-  const lower = V(LEN / 2 - 2, blockY + 28, -8).sub(ORG);    // lower hose start (pump side)
-  neck(V(0, 0, 0), upper, 6.2);
-  neck(V(0, 0, 0), lower, 6.2);
+  // Opposed elbows: upper goes up/rearward (-Z) then turns to the front (+X); lower drops straight down then turns to the front.
+  // Tips must match the hose start points in hoses.js (tip minus 4 along the last leg).
+  neck([V(0, 0, 0), V(0, 6, -16), V(16, 6, -24)], 6.2);
+  neck([V(0, 0, 0), V(0, -20, 2), V(14, -24, 4)], 6.2);
 
   // Flange plate + body (plate lies in the YZ plane, faces +X)
   add(new T.CylinderGeometry(11, 11, 6, 20), matAlu, V(0, 0, 0), [0, 0, Math.PI / 2]);

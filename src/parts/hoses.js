@@ -1,25 +1,37 @@
-// Radiator hoses
+// Radiator hoses: each starts on an elbowed thermostat-housing neck (thermostat.js) and ends on a radiator tank neck. Clamped at both ends.
 export function build(c) {
-  const { T, matHose, reg, detail, LEN, blockY, headY, radY, slantedGrp } = c;
+  const { T, matHose, matSteel, reg, detail, LEN, blockY, headY, radY, slantedGrp } = c;
   // Radiator necks live in the upright frame; this group is slanted, so un-slant those end points.
   const up = (x, y, z) => new T.Vector3(x, y, z).applyAxisAngle(new T.Vector3(1, 0, 0), -slantedGrp.rotation.x);
-  // ----- RADIATOR HOSES [NEW] -----
   const hosesGrp = new T.Group();
-  // Upper coolant hose: thermostat housing to radiator top left
-  const upperCurve = new T.CatmullRomCurve3([
-    new T.Vector3(LEN / 2 + 14, headY - 14, -14),
-    new T.Vector3(LEN / 2 + 50, headY - 6, -34),
+  const P = (x, y, z) => new T.Vector3(x, y, z);
+
+  const hose = (pts) => {
+    const curve = new T.CatmullRomCurve3(pts);
+    detail(new T.Mesh(new T.TubeGeometry(curve, 40, 6.5, 12, false), matHose), hosesGrp);
+    for (const u of [0.04, 0.96]) { // worm-drive clamp: band + screw housing
+      const q = new T.Quaternion().setFromUnitVectors(P(0, 0, 1), curve.getTangentAt(u));
+      const band = detail(new T.Mesh(new T.TorusGeometry(6.9, 0.9, 6, 20), matSteel), hosesGrp);
+      band.position.copy(curve.getPointAt(u)); band.quaternion.copy(q);
+      const screw = detail(new T.Mesh(new T.BoxGeometry(3, 3, 2.4), matSteel), hosesGrp);
+      screw.position.copy(P(0, 7.6, 0).applyQuaternion(q).add(band.position)); screw.quaternion.copy(q);
+    }
+  };
+  // Thermostat origin (thermostat.js ORG) + elbow tip - 4 along the last leg.
+  const O = P(LEN / 2 + 2, headY, -8);
+  hose([ // upper: elbowed neck -> radiator -Z tank neck
+    O.clone().add(P(12.4, 6, -22.2)),
+    O.clone().add(P(26.7, 6, -29.4)),
+    P(LEN / 2 + 55, headY - 4, -50),
     up(LEN / 2 + 76, radY + 39, -62),
-    up(LEN / 2 + 90, radY + 38, -65) // slides over the radiator -Z tank neck
+    up(LEN / 2 + 90, radY + 38, -65)
   ]);
-  detail(new T.Mesh(new T.TubeGeometry(upperCurve, 20, 6.5, 12, false), matHose), hosesGrp);
-  // Lower coolant hose: water pump to radiator bottom right
-  const lowerCurve = new T.CatmullRomCurve3([
-    new T.Vector3(LEN / 2 - 2, blockY + 28, -8),
-    new T.Vector3(LEN / 2 + 45, blockY - 12, 38),
+  hose([ // lower: elbowed neck -> radiator +Z tank neck
+    O.clone().add(P(10.3, -22.9, 3.5)),
+    O.clone().add(P(24, -26, 5)),
+    P(LEN / 2 + 50, blockY - 8, 30),
     up(LEN / 2 + 76, radY - 39, 62),
-    up(LEN / 2 + 90, radY - 38, 65) // slides over the radiator +Z tank neck
+    up(LEN / 2 + 90, radY - 38, 65)
   ]);
-  detail(new T.Mesh(new T.TubeGeometry(lowerCurve, 20, 6.5, 12, false), matHose), hosesGrp);
-  reg(hosesGrp, 'thermostat'); // group under thermostat/cooling
+  reg(hosesGrp, 'thermostat');
 }
