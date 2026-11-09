@@ -7,14 +7,15 @@ export function build(c) {
   const beltX2 = LEN / 2 + 28;       // secondary AC belt plane (outer crank groove)
   const bodyX = LEN / 2 + 3;
 
+  // Radii from E46 M54 reference diameters (not measured), 2.24 mm/unit (91 mm bore pitch = layout span 40.7).
   // Pulley positions: Y, Z, R (radius). Layout per refs/front-drive/notes.md (+Z = intake side).
   const A = {
     crank:      { y: blockY - 6,  z: 0,   r: 34 },
-    waterPump:  { y: blockY + 48, z: 4,   r: 18 },
-    alternator: { y: blockY + 36, z: 52,  r: 13 },
-    idler:      { y: blockY + 32, z: 26,  r: 9, inner: true },  // belt dips under it
-    tensioner:  { y: blockY + 18, z: -36, r: 11 },
-    ps:         { y: blockY - 22, z: 60,  r: 20 },
+    waterPump:  { y: blockY + 66, z: 4,   r: 29 },
+    alternator: { y: blockY + 36, z: 52,  r: 13.5 },
+    idler:      { y: blockY + 36, z: 28,  r: 9, inner: true },  // belt dips under it
+    tensioner:  { y: blockY + 30, z: -44, r: 11 },
+    ps:         { y: blockY - 22, z: 68,  r: 24.5 },
     ac:         { y: blockY - 34, z: -56, r: 17 },
     acTens:     { y: blockY - 46, z: -24, r: 8  }
   };
