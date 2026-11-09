@@ -98,7 +98,7 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
   clips and feed line, airbox end of the boot.
 
 ## Still off
-- Boot route is still a long sweep to the MAF; the photo shows a short elbow. Shortening it means moving the airbox/MAF.
-- Boot end (r 15.6) is narrower than the MAF (r 17); real boot clamps over the MAF outlet.
+- Boot shortened (2026-11-09): MAF moved to (28, 42, 108) upright, handles 10/14, radius 13.6 → 17 (= MAF). Looked right
+  in one oblique intake-side view; not checked close-up against the throttle flange or from above.
 - U-ribs are single round ribs; the real comb is a flat strip with a lip on each edge (double ridge).
 - Spine/rib not checked close-up in the viewer (screenshot was a side view).
