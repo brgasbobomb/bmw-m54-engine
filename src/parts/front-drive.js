@@ -1,7 +1,7 @@
 // Front accessory drive (pulleys, belts, alternator, PS, AC, water pump)
 export function build(c) {
-  const { T, matAlu, matAluDark, matSteel, matSteelDk, matCover, matBelt, matFace, reg, detail, ribbedPulley,
-          crankDamper, alternatorBody, buildBelt, LEN, blockY } = c;
+  const { T, matAlu, matAluDark, matSteel, matSteelDk, matCover, matHose, matBelt, matFace, reg, detail, ribbedPulley,
+          crankDamper, alternatorBody, buildBelt, LEN, BW, blockY } = c;
   // ===== FRONT ACCESSORY DRIVE (Dual belt setup) =====
   const beltX1 = LEN / 2 + 18;       // main belt plane
   const beltX2 = LEN / 2 + 28;       // secondary AC belt plane (outer crank groove)
@@ -126,10 +126,19 @@ export function build(c) {
   const psPul = detail(ribbedPulley(A.ps.r, 12, matSteel, 5), psGrp);
   psPul.position.set(beltX1, A.ps.y, A.ps.z);
   bracket(psGrp, A.ps, 22, 20);
-  const psRes = detail(new T.Mesh(new T.CylinderGeometry(7, 7, 18, 16), matSteelDk), psGrp); // fluid reservoir
-  psRes.position.set(bodyX - 22, A.ps.y + 22, A.ps.z - 4);
-  const psCap = detail(new T.Mesh(new T.CylinderGeometry(5, 5, 4, 12), matSteel), psGrp);
-  psCap.position.set(bodyX - 22, A.ps.y + 33, A.ps.z - 4);
+  // Reservoir beside the oil filter housing (oil-filter.js: x = LEN/2-58, y = blockY+12, z = BW/2+15), see notes
+  const rx = LEN / 2 - 58 + 4, ry = blockY + 30, rz = BW / 2 + 15 + 32;
+  const psRes = detail(new T.Mesh(new T.CylinderGeometry(9, 9, 24, 18), matCover), psGrp);
+  psRes.position.set(rx, ry, rz);
+  const psCap = detail(new T.Mesh(new T.CylinderGeometry(6, 6, 5, 12), matCover), psGrp);
+  psCap.position.set(rx, ry + 14.5, rz);
+  // Feed (thick) and return (thin) hoses down to the pump
+  for (const [dx, r, endZ] of [[-3, 2.6, -6], [4, 1.6, 6]]) {
+    const hose = new T.CatmullRomCurve3([
+      new T.Vector3(rx + dx, ry - 12, rz), new T.Vector3(rx + dx, ry - 24, rz + 4),
+      new T.Vector3(bodyX - 22 + dx, A.ps.y + 22, A.ps.z + endZ + 18), new T.Vector3(bodyX - 22 + dx, A.ps.y + 15, A.ps.z + endZ)]);
+    detail(new T.Mesh(new T.TubeGeometry(hose, 32, r, 8, false), matHose), psGrp);
+  }
   cylX(psGrp, 4, 6, matSteel, beltX1 + 6, A.ps.y, A.ps.z, 6);
   reg(psGrp, 'power-steering-pump');
 

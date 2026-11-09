@@ -36,6 +36,6 @@ shroud hole and ring on it. The radiator is lifted to `radY` (layout.js, blockY 
 shroud; the expansion tank and radiator-hose ends follow `radY`.
 
 ## Still off
-- PS reservoir still sits on the pump instead of up by the oil filter housing.
+- PS reservoir now stands beside the oil filter housing (feed + return hoses to the pump); hose routes are approximate.
 - Pulley sizes are eyeballed from a perspective photo, not measured.
 - Alternator cooling duct shape is a guess (see above).
