@@ -37,3 +37,12 @@ No ruler in any photo, so proportions only. The notes below cover both photos; n
 ## Still missing from refs (per photo-set.md)
 - Square exhaust-side elevation of the B30 head, a view from below, shields on/off on the same engine, labeled
   pre/post-cat sensors, downpipe flange detail.
+
+## Still off
+- Heat shields (image_25 never opened) and the tan S-bend heat-shield sleeve on the front assembly: missing.
+- Black O2 connector holder clip on the rear cat, the stamped logo on the cats, sensor cables: missing (sensors end in a short boot).
+- Flange has no port holes (solid plate) and the bolt/nut count (8 per flange) is unverified.
+- Collector is a scaled ellipsoid, not a stamped clamshell with seam lip; runners do converge but the join is not photo-accurate.
+- Front/rear assembly assignment (A = cyl 1–3) is assumed; the cat offset (Z −70 / −89) comes from clearing the block boss, not from photos.
+- Pipes simply stop at X −150 with a box flange; no downpipe continuation, hangers or flex joint.
+- Still missing refs: exhaust-side head elevation, view from below, labeled pre/post-cat sensors, downpipe flange detail.

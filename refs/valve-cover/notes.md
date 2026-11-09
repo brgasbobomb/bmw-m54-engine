@@ -33,3 +33,12 @@ on). Not opened: image_6 (fuel-rail close-up). Perspective photos, no scale: sha
 ## Still missing
 - Embossed roundel/text, yellow sticker (no yellow material yet), CCV nipple on the nose, harness clips on the rim,
   the gasket lip around the base, nose bolts, centre bolts in the trough.
+
+## Still off
+- Nose is a plain round bar (r 12) across the width; photo shows a bulbous dome curving down to the front flange, extending well past the first coil.
+- Plug-well row sits at z = −6, near mid-width; photo says it hugs the exhaust edge. Check against coil positions before moving.
+- Bolts: only 3 on the plateau (cylinders 2/4/6); photo also has a few on the nose and 2 centre bolts in the trough.
+- Missing: embossed roundel/part-number text, yellow HV sticker, CCV nipple/hose on the front intake corner, harness clips on the rim, gasket lip.
+- Trough has a rim only along the exhaust edge; nothing closes it at the rear end.
+- Oil cap position (cx(4) − 15) not re-checked against which end is "front" in the photos.
+- Underside (gasket, oil-separator labyrinth, honeycomb baffle) not modelled; only matters if the cover is shown removed.

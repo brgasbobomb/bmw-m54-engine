@@ -36,3 +36,6 @@ Photo `engine bay.jpeg` (opened): radiator not visible (hidden by front panel), 
 - Hose side (upper −Z vs +Z per photo), see "Differences".
 - Core/shroud/fan not visible in any photo: dimensions from E46 knowledge/aftermarket listings.
 - Fan stub not tied to actual pump nose geometry.
+- (Added from code review) Shroud is a flat plate plus a short ring: no side walls/funnel to the core, no mounting tabs.
+- Fan: blades are 9 identical flat boxes; no viscous-clutch detail (bimetal spring, fins on the hub face).
+- Missing: filler/bleed fittings, coolant temperature sensor, rubber mounts/brackets, trans/AC lines. Core is only a texture on a box (no real tubes).

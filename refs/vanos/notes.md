@@ -35,3 +35,11 @@ Group origin is (LEN/2 - 4, headY + 4, 0). Local +X = front, +Z = intake.
 - The steel bracket around the fitting head and the thin black oil pipe from the fitting to the oil filter housing.
 - Sprocket plates and chain belong to `timing-chain.js`, not here.
 - Check `vanos3`–`vanos6` for the real unit's solenoid positions and top face, then correct the layout above.
+
+## Still off
+- Steel L-bracket on the fitting head and the thin black oil pipe to the filter housing: missing (see also oil-filter.js VANOS line; check the two meet).
+- Black rectangular connector plug beside the fitting neck: missing. Fitting screws are hex, photo shows Torx (3 in a triangle: layout matches).
+- Hose boot has no clamp; the hose is a short stub that stops in mid-air.
+- Solenoid positions, top face and overall housing shape are unverified: `vanos3`–`vanos6` were never opened.
+- Housing is a generic rounded box; real unit is grimy dull cast aluminium with more casting detail.
+- Hubs are flat gold discs; toothed plates and chain are in timing-chain.js, so check they line up with the hub centres.
