@@ -12,8 +12,11 @@ Photos: `cylinder head.jpeg` (own), catalog image_2 (whole engine) and image_27 
 - Gasket strip under the head, bright edge strips on top/bottom long edges and vertical corners,
   intake flanges (1/cyl) and exhaust flanges (2/cyl) with studs, lifting eyes (boss + ring) at both ends, exhaust side.
 
+- Edges now rounded cylinder rails + corner balls; 7 cam bearing caps per cam (roundedBox); 6 plug-tube bosses with bore; VANOS front plate (+X) with two cam-end bosses.
+
 ## Still off
-- Edges are flat strips, not real casting radii/parting lines.
-- No cam-bearing caps, VANOS front plate or plug-tube bosses (hidden by cover/coils in photos).
+- Edge rails are plain cylinders, no parting lines / draft.
+- Bearing caps, plug-tube bosses and VANOS plate are positioned by estimate (no photo shows them); VANOS plate is a plain slab without bolt pattern/solenoid ports.
+- Not visually verified: preview canvas rendered blank in the Browser pane (no console errors; syntax check ok).
 - Lifting-eye positions and flange spacing are estimated, not measured.
 - Flanges don't follow port shapes; stud counts are simplified.
