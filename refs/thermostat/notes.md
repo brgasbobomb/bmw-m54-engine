@@ -13,6 +13,6 @@ Source: refs/catalog/images/image_20.jpg (OEM 11531436823 / 11531437040, "Front 
 - Sensor, 3 hex bolts, thermostat internals are simple primitives.
 
 ## Still off
-- Necks are straight cylinders; real ones are elbowed and the two are ~opposed, not both diverging from one point.
+- Necks are now elbowed and opposed (see refs/hoses/notes.md) but unchecked visually.
 - Bolt count/positions guessed (photo shows 3 only partly).
 - Not checked against the real mounting position on the head face.
