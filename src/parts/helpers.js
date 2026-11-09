@@ -171,5 +171,45 @@ export function makeHelpers(c, model) {
     belt.castShadow = true; belt.receiveShadow = true;
     return belt;
   };
-  return { reg, detail, roundedBox, ribbedPulley, crankDamper, alternatorBody, buildBelt };
+  // Chain sprocket on the X axis, centre at (x, y, z): N teeth, root radius r. Teeth are trapezoids.
+  const sprocket = (n, pitch, thick, mat) => {
+    const r = n * pitch / (2 * Math.PI), s = new T.Shape();
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * 2 * Math.PI, w = Math.PI / n * 0.5;
+      [[a - w, r - 1.6], [a - w * 0.5, r + 0.9], [a + w * 0.5, r + 0.9], [a + w, r - 1.6]]
+        .forEach(([t, rr], k) => (i + k ? s.lineTo : s.moveTo).call(s, Math.cos(t) * rr, Math.sin(t) * rr));
+    }
+    const g = new T.ExtrudeGeometry(s, { depth: thick, bevelEnabled: false });
+    g.rotateY(Math.PI / 2); // shape (u,v) -> (-z,y), extrusion -> +x
+    g.translate(-thick / 2, 0, 0);
+    const m = new T.Mesh(g, mat); m.castShadow = true; m.receiveShadow = true;
+    return m;
+  };
+  // Closed chain around circles [{z,y,r}] listed counter-clockwise in the (z,y) plane. Returns a roller-chain
+  // InstancedMesh (alternating wide/narrow plates, ~pitch long) at plane x, plus the straight runs for rails.
+  // shortcut: 2-circle loops only (all chains in this engine), upgrade for idlers.
+  const chainLoop = (circles, pitch, x, mat) => {
+    const [A, B] = circles, d = Math.hypot(B.z - A.z, B.y - A.y), a = Math.atan2(B.y - A.y, B.z - A.z);
+    const nAB = a - Math.acos((A.r - B.r) / d), nBA = a + Math.PI - Math.acos((B.r - A.r) / d);
+    const pts = [], arc = (C, t0, t1) => {
+      while (t1 < t0) t1 += 2 * Math.PI;
+      for (let t = t0; t < t1; t += 0.05) pts.push([C.z + C.r * Math.cos(t), C.y + C.r * Math.sin(t)]);
+    };
+    arc(A, nBA, nAB); arc(B, nAB, nBA);
+    pts.push(pts[0]);
+    const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    const N = Math.round(cum[cum.length - 1] / pitch), step = cum[cum.length - 1] / N;
+    const im = new T.InstancedMesh(new T.BoxGeometry(1, 2.2, 1), mat, N), o = new T.Object3D();
+    const at = (s) => { let i = 1; while (cum[i] < s && i < pts.length - 1) i++; const f = (s - cum[i - 1]) / (cum[i] - cum[i - 1] || 1);
+      return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * f, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * f]; };
+    for (let k = 0; k < N; k++) {
+      const [z0, y0] = at(k * step), [z2, y2] = at(((k + 1) * step) % cum[cum.length - 1]);
+      o.position.set(x, y0, z0); o.rotation.set(-Math.atan2(y2 - y0, z2 - z0), 0, 0);
+      o.scale.set(k % 2 ? 2.6 : 4.2, 1, step * 0.92); o.updateMatrix(); im.setMatrixAt(k, o.matrix);
+    }
+    im.castShadow = true;
+    const run = (C, D, n) => ({ p: [C.z + C.r * Math.cos(n), C.y + C.r * Math.sin(n)], q: [D.z + D.r * Math.cos(n), D.y + D.r * Math.sin(n)], n });
+    return { mesh: im, runs: [run(A, B, nAB), run(B, A, nBA)] };
+  };
+  return { reg, detail, roundedBox, ribbedPulley, crankDamper, alternatorBody, buildBelt, sprocket, chainLoop };
 }
