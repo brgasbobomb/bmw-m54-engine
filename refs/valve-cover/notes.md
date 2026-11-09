@@ -38,10 +38,15 @@ on). Not opened: image_6 (fuel-rail close-up). Perspective photos, no scale: sha
 - Nose is now an upper half-ellipsoid: centre (128, −10, 0), radii (16, 20, 34) — front flange tip at x = 144, top at plateau height, starts just ahead of the first coil (cx(5) = 105.7, well r 8).
 - Oil cap: x axis has +X = front; cx(4)−15 = 50 is between the 2nd and 3rd coil from the FRONT (cx(5)=105.7 is front), on the plateau at z = 12. Consistent with the photo; left unchanged.
 
+## BMW roundel — session 3
+- Canvas-drawn roundel texture (blue/white quadrants, black ring, "BMW" lettering, chrome rim) on a `CircleGeometry` decal with a clearcoat `MeshPhysicalMaterial`. Plateau decal r = 10 at `(cx(1), z = 17)`, oil-cap decal r = 5.6. No photos opened.
+- Hidden under the intake plenum until the intake is removed.
+
 ## Still missing
 - Embossed roundel/text, yellow sticker (no yellow material yet), harness clips on the rim, the gasket lip around the base, nose bolts, centre bolts in the trough.
 
 ## Still off
+- Roundel: lettering is Helvetica Bold, not BMW's own face; mirroring of the text (engine is mirrored across Z in index.js) not verified at readable zoom; clearcoat glare washes out the oil-cap decal. No part-number text yet.
 - Dome/nipple added but NOT visually verified: the one screenshot showed an empty viewport (static server, no canvas content) — check in Electron.
 - Dome front tip (x = 144) overshoots base body end (x = 135) by ~9; check the front flange looks right.
 - Plug-well row sits at z = −6, near mid-width; photo says it hugs the exhaust edge. Check against coil positions before moving.

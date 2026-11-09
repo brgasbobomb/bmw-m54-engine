@@ -39,6 +39,32 @@ export function build(c) {
     detail(new T.Mesh(new T.CylinderGeometry(2, 2, 2, 6), matSteel), coverGrp).position.set(cx(i), top + 1.8, 30);
   }
 
+  // BMW roundel decal (canvas texture): blue/white quadrants, black ring, white "BMW" lettering. Used on the plateau and the oil cap.
+  const roundelTex = (() => {
+    const S = 1024, k = S / 2, cv = document.createElement('canvas'); cv.width = cv.height = S;
+    const g = cv.getContext('2d');
+    const disc = (r, fill) => { g.beginPath(); g.arc(k, k, r, 0, Math.PI * 2); g.fillStyle = fill; g.fill(); };
+    disc(510, '#c9ccd1'); disc(498, '#0a0a0b'); disc(340, '#d4d7db'); // chrome rim, black ring, chrome inner line
+    disc(330, '#0a0a0b');
+    // quadrants: blue top-left + bottom-right, white the other two
+    [['#1c69d4', Math.PI, 1.5 * Math.PI], ['#f4f5f6', 1.5 * Math.PI, 2 * Math.PI], ['#1c69d4', 0, 0.5 * Math.PI], ['#f4f5f6', 0.5 * Math.PI, Math.PI]]
+      .forEach(([col, a0, a1]) => { g.beginPath(); g.moveTo(k, k); g.arc(k, k, 322, a0, a1); g.closePath(); g.fillStyle = col; g.fill(); });
+    g.fillStyle = '#f2f2f2'; g.font = 'bold 150px Helvetica, Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    [['B', -0.5], ['M', 0], ['W', 0.5]].forEach(([ch, a]) => { // letters on the ring, top
+      g.save(); g.translate(k, k); g.rotate(a); g.translate(0, -418); g.fillText(ch, 0, 0); g.restore();
+    });
+    const tex = new T.CanvasTexture(cv); tex.colorSpace = T.SRGBColorSpace; tex.anisotropy = 8;
+    return tex;
+  })();
+  const matRoundel = new T.MeshPhysicalMaterial({ map: roundelTex, roughness: 0.4, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.15, transparent: true, polygonOffset: true, polygonOffsetFactor: -2 });
+  const decal = (r, x, y, z) => {
+    const m = detail(new T.Mesh(new T.CircleGeometry(r, 64), matRoundel), coverGrp);
+    m.rotation.x = -Math.PI / 2; m.position.set(x, y, z);
+    return m;
+  };
+  decal(10, cx(1), top + 0.12, 17);   // plateau, rear half
+  decal(5.6, cx(4) - 15, top + 6.1, 12); // oil cap top
+
   coverGrp.position.y = coverY;
   reg(coverGrp, 'cylinder-head'); // Tagged under cylinder-head removable block
   coverGrp.userData.partId = 'cylinder-head';
