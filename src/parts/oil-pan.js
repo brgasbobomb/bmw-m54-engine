@@ -34,9 +34,26 @@ export function build(c) {
   const plug = detail(new T.Mesh(new T.CylinderGeometry(4, 4, 3, 12), matSteel), panGrp);
   plug.position.set(L * 0.22, -35, W / 2 + 1);
   plug.rotation.x = Math.PI / 2;
-  // Oil level sensor, front-lower of the deep section
+  // Oil level sensor, bolted to the exhaust-side wall of the deep section (z=0 was inside the body)
   const sensor = detail(roundedBox(10, 8, 8, 2, matSteel), panGrp);
-  sensor.position.set(L / 2 - 6, -24, 0);
+  sensor.position.set(L * 0.32, -30, -(W / 2 + 4));
+  // Round bore boss mid-length on the deep section's side walls
+  for (const sz of [1, -1]) {
+    const boss = detail(new T.Mesh(new T.CylinderGeometry(8, 8, 5, 20), matAluDark), panGrp);
+    boss.rotation.x = Math.PI / 2;
+    boss.position.set(L * 0.17, -26, sz * (W / 2 + 2));
+    const bore = detail(new T.Mesh(new T.CylinderGeometry(4.5, 4.5, 1, 16), matSteel), panGrp);
+    bore.rotation.x = Math.PI / 2;
+    bore.position.set(L * 0.17, -26, sz * (W / 2 + 4.6));
+  }
+  // Front-end boss with 2 studs at the top corner of the sloped face
+  const fboss = detail(roundedBox(8, 12, 22, 2, matAluDark), panGrp);
+  fboss.position.set(L / 2 + 3, -11, 0);
+  for (const sz of [1, -1]) {
+    const stud = detail(new T.Mesh(new T.CylinderGeometry(1.5, 1.5, 10, 8), matSteel), panGrp);
+    stud.rotation.z = Math.PI / 2;
+    stud.position.set(L / 2 + 10, -11, sz * 7);
+  }
   // Dipstick tube stub, exhaust side near the front
   const tube = detail(new T.Mesh(new T.CylinderGeometry(2.5, 2.5, 26, 8), matSteel), panGrp);
   tube.position.set(L * 0.3, 7, -W / 2 + 2);
