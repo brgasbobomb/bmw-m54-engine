@@ -14,7 +14,7 @@ Sources: refs/hoses/hoses-1.webp (bmwfans exploded diagram: upper hose 3 with se
 - Hoses registered as 'thermostat' group (slanted frame); radiator end points are un-slanted.
 
 ## Still off
-- NOT visually checked: the in-app browser pane rendered a blank canvas this session; geometry only reasoned from coordinates. Check hose vs front-drive pulleys/fan and radiator tanks.
+- STILL NOT visually checked (2nd attempt): preview pane is hidden in this app and the WebGL canvas reads back as uniform background (no console errors, rAF runs, 1348x1536 canvas). No collisions confirmed or fixed; hose vs front-drive pulleys/fan and radiator tanks still need a look in a visible window (Explode 0%, intake side + front).
 - Lower hose still starts on the thermostat housing (real M54 lower hose also starts at housing; pump feed is via a separate pipe, not modelled).
 - No expansion-tank hose, heater pipes (diagram 6/8) or sensor on the upper hose elbow.
 - Hose has constant radius, no moulded bulge or quick-release clip.
