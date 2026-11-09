@@ -1,5 +1,5 @@
 // Radiator: aluminium crossflow core, plastic end tanks, fan shroud and belt-driven viscous fan.
-// Envelope is unchanged (x ±6, y ±56, z ±69) so the expansion tank beside it still lines up.
+// Core scaled to the E46 650x440x32 mm at 0.266 u/mm in Y and X; Z width capped at ±69 by hoses.js necks and the expansion tank (x ±6, y ±64, z ±69) so the expansion tank beside it still lines up.
 export function build(c) {
   const { T, matCover, matSteelDk, matRadiator, reg, detail, radX, radY, fanMount } = c;
   // Fan axis = water pump fan boss (front-drive.js), in this group's frame
@@ -22,16 +22,16 @@ export function build(c) {
   tex.anisotropy = 8;
   const matCore = matRadiator.clone();
   matCore.map = tex; matCore.color.set(0xffffff);
-  detail(new T.Mesh(new T.BoxGeometry(10, 100, 122), matCore), radGrp);
+  detail(new T.Mesh(new T.BoxGeometry(8.5, 116, 122), matCore), radGrp);
 
   // Top & bottom rails
-  [53, -53].forEach(y => { detail(new T.Mesh(new T.BoxGeometry(14, 6, 138), matCover), radGrp).position.y = y; });
+  [61, -61].forEach(y => { detail(new T.Mesh(new T.BoxGeometry(14, 6, 138), matCover), radGrp).position.y = y; });
 
   // End tanks (crossflow: left/right) with ribs, hose necks and the expansion-tank nipple
   [-1, 1].forEach(s => {
-    const tank = detail(new T.Mesh(new T.BoxGeometry(13, 100, 8), matCover), radGrp);
+    const tank = detail(new T.Mesh(new T.BoxGeometry(13, 116, 8), matCover), radGrp);
     tank.position.z = s * 65;
-    for (let y = -36; y <= 36; y += 24) {
+    for (let y = -40; y <= 40; y += 20) {
       const rib = detail(new T.Mesh(new T.BoxGeometry(14, 3, 9), matCover), radGrp);
       rib.position.set(0, y, s * 65);
     }

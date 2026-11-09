@@ -31,9 +31,14 @@ Photo `engine bay.jpeg` (opened): radiator not visible (hidden by front panel), 
 - Scaled: core ≈ **154 W × 118 H units**. Current core is 122 × 100 (138 × 112 with tanks/rails) → current radiator is already ~20% SMALLER than true scale vs this engine.
 - Conclusion: the real radiator is wider than the engine, so it hides it in the front view too. Making it smaller would be less accurate, so size left unchanged. If a smaller look is wanted anyway, a ~0.85× (core 104 × 85) keeps fan hole Ø88 barely inside; needs shroud/neck/hose/tank re-lay.
 
+## Decision (session 3)
+E46 core ~650 x 440 x 32 mm at 0.266 u/mm (Y/Z scale from engine height). Applied: height 100→116 (tanks/rails follow, rails y ±61), thickness 10→8.5.
+Width left at 122 core / 138 overall: hoses.js necks (z ±65, y ±38 unchanged) and the expansion tank (z 70…92) pin it; true scale would be ~173.
+Hose side settled: upper −Z, lower +Z stays (photo only hints at +Z; cannot change hoses.js here).
+
 ## Still off
-- Radiator size vs scale: unchanged, see above; decision pending.
-- Hose side (upper −Z vs +Z per photo), see "Differences".
+- Width (z) still 138 not true-scale 173: tank necks at z ±65 are fixed by `hoses.js` and the expansion tank sits at z 70+. Widening needs both moved.
+- Hose side: kept upper −Z / lower +Z (hoses.js is fixed and the photo is not conclusive); revisit only together with hoses.js.
 - Core/shroud/fan not visible in any photo: dimensions from E46 knowledge/aftermarket listings.
 - Fan stub not tied to actual pump nose geometry.
 - (Added from code review) Shroud is a flat plate plus a short ring: no side walls/funnel to the core, no mounting tabs.
