@@ -35,7 +35,15 @@ front-drive.js returns `fanMount` (fan-clutch boss nose, upright frame); radiato
 shroud hole and ring on it. The radiator is lifted to `radY` (layout.js, blockY + 38) so the offset fan fits the
 shroud; the expansion tank and radiator-hose ends follow `radY`.
 
+## Pulley sizes — reference values, not measured
+Scale: 91 mm bore pitch = `span` 40.7 units → 2.24 mm/unit. From E46 M54 knowledge:
+crank 160 mm (r 36), alternator 60 (r 13.5), PS pump 110 (r 24.5), water pump 130 (r 29), fan clutch ~100 mm (not in this file;
+radiator.js owns the fan). Water pump, tensioner, idler and PS moved to keep belt tangents clear of the crank.
+Idler (r 9), tensioner (r 11), AC pulleys left as eyeballed.
+
 ## Still off
 - PS reservoir now stands beside the oil filter housing (feed + return hoses to the pump); hose routes are approximate.
-- Pulley sizes are eyeballed from a perspective photo, not measured.
+- Pulley sizes are reference values, not measured; idler/tensioner/AC pulley sizes still eyeballed.
+- Water pump moved up (y +66); thermostat/hoses/radiator fan follow it via fanMount but were not re-checked for clearance.
+- Fan clutch (~100 mm) size is radiator.js's; not checked.
 - Alternator cooling duct shape is a guess (see above).
