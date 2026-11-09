@@ -12,6 +12,8 @@ export function build(c) {
   // Hex bolt head with dark socket, sitting on a +X-facing surface at x
   const bolt = (x, y, z) => { cyl(1.4, 1.2, matSteel, x + 0.6, y, z, 'x', 6); cyl(0.7, 1.4, matSteelDk, x + 0.7, y, z, 'x', 6); };
 
+  // Torx screw: round head with a six-lobe-ish socket (two crossed hexes)
+  const torx = (x, y, z) => { cyl(1.4, 1.2, matSteel, x + 0.6, y, z, 'x', 12); cyl(0.8, 1.4, matSteelDk, x + 0.7, y, z, 'x', 6); cyl(0.8, 1.4, matSteelDk, x + 0.7, y, z, 'x', 6).rotateY(Math.PI / 6); };
   // Cast housing: wide lower body with a bridge between the two hub barrels
   put(roundedBox(24, 24, 66, 2.5, matBlock), 0, -7, 0);
   put(roundedBox(24, 12, 20, 2, matBlock), 0, 9, 0);
@@ -32,11 +34,27 @@ export function build(c) {
   // Oil feed fitting on the intake side: bolted head, neck, union nut, hose down to the filter housing
   cyl(4, 8, matBlock, 4, -9, 37, 'z');
   put(roundedBox(11, 11, 8, 1.2, matBlock), 4, -9, 44.5);
-  [[-5.5, 44.5], [-12, 42.5], [-12, 46.5]].forEach(([y, z]) => bolt(9.5, y, z));
+  [[-5.5, 44.5], [-12, 42.5], [-12, 46.5]].forEach(([y, z]) => torx(9.5, y, z));
   cyl(3, 5, matBlock, 4, -17, 44.5, 'y');
   cyl(3.6, 2.4, matSteel, 4, -20.7, 44.5, 'y', 6);
   cyl(2.8, 9, matHose, 4, -26.4, 44.5, 'y');
-  
+  cyl(3.5, 1.4, matSteel, 4, -24.5, 44.5, 'y'); // hose clamp band
+  put(new T.Mesh(new T.BoxGeometry(1.2, 1.6, 2.4), matSteel), 4, -24.5, 47.9); // clamp screw housing
+  // Steel L-bracket: vertical plate on the head's +Z end, flange over the top
+  put(new T.Mesh(new T.BoxGeometry(11.4, 11.6, 1), matSteel), 4, -9, 49);
+  put(new T.Mesh(new T.BoxGeometry(11.4, 1, 10), matSteel), 4, -3.2, 45);
+  cyl(2.2, 1.2, matSteelDk, 4, -9, 49.8, 'z');
+  // Black connector plug beside the neck, on the -Z side
+  put(new T.Mesh(new T.BoxGeometry(7, 7, 5), matCoil), 4, -16, 38.5);
+  put(new T.Mesh(new T.BoxGeometry(5, 5, 1), matSteelDk), 4, -16, 35.6);
+  // Casting detail: ribs on the bridge, parting-line rims on the barrels, bolt lugs on the lower body
+  for (const z of [-6, 0, 6]) put(new T.Mesh(new T.BoxGeometry(14, 1.6, 1.8), matBlock), 0, 15.6, z);
+  for (const s of [1, -1]) {
+    cyl(15.3, 2, matBlock, -11, 4, s * 18);
+    put(roundedBox(6, 5, 6, 1, matBlock), 12.5, -19.5, s * 33);
+  }
+  put(new T.Mesh(new T.BoxGeometry(24.4, 1.4, 66.4), matBlock), 0, -7, 0);
+
   vanosGrp.position.set(LEN / 2 - 4, headY + 4, 0);
   reg(vanosGrp, 'vanos-actuators');
 }
