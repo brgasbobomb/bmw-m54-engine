@@ -19,12 +19,13 @@ Also seen: `refs/catalog/images/image_11.jpg` (RWD pan, side view, lying on its 
 ## Model choices
 - Deep front box + ramp wedge + shallow rear box, bolts along flange, 3 rear ribs, drain plug, level sensor, dipstick stub on −Z (exhaust) side.
 
+- Added: round bore boss (r8, bore r4.5) on both side walls of the deep section at x=0.17L, y=-26; front boss (8x12x22) at the top of the sloped front face with 2 studs (z=±7) pointing +X; level sensor moved to the −Z wall at x=0.32L, y=-30.
+
 ## Still off
-- Front-end boss with 2 studs at the top corner of the sloped front face: not modelled.
-- Large round bore boss at mid-length on the deep section's side walls, and the bolt-through bosses: not modelled; walls are plain flat boxes.
+- Bolt-through bosses on the walls: not modelled (round bore boss now exists, see below).
 - Side ribs only exist on the shallow rear section (3 per side); photo shows ribs/bosses on the deep section too.
 - Cast locating tab on the flange lip: missing.
 - Shallow end: stamped steel bracket (lower rear corner) and sensor housing (top rear) are missing.
-- Oil level sensor sits at z = 0, inside the extruded body, so it is probably buried and invisible; needs to move out to a wall.
+- Not visually checked in-app (browser pane showed blank viewport); sizes/positions of the new bosses are eyeballed guesses.
 - Drain plug, level sensor and dipstick positions are guesses (not confirmed by photos), see above.
 - `oilpann2.jpeg` was never opened.
