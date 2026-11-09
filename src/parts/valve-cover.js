@@ -18,9 +18,18 @@ export function build(c) {
   const wellGeo = new T.LatheGeometry([[5.2, 0], [8, 0], [8, 7], [5.2, 7], [5.2, 0]].map(([r, y]) => new T.Vector2(r, y)), 20);
   for (let i = 0; i < 6; i++) detail(new T.Mesh(wellGeo, matCover), coverGrp).position.set(cx(i), floor, -6);
   // Front nose over the VANOS: full-width bullnose, same height as the plateau
-  const nose = detail(new T.Mesh(new T.CylinderGeometry(12, 12, BW - 10, 24), matCover), coverGrp);
-  nose.rotation.x = Math.PI / 2;
-  nose.position.set(LEN / 2 - 12, top - 12, 0);
+  // Bulbous dome: upper half-ellipsoid, top at plateau height, falling to the base bottom at the front flange; starts just ahead of the first coil (x 105.7 + well r 8)
+  const nose = detail(new T.Mesh(new T.SphereGeometry(1, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), matCover), coverGrp);
+  nose.scale.set(16, 20, 34);
+  nose.position.set(128, -10, 0);
+  // CCV nipple on the front intake corner, pointing up and out (+Z); see notes.md for coordinates
+  const ccv = new T.Group();
+  const stem = new T.Mesh(new T.CylinderGeometry(8, 8, 18, 20), matCover); stem.position.y = 9;
+  const barb = new T.Mesh(new T.CylinderGeometry(9.5, 8, 3, 20), matCover); barb.position.y = 16.5;
+  ccv.add(stem, barb);
+  ccv.rotation.x = Math.PI / 4;
+  ccv.position.set(126, 3, 26);
+  detail(ccv, coverGrp);
   // Oil filler cap: front third of the plateau, between the 2nd and 3rd coil from the front
   const oilCap = detail(new T.Mesh(new T.CylinderGeometry(7, 8, 6, 24), matCover), coverGrp);
   oilCap.position.set(cx(4) - 15, top + 3, 12);
