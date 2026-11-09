@@ -30,15 +30,22 @@ on). Not opened: image_6 (fuel-rail close-up). Perspective photos, no scale: sha
   puts the coil bottoms; nose cylinder r = 12 at `LEN/2 - 12`; oil cap at `cx(4) - 15, z = 12`; 3 bolts at z = 30.
 - Registered as `cylinder-head` (no own entry in parts-database.json).
 
+## CCV nipple (hand-over for ccv.js) — added session 2
+- Lives in valve-cover.js inside `coverGrp` (parent of cover meshes; `coverGrp.position.y = coverY` = 63; inside the 30° slanted group; +X front, +Z intake).
+- Cover-group-local coords (x, y, z): base (126, 3, 26); tilted 45° about X, axis direction (0, 0.707, 0.707) (up + out toward +Z/intake).
+  Barb tip centre ≈ (126, 15.7, 38.7) local → **y ≈ 78.7 in slanted-group coords** (coverY 63 + 15.7).
+- Outer diameter: stem 16 mm, barb collar 19 mm at the tip. Hose should slip over the stem (ID ≈ 16) and head toward the intake manifold (−X/+Z… i.e. along +Z then rearward).
+- Nose is now an upper half-ellipsoid: centre (128, −10, 0), radii (16, 20, 34) — front flange tip at x = 144, top at plateau height, starts just ahead of the first coil (cx(5) = 105.7, well r 8).
+- Oil cap: x axis has +X = front; cx(4)−15 = 50 is between the 2nd and 3rd coil from the FRONT (cx(5)=105.7 is front), on the plateau at z = 12. Consistent with the photo; left unchanged.
+
 ## Still missing
-- Embossed roundel/text, yellow sticker (no yellow material yet), CCV nipple on the nose, harness clips on the rim,
-  the gasket lip around the base, nose bolts, centre bolts in the trough.
+- Embossed roundel/text, yellow sticker (no yellow material yet), harness clips on the rim, the gasket lip around the base, nose bolts, centre bolts in the trough.
 
 ## Still off
-- Nose is a plain round bar (r 12) across the width; photo shows a bulbous dome curving down to the front flange, extending well past the first coil.
+- Dome/nipple added but NOT visually verified: the one screenshot showed an empty viewport (static server, no canvas content) — check in Electron.
+- Dome front tip (x = 144) overshoots base body end (x = 135) by ~9; check the front flange looks right.
 - Plug-well row sits at z = −6, near mid-width; photo says it hugs the exhaust edge. Check against coil positions before moving.
 - Bolts: only 3 on the plateau (cylinders 2/4/6); photo also has a few on the nose and 2 centre bolts in the trough.
-- Missing: embossed roundel/part-number text, yellow HV sticker, CCV nipple/hose on the front intake corner, harness clips on the rim, gasket lip.
+- Missing: embossed roundel/part-number text, yellow HV sticker, harness clips on the rim, gasket lip.
 - Trough has a rim only along the exhaust edge; nothing closes it at the rear end.
-- Oil cap position (cx(4) − 15) not re-checked against which end is "front" in the photos.
 - Underside (gasket, oil-separator labyrinth, honeycomb baffle) not modelled; only matters if the cover is shown removed.
