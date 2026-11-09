@@ -10,11 +10,14 @@ export function build(c) {
     return m;
   };
 
-  // Mounting flange (against block/bellhousing rear face) with two bolt ears
-  add(new T.BoxGeometry(4, 32, 28), matAlu, 1, 0, 0);
-  for (const [y, z] of [[12, -10], [-12, 10]]) {
-    cyl(5, 5, 4, matAlu, 1, y * 1.15, z * 1.2, 16);     // ear boss
-    cyl(2.7, 2.7, 3, matSteel, 4, y * 1.15, z * 1.2, 6); // hex bolt head
+  // Triangular mounting flange flush against the block rear face (plane x=0), two bolts into the block, third lobe at the nose
+  const tri = new T.Shape();
+  tri.moveTo(-17, 13); tri.lineTo(-17, -13); tri.lineTo(17, 0); tri.closePath(); // shape x -> world Z (block side = -Z), y -> Y
+  const fl = add(new T.ExtrudeGeometry(tri, { depth: 4, bevelEnabled: false }), matAlu, 0, 0, 0);
+  fl.rotation.y = -Math.PI / 2;                          // extrusion runs x = -4..0
+  for (const y of [11, -11]) {
+    cyl(2.7, 2.7, 3, matSteel, -5.5, y, -14, 6);             // hex bolt heads on the rear side, threaded into the block face
+    cyl(1.6, 1.6, 4, matSteel, 2, y, -14, 8);                // bolt shank in the block
   }
   // Drive-end nose: tapering casting with the pinion on its tip
   cyl(7, 12.5, 12, matAlu, -6);
@@ -35,7 +38,7 @@ export function build(c) {
   add(new T.CylinderGeometry(2.2, 2.2, 18, 10), matHose, 38.5, 8, 0); // heavy cable down the tail
   cyl(1.2, 1.2, 8, matSteel, 36, 24, 3.5, 8);            // small terminal 50 spade stub
 
-  // Axis 45 from crank centre (ring r40 + pinion r5), nose at ring-gear plane (flywheel x=-148)
+  // Axis 45 from crank centre (ring tip r40 + pinion r5), pinion on the ring-gear plane (flywheel ring x=-LEN/2-8)
   g.position.set(-LEN / 2, blockY - 18, 43.4);
   reg(g, 'starter-motor');
 }

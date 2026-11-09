@@ -6,7 +6,11 @@ Photos used: catalog image_15 (E46 330i bay, starter location), image_16 (Bosch-
 Model: axis along X, nose toward -X; flange at block rear face (x=-LEN/2), pinion x=-148 meshes flywheel ring
 (r40) — axis 45 from crank centre at (y=-18, z=43.4).
 
+Update (flywheel session): flange is now a triangular plate flush on the block rear face (x=-LEN/2), two hex bolts
+(+shanks) into the block at z=-14 local; pinion on the ring-gear plane (x=-LEN/2-8), axis 45.03 from crank centre =
+ring tip r40 + pinion r5. Checked in one rear-corner view only.
+
 ## Still off
-- No bellhousing/crank sensor to bolt the flange to; flange floats beside block side.
-- Flange is rectangular, real one is triangular; no motor-end bearing cap detail.
-- Cable is a stub, no harness routing; position only checked in one view.
+- Starter body (z 43.4 +/-12.5) still overlaps the block side by ~8 mm in Z; real one nests behind the bellhousing. No bellhousing.
+- No crank sensor; no motor-end bearing cap detail; pinion has no teeth.
+- Cable is a stub, no harness routing.
