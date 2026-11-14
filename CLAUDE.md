@@ -20,7 +20,7 @@ Electron + Three.js r160. Procedural M54B30 built from primitives; each removabl
    don't cover what you need. If you do look at photos, write what you learned into that `notes.md`
    before finishing, so the next session doesn't have to look again.
 4. Make targeted edits (Edit tool) instead of rewriting whole files. Don't re-read a file after editing it.
-5. Visual check: at most one screenshot at the end of the task, not after every change.
+5. Visual check = one `npm run shot` at the end, then look at the PNG.
 6. New shared material/helper/dimension → add it to the shared file and return it from there.
    Something used only by one part stays in that part's file.
 7. Axes inside part files: X = crank axis (+X = front/pulley end), Y = up, Z = intake (+) / exhaust (−).
