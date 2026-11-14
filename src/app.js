@@ -20,6 +20,7 @@ class Scene {
     this.initLighting();
     this.setupEnvironment();
     this.setupControls();
+    this.setupAO();
   }
 
   setupEnvironment() {
@@ -34,9 +35,27 @@ class Scene {
     }
   }
 
+  // Ground-truth AO so gaps between parts darken. #ao-toggle disables only the AO pass, so the look stays the same otherwise.
+  setupAO() {
+    const T = window.THREE, w = this.container.clientWidth, h = this.container.clientHeight;
+    if (!window.GTAOPass) return;
+    const pr = this.renderer.getPixelRatio();
+    // multisampled target keeps edges antialiased through the composer
+    const rt = new T.WebGLRenderTarget(w * pr, h * pr, { type: T.HalfFloatType, samples: 4 });
+    this.composer = new window.EffectComposer(this.renderer, rt);
+    this.composer.addPass(new window.RenderPass(this.scene, this.camera));
+    const ao = new window.GTAOPass(this.scene, this.camera, w, h);
+    ao.updateGtaoMaterial({ radius: 14, distanceFallOff: 1, thickness: 8, scale: 1, samples: 16 });
+    ao.blendIntensity = 0.9;
+    this.composer.addPass(this.ao = ao);
+    this.composer.addPass(new window.OutputPass());
+  }
+
   initScene() {
     // Light studio background (matches product-render references)
-    this.scene.background = new window.THREE.Color(0xeef1f5);
+    // CSS, not scene.background: through the composer the background and the ground shadow would get
+    // tone-mapped (greyed, shadow washed out). Transparent canvas keeps both exact.
+    this.container.style.background = '#eef1f5';
     // no fog — engine spans a wide area and must stay crisp
   }
 
@@ -79,8 +98,8 @@ class Scene {
     const key = new T.DirectionalLight(0xffffff, 1.15);
     key.position.set(280, 320, 220);
     key.castShadow = true;
-    key.shadow.mapSize.width = 2048;
-    key.shadow.mapSize.height = 2048;
+    key.shadow.mapSize.width = 1024; // lower res = wider PCF penumbra = softer shadow
+    key.shadow.mapSize.height = 1024;
     key.shadow.camera.near = 50;
     key.shadow.camera.far = 1400;
     key.shadow.camera.left = -400;
@@ -141,6 +160,7 @@ class Scene {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
+    this.composer?.setSize(width, height);
   }
 
   getRaycasterFromMouse() {
@@ -158,7 +178,8 @@ class Scene {
 
   render() {
     this.controls.update(); // damping needs a per-frame update
-    this.renderer.render(this.scene, this.camera);
+    if (this.composer) this.composer.render();
+    else this.renderer.render(this.scene, this.camera);
   }
 
   getScene() {
@@ -877,6 +898,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     const BODY_IDS = ['bonnet', 'car-body'];
     const bodyToggle = document.getElementById('body-toggle');
+    document.getElementById('ao-toggle').addEventListener('change', e => { if (scene.ao) scene.ao.enabled = e.target.checked; });
     const isBody = p => BODY_IDS.includes(p.userData?.partId);
 
     // Aim the camera at the engine (or whole car) from the front-left corner, slightly above.

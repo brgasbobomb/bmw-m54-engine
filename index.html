@@ -6,12 +6,13 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
   <title>BMW M54 Engine 3D Model</title>
   <link rel="stylesheet" href="styles/main.css">
-  <!-- vendor/addons has no controls/, so OrbitControls comes from the installed three (same r160) -->
+  <!-- vendor/addons has no controls/ or postprocessing/, so those come from the installed three (same r160) -->
   <script type="importmap">
   {
     "imports": {
       "three": "./vendor/three.module.js",
       "three/addons/controls/": "./node_modules/three/examples/jsm/controls/",
+      "three/addons/postprocessing/": "./node_modules/three/examples/jsm/postprocessing/",
       "three/addons/": "./vendor/addons/"
     }
   }
@@ -87,6 +88,7 @@
           <input type="range" id="explode-slider" min="0" max="1" step="0.01" value="0">
         </label>
         <label class="explode-control"><input type="checkbox" id="body-toggle"> Car body</label>
+        <label class="explode-control"><input type="checkbox" id="ao-toggle" checked> Ambient occlusion</label>
       </div>
     </div>
   </div>

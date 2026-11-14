@@ -4,11 +4,16 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 window.THREE = THREE;
 window.GLTFLoader = GLTFLoader;
 window.RoomEnvironment = RoomEnvironment;
 window.OrbitControls = OrbitControls;
+Object.assign(window, { EffectComposer, RenderPass, GTAOPass, OutputPass });
 
 // Startup model. null => boot to the built-in procedural M54 (no external asset).
 // To auto-load a model on startup instead, set this to a path, e.g.
