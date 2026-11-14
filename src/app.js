@@ -671,6 +671,7 @@ class UIPanel {
     this.partWeight = document.getElementById('part-weight');
     this.partMaterial = document.getElementById('part-material');
     this.partAssembly = document.getElementById('part-assembly');
+    this.partNumber = document.getElementById('part-number');
     this.relationshipsList = document.getElementById('part-relationships');
     this.partsList = document.getElementById('parts-list');
     this.removedPartsIcons = document.getElementById('removed-parts-icons');
@@ -733,6 +734,7 @@ class UIPanel {
     this.partWeight.textContent = part.weight;
     this.partMaterial.textContent = part.material;
     this.partAssembly.textContent = part.assembly;
+    this.partNumber.textContent = part.partNumber || 'unverified';
 
     this.displayRelationships(part.id);
     this.highlightPartInList(part.id);
@@ -769,6 +771,7 @@ class UIPanel {
     this.partWeight.textContent = '—';
     this.partMaterial.textContent = '—';
     this.partAssembly.textContent = '—';
+    this.partNumber.textContent = '—';
     this.relationshipsList.innerHTML = '<p class="placeholder">Click a part to view its details</p>';
   }
 
