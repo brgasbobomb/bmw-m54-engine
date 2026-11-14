@@ -477,35 +477,6 @@
     "partNumber": "unverified",
     "source": "unverified"
   },
-  "carBody": {
-    "id": "car-body",
-    "name": "E46 Saloon Body Shell",
-    "type": "Body",
-    "weight": "unverified",
-    "material": "unverified",
-    "assembly": "Body",
-    "specs": "BMW E46 4-door saloon, Oriental Blau metallic (420), bare shell with glass",
-    "relationships": [
-      "Bonnet",
-      "Engine Block"
-    ],
-    "partNumber": "unverified",
-    "source": "unverified"
-  },
-  "bonnet": {
-    "id": "bonnet",
-    "name": "Bonnet",
-    "type": "Body Panel",
-    "weight": "unverified",
-    "material": "unverified",
-    "assembly": "Body",
-    "specs": "Oriental Blau metallic, hinged at the cowl",
-    "relationships": [
-      "E46 Saloon Body Shell"
-    ],
-    "partNumber": "unverified",
-    "source": "unverified"
-  },
   "ccv": {
     "id": "ccv",
     "name": "Crankcase Ventilation (CCV)",

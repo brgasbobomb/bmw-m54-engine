@@ -896,19 +896,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     const explodeSlider = document.getElementById('explode-slider');
     const canvasContainer = document.getElementById('canvas-container');
 
-    const BODY_IDS = ['bonnet', 'car-body'];
-    const bodyToggle = document.getElementById('body-toggle');
     document.getElementById('ao-toggle').addEventListener('change', e => { if (scene.ao) scene.ao.enabled = e.target.checked; });
-    const isBody = p => BODY_IDS.includes(p.userData?.partId);
 
-    // Aim the camera at the engine (or whole car) from the front-left corner, slightly above.
+    // Aim the camera at the engine from the front-left corner, slightly above.
     // Front = +X, car's left = intake = -Z on screen (engine is mirrored across Z once).
-    function frameView(wholeCar) {
+    function frameView() {
       const group = engineModel.getEngineGroup();
       group.updateMatrixWorld(true);
       const T = window.THREE;
       const box = new T.Box3();
-      explodeParts.filter(p => wholeCar || !isBody(p)).forEach(p => box.expandByObject(p));
+      explodeParts.forEach(p => box.expandByObject(p));
       const sphere = box.getBoundingSphere(new T.Sphere());
       const cam = scene.getCamera();
       const halfFov = Math.min(cam.fov, 2 * Math.atan(Math.tan(cam.fov * Math.PI / 360) * cam.aspect) * 180 / Math.PI) * Math.PI / 360;
@@ -984,15 +981,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         console.log('✓ Application loaded successfully!');
 
-        // the opaque shell hides the engine from the start camera; open on the bare engine
-        BODY_IDS.forEach(id => handlePartClick(id));
-        frameView(false);
-        bodyToggle.addEventListener('change', () => {
-          BODY_IDS.forEach(id => {
-            if (engineModel.getHierarchy().isPartVisible(id) !== bodyToggle.checked) handlePartClick(id);
-          });
-          frameView(bodyToggle.checked);
-        });
+        frameView();
 
         startRenderLoop();
         window.__shot = { scene, frameView, isolate: handlePartIsolate }; // used by scripts/shot.mjs
@@ -1096,7 +1085,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       const allParts = explodeParts;
 
       allParts.forEach(part => {
-        if (!isBody(part) && part.userData?.partId && !hierarchy.isPartVisible(part.userData.partId)) {
+        if (part.userData?.partId && !hierarchy.isPartVisible(part.userData.partId)) {
           animationController.restorePart(part, () => {
             part.visible = true;
             animationController.setOpacityRecursive(part, 1.0);
@@ -1105,9 +1094,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       });
 
       hierarchy.resetAll();
-      BODY_IDS.forEach(id => hierarchy.removePart(id)); // start view: body hidden
-      bodyToggle.checked = false;
-      frameView(false);
+      frameView();
       camK = null;
       uiPanel.displayDefaultInfo();
       uiPanel.clearHighlight();
@@ -1115,7 +1102,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
       setTimeout(() => {
         allParts.forEach(part => {
-          if (isBody(part)) { part.visible = false; return; }
           part.visible = true;
           animationController.setOpacityRecursive(part, 1.0);
         });

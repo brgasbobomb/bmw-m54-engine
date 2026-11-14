@@ -29,7 +29,6 @@ import { build as radiator } from './radiator.js';
 import { build as hoses } from './hoses.js';
 import { build as expansionTank } from './expansion-tank.js';
 import { build as ccv } from './ccv.js';
-import { build as body } from './body.js';
 
 const PARTS = [
   block,
@@ -56,8 +55,7 @@ const PARTS = [
   radiator,
   hoses,
   expansionTank,
-  ccv,
-  body
+  ccv
 ];
 
 export function buildProceduralEngine(model) {

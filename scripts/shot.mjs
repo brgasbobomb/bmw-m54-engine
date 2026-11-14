@@ -52,7 +52,7 @@ if (view === 'explode') await page.evaluate(() => {
 });
 else if (VIEWS[view]) await page.evaluate(d => {
   const { scene, frameView } = window.__shot;
-  frameView(false);
+  frameView();
   const cam = scene.getCamera(), t = scene.controls.target;
   const dist = cam.position.distanceTo(t);
   cam.position.copy(t).addScaledVector(new cam.position.constructor(...d).normalize(), dist);
