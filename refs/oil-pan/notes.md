@@ -29,3 +29,5 @@ Also seen: `refs/catalog/images/image_11.jpg` (RWD pan, side view, lying on its 
 - Not visually checked in-app (browser pane showed blank viewport); sizes/positions of the new bosses are eyeballed guesses.
 - Drain plug, level sensor and dipstick positions are guesses (not confirmed by photos), see above.
 - `oilpann2.jpeg` was never opened.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Renders well: deep section at the front, shallow rear, flange lip with bolts, two round bosses on the intake wall. Small stub at the front-left tip (sensor/plug?) pokes out past the flange, check it is intentional. No floating or wrong-side problem seen.

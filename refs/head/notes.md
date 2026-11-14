@@ -20,3 +20,5 @@ Photos: `cylinder head.jpeg` (own), catalog image_2 (whole engine) and image_27 
 - Not visually verified: preview canvas rendered blank in the Browser pane (no console errors; syntax check ok).
 - Lifting-eye positions and flange spacing are estimated, not measured.
 - Flanges don't follow port shapes; stud counts are simplified.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Rendered together with valve-cover (same part id 'cylinder-head'), so one shot covers both. Looks coherent: six plug wells in the trough, rim, oil cap at the front end. Oil cap sits right at the very front edge, check it is not overhanging the cover end. Head body underneath is plain black, no visible port/flange detail from this angle.

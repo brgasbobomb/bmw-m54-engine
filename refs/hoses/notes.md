@@ -18,3 +18,5 @@ Sources: refs/hoses/hoses-1.webp (bmwfans exploded diagram: upper hose 3 with se
 - Lower hose still starts on the thermostat housing (real M54 lower hose also starts at housing; pump feed is via a separate pipe, not modelled).
 - No expansion-tank hose, heater pipes (diagram 6/8) or sensor on the upper hose elbow.
 - Hose has constant radius, no moulded bulge or quick-release clip.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Two hoses meet at the thermostat housing and run to the radiator end points; no kinks. Upper hose end looks lifted above the lower one, plausible. Hose ends sit at the radiator's connection side only in the full engine; check the radiator tank necks line up with them at Explode 0%.

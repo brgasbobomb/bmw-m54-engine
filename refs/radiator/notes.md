@@ -44,3 +44,5 @@ Hose side settled: upper −Z, lower +Z stays (photo only hints at +Z; cannot ch
 - (Added from code review) Shroud is a flat plate plus a short ring: no side walls/funnel to the core, no mounting tabs.
 - Fan: blades are 9 identical flat boxes; no viscous-clutch detail (bimetal spring, fins on the hub face).
 - Missing: filler/bleed fittings, coolant temperature sensor, rubber mounts/brackets, trans/AC lines. Core is only a texture on a box (no real tubes).
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Upright, fan disc plus a long thin shaft sticking out with nothing at its end (pump nose is not part of this part, so it floats in isolation; check it meets the pump in the full engine). In the full-engine intake view the translucent grey expansion tank overlaps the radiator's top-left corner, check clearance.

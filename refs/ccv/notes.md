@@ -19,3 +19,5 @@ to a separator on the intake manifold, short return hose into the plenum.
 - Separator box position/size, hose route and whether the hose really ends on the plenum front vs. near the throttle body are guesses (no photo shows it).
 - Nipple stub duplicates what valve-cover.js should own; hose does not avoid the oil-filler cap / coil harness clearance explicitly.
 - Hose radius and box dimensions are unmeasured.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Top view: box with cap hole plus one curved hose; reads fine, but only one hose is visible (the second short hose to the plenum seems absent or hidden). Everything is pure black, so no detail visible in the intake view. Box looks tiny/flat compared with the hose.

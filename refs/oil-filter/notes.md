@@ -21,3 +21,5 @@ Looked at: `oil-filter-1.webp` (bmwfans exploded parts diagram), `oil-filter-2.j
   the route between banjo and union is still a guessed curve (could clip the block pad near z=-10). Fixed by arithmetic, not looked at.
 - Reservoir sits on the pump group, so it is removed together with the pump; hose ends at the pump are approximate.
 - Never visually checked close-up: static preview (python http.server) renders a blank canvas, so use Electron (`npm run dev`) and remove the airbox.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Housing + canister look right, canister on top. The thin VANOS line leaves the housing and ends in free air (expected only if vanos.js hose meets it; unverified). Housing is small relative to the pan: check against block pad.

@@ -40,3 +40,5 @@ Group origin is (LEN/2 - 4, headY + 4, 0). Local +X = front, +Z = intake.
 - Solenoid positions, top face and overall housing shape unverified: `vanos3`-`vanos6` never opened.
 - Hubs are flat gold discs; toothed plates and chain live in timing-chain.js, check they line up with the hub centres.
 - Bracket flange is a flat plate, not the curved flange in the photo.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Tiny at full-engine zoom; sits at the front end, plausible side. Housing reads as a grey block with gold hubs and a small stub at the bottom; the stub dangles in free air (oil feed from the filter housing is separate). Could not judge clashes with the head/timing cover in isolation.

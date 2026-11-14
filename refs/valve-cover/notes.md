@@ -54,3 +54,5 @@ on). Not opened: image_6 (fuel-rail close-up). Perspective photos, no scale: sha
 - Missing: embossed roundel/part-number text, yellow HV sticker, harness clips on the rim, gasket lip.
 - Trough has a rim only along the exhaust edge; nothing closes it at the rear end.
 - Underside (gasket, oil-separator labyrinth, honeycomb baffle) not modelled; only matters if the cover is shown removed.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Same shot as head (shared id). Cover top is mostly black with light-grey well bottoms; roundel/decals not readable at this zoom. Nothing floating. Cover rim looks proud of the head flange at the exhaust edge, check at close zoom.

@@ -36,3 +36,5 @@ Photos opened (2): `refs/catalog/images/image_1.webp` (whole engine, front 3/4 f
 - Bellhousing flange is lugs + lower pad only, not a full bolt ring; hole pattern invented.
 - Lifting eyes (front/rear) not modelled; no photo.
 - Old per-cylinder side ribs kept as-is.
+- Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
+  - Renders, no floating bits or obvious wrong size. Round disc and black rectangle on the upper face and a grey plate at the rear end are unidentified; check what they are (deck features vs leftovers). Skirt ends in black dowel-like stubs, check they are the cap bosses.
