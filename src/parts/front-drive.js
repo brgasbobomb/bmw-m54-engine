@@ -67,6 +67,7 @@ export function build(c) {
   }
   cylX(damperGrp, 5, 4, matSteel, 17, 0, 0, 6);  // central crank bolt
   damperGrp.position.set(beltX1, A.crank.y, A.crank.z);
+  const damperSpin = c.spinGroup(damperGrp, 0, 0);
   reg(damperGrp, 'pulleys');
 
   // Water pump (body + single groove pulley)
@@ -86,6 +87,7 @@ export function build(c) {
     const a = i / 6 * Math.PI * 2;
     cylX(wpGrp, 1.8, 3, matSteel, bodyX - 5, A.waterPump.y + Math.sin(a) * 20, A.waterPump.z + Math.cos(a) * 20, 6);
   }
+  const wpSpin = c.spinGroup(wpGrp, A.waterPump.y, A.waterPump.z, m => m.position.x >= beltX1 - 6); // pulley, lips, bolts, boss
   reg(wpGrp, 'water-pump');
 
   // Alternator (finned heavy frame + cooling fan + main pulley)
@@ -195,6 +197,14 @@ export function build(c) {
     beltX2, 8, 4
   );
   reg(belt2, 'serpentine-belt'); // share ID with belt1 so they disassemble together
+
+  // Run engine: pulleys on the belt's rib side turn with the crank, back-side ones (water pump, idler) against it
+  const spinAt = (m, crankR, p, back) => t => { m.rotation.x = (back ? -t : t) * crankR / p.r; };
+  c.motion.push(
+    t => { damperSpin.rotation.x = t; },
+    spinAt(wpSpin, A.crank.r, A.waterPump, true), spinAt(mainIdler, A.crank.r, A.idler, true),
+    spinAt(altPul, A.crank.r, A.alternator), spinAt(psPul, A.crank.r, A.ps), spinAt(mainTens, A.crank.r, A.tensioner),
+    spinAt(acPul, A.crank.r - 2, A.ac), spinAt(acTens, A.crank.r - 2, A.acTens));
 
   // Fan-clutch boss nose in the upright (radiator) frame; radiator.js hangs the viscous fan here.
   const fanMount = new T.Vector3(beltX1 + 14, A.waterPump.y, A.waterPump.z)

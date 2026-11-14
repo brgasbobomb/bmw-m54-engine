@@ -27,6 +27,8 @@ export function build(c) {
       lobe.position.set(cx(i) + o, camY, z);
       lobe.rotation.x = -Math.PI / 2 + firing[i] * Math.PI / 3 + off; // phase 0 = nose down onto the tappet
     }
+    const spin = c.spinGroup(grp, camY, z, m => m.isMesh);
+    c.motion.push(t => { spin.rotation.x = t / 2; });
   }
   reg(grp, 'camshafts');
 }

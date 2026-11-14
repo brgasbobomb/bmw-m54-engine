@@ -60,10 +60,6 @@ export function build(c) {
   const headGeo = new T.CylinderGeometry(3.3, 3.3, 2.2, 6);
 
   for (let i = 0; i < 6; i++) {
-    const a = angles[i];
-    const pinY = blockY - 6 + Math.cos(a) * crankThrow; // crankpin centre
-    const pinZ = Math.sin(a) * crankThrow;
-    const pistonY = pinY + Math.sqrt(rodLen * rodLen - pinZ * pinZ); // slider-crank
 
     // Piston + rings + pin + circlips
     const pg = new T.Group();
@@ -82,7 +78,6 @@ export function build(c) {
       v.scale.set(1, 1, 0.8); v.position.set(sx * 7.5, 11.25, sz * 8.5);
       v.rotation.set(sz * 0.12, 0, -sx * 0.12);
     });
-    pg.position.set(cx(i), pistonY, 0);
     detail(pg, pistonsGrp);
 
     // Rod: big end on the crankpin, small end on the piston pin
@@ -95,9 +90,17 @@ export function build(c) {
       const b = detail(new T.Mesh(boltGeo, matSteelDk), rg); b.position.set(0, 0, s * 11);
       const h = detail(new T.Mesh(headGeo, matSteelDk), rg); h.position.set(0, -7.8, s * 11);
     });
-    rg.position.set(cx(i), pinY, pinZ);
-    rg.rotation.x = Math.atan2(-pinZ, pistonY - pinY);
     detail(rg, rodsGrp);
+    const pose = (a) => {
+      const pinY = blockY - 6 + Math.cos(a) * crankThrow; // crankpin centre
+      const pinZ = Math.sin(a) * crankThrow;
+      const pistonY = pinY + Math.sqrt(rodLen * rodLen - pinZ * pinZ); // slider-crank
+      pg.position.set(cx(i), pistonY, 0);
+      rg.position.set(cx(i), pinY, pinZ);
+      rg.rotation.x = Math.atan2(-pinZ, pistonY - pinY);
+    };
+    pose(angles[i]);
+    c.motion.push(t => pose(angles[i] + t));
   }
   reg(pistonsGrp, 'pistons');
   reg(rodsGrp, 'connecting-rods');

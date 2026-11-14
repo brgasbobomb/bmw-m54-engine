@@ -1,4 +1,4 @@
-// npm run shot -- <view> [--only <part-id>]  ->  shots/<view>.png
+// npm run shot -- <view> [--only <part-id>] [--run]  (--run: Run engine ticked)  ->  shots/<view>.png
 import http from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
@@ -22,6 +22,7 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/jav
 const args = process.argv.slice(2);
 const oi = args.indexOf('--only');
 const only = oi >= 0 ? args.splice(oi, 2)[1] : null;
+const ri = args.indexOf('--run'), run = ri >= 0 && !!args.splice(ri, 1);
 const view = args[0];
 if (!(view in VIEWS)) { console.error('usage: npm run shot -- <' + Object.keys(VIEWS).join('|') + '> [--only <part-id>]'); process.exit(1); }
 
@@ -44,6 +45,7 @@ await page.goto(`http://localhost:${server.address().port}/index.html`);
 await loaded;
 
 if (only) await page.evaluate(id => window.__shot.isolate(id), only);
+if (run) await page.evaluate(() => { document.getElementById('run-toggle').checked = true; });
 if (view === 'explode') await page.evaluate(() => {
   const s = document.getElementById('explode-slider');
   s.value = 1; s.dispatchEvent(new Event('input'));

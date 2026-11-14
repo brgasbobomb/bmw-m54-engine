@@ -9,11 +9,10 @@ export function build(c) {
   const rOf = (n) => n * PITCH / (2 * Math.PI);
 
   // Sprockets (teeth: crank 12, cam primary 24 = 2:1, secondary cam sprockets 16, crank pump row 14)
-  place(sprocket(12, PITCH, 4, matSteelDk), XP, crankV, 0);
-  place(sprocket(14, PITCH, 4, matSteelDk), XO, crankV, 0);
-  place(sprocket(24, PITCH, 4, matSteelDk), XP, camV, camZ);
+  const crankSp = [place(sprocket(12, PITCH, 4, matSteelDk), XP, crankV, 0), place(sprocket(14, PITCH, 4, matSteelDk), XO, crankV, 0)];
+  const camSp = [place(sprocket(24, PITCH, 4, matSteelDk), XP, camV, camZ)];
   for (const s of [1, -1]) {
-    place(sprocket(16, PITCH, 4, matSteelDk), XS, camV, s * camZ);
+    camSp.push(place(sprocket(16, PITCH, 4, matSteelDk), XS, camV, s * camZ));
     const hub = place(new T.Mesh(new T.CylinderGeometry(6, 6, 12, 18), matGold), XS + 2, camV, s * camZ);
     hub.rotation.z = Math.PI / 2;
   }
@@ -22,6 +21,12 @@ export function build(c) {
   const prim = chainLoop([{ z: 0, y: crankV, r: rOf(12) }, { z: camZ, y: camV, r: rOf(24) }], PITCH, XP, matSteel);
   const sec = chainLoop([{ z: -camZ, y: camV, r: rOf(16) }, { z: camZ, y: camV, r: rOf(16) }], PITCH, XS, matSteel);
   g.add(prim.mesh, sec.mesh);
+  // Run engine: sprocket rotation.x = +a moves the loop clockwise in (z, y), i.e. a chain offset of -r*a
+  c.motion.push(t => {
+    crankSp.forEach(m => { m.rotation.x = t; });
+    camSp.forEach(m => { m.rotation.x = t / 2; });
+    prim.set(-rOf(12) * t); sec.set(-rOf(16) * t / 2);
+  });
 
   // Rail: flat strip along a run, pushed `off` outside the chain and bowed by `bow`; thickness 3, width 6 (along X)
   const rail = (run, x, off, bow, mat, w = 6) => {

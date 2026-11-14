@@ -61,6 +61,8 @@ export function build(c) {
     cyl(2.5, 3, rear + 9.5, matSteel, axisY + Math.cos(t) * 17, Math.sin(t) * 17);
   }
 
+  const spin = c.spinGroup(crankGrp, axisY, 0);
+  c.motion.push(t => { spin.rotation.x = t; });
   reg(crankGrp, 'crankshaft');
   return { angles, crankThrow };
 }

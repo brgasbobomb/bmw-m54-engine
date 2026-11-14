@@ -20,10 +20,12 @@ export function build(c) {
   relief.rotation.x = Math.PI / 2;
 
   // Drive sprocket (9 teeth) on the shaft, plane XO like the crank's second row, and the chain loop between them
-  put(sprocket(9, PITCH, 4, matSteelDk), XO, py, 0);
+  const pumpSp = put(sprocket(9, PITCH, 4, matSteelDk), XO, py, 0);
   cylX(2.6, 2, matSteel, XO + 2.5, py, 0);                         // nut
   const r = (n) => n * PITCH / (2 * Math.PI);
-  g.add(chainLoop([{ z: 0, y: crankV, r: r(14) }, { z: 0, y: py, r: r(9) }], PITCH, XO, matSteel).mesh);
+  const chain = chainLoop([{ z: 0, y: crankV, r: r(14) }, { z: 0, y: py, r: r(9) }], PITCH, XO, matSteel);
+  g.add(chain.mesh);
+  c.motion.push(t => { pumpSp.rotation.x = t * 14 / 9; chain.set(-r(14) * t); });
 
   // Pickup: flanged pipe leaves the body underside, runs back along -X, ends in a flat strainer cup low in the deep sump
   const pipe = new T.CatmullRomCurve3([

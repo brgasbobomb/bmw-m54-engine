@@ -1138,10 +1138,28 @@ window.addEventListener('DOMContentLoaded', async () => {
       });
     }
 
+    // Run engine: crank angle advances at the slider rpm (log scale, 10 rpm slow-motion .. 750 rpm idle).
+    // Parts animate only children of their registered groups, so explode/removal keep working.
+    // Angle decreases so the pistons reach TDC in firing order 1-5-3-6-2-4 with the crankshaft.js pin angles.
+    const runToggle = document.getElementById('run-toggle'), rpmSlider = document.getElementById('rpm-slider');
+    const rpmValue = document.getElementById('rpm-value');
+    const rpm = () => Math.round(10 * Math.pow(75, Number(rpmSlider.value)));
+    const showRpm = () => { rpmValue.textContent = rpm() + ' rpm'; };
+    rpmSlider.addEventListener('input', showRpm); showRpm();
+    let crankAngle = 0, lastT = performance.now();
+    function updateRun() {
+      const now = performance.now(), dt = Math.min(0.1, (now - lastT) / 1000);
+      lastT = now;
+      if (!runToggle.checked || !engineModel.motion) return;
+      crankAngle = (crankAngle - dt * rpm() / 60 * 2 * Math.PI) % (4 * Math.PI); // 4π: cams turn once per two crank turns
+      engineModel.motion.forEach(f => f(crankAngle));
+    }
+
     function startRenderLoop() {
       function animate() {
         requestAnimationFrame(animate);
         updateExplode();
+        updateRun();
         scene.render();
       }
       animate();

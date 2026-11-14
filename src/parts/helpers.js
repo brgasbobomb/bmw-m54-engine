@@ -171,6 +171,13 @@ export function makeHelpers(c, model) {
     belt.castShadow = true; belt.receiveShadow = true;
     return belt;
   };
+  // Move a part group's meshes (pick) into a pivot on the X-parallel axis through (y, z) and return it, so the
+  // pivot can spin while the registered group stays free for explode/removal.
+  const spinGroup = (group, y, z, pick = m => m.isMesh || m.isGroup) => {
+    const p = new T.Group(); p.position.set(0, y, z);
+    group.children.filter(pick).forEach(m => { m.position.y -= y; m.position.z -= z; p.add(m); });
+    group.add(p); return p;
+  };
   // Chain sprocket on the X axis, centre at (x, y, z): N teeth, root radius r. Teeth are trapezoids.
   const sprocket = (n, pitch, thick, mat) => {
     const r = n * pitch / (2 * Math.PI), s = new T.Shape();
@@ -202,14 +209,19 @@ export function makeHelpers(c, model) {
     const im = new T.InstancedMesh(new T.BoxGeometry(1, 2.2, 1), mat, N), o = new T.Object3D();
     const at = (s) => { let i = 1; while (cum[i] < s && i < pts.length - 1) i++; const f = (s - cum[i - 1]) / (cum[i] - cum[i - 1] || 1);
       return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * f, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * f]; };
-    for (let k = 0; k < N; k++) {
-      const [z0, y0] = at(k * step), [z2, y2] = at(((k + 1) * step) % cum[cum.length - 1]);
-      o.position.set(x, y0, z0); o.rotation.set(-Math.atan2(y2 - y0, z2 - z0), 0, 0);
-      o.scale.set(k % 2 ? 2.6 : 4.2, 1, step * 0.92); o.updateMatrix(); im.setMatrixAt(k, o.matrix);
-    }
+    const L = cum[cum.length - 1];
+    const set = (off) => { // off = distance the chain has travelled along the loop (counter-clockwise)
+      for (let k = 0; k < N; k++) {
+        const s = ((k * step + off) % L + L) % L, [z0, y0] = at(s), [z2, y2] = at((s + step) % L);
+        o.position.set(x, y0, z0); o.rotation.set(-Math.atan2(y2 - y0, z2 - z0), 0, 0);
+        o.scale.set(k % 2 ? 2.6 : 4.2, 1, step * 0.92); o.updateMatrix(); im.setMatrixAt(k, o.matrix);
+      }
+      im.instanceMatrix.needsUpdate = true;
+    };
+    set(0);
     im.castShadow = true;
     const run = (C, D, n) => ({ p: [C.z + C.r * Math.cos(n), C.y + C.r * Math.sin(n)], q: [D.z + D.r * Math.cos(n), D.y + D.r * Math.sin(n)], n });
-    return { mesh: im, runs: [run(A, B, nAB), run(B, A, nBA)] };
+    return { mesh: im, runs: [run(A, B, nAB), run(B, A, nBA)], set };
   };
-  return { reg, detail, roundedBox, ribbedPulley, crankDamper, alternatorBody, buildBelt, sprocket, chainLoop };
+  return { reg, detail, roundedBox, ribbedPulley, crankDamper, alternatorBody, buildBelt, sprocket, chainLoop, spinGroup };
 }

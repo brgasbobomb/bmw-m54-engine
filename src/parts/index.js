@@ -62,7 +62,7 @@ const PARTS = [
 
 export function buildProceduralEngine(model) {
   const T = window.THREE;
-  const c = { T, ...makeMaterials(T) };
+  const c = { T, ...makeMaterials(T), motion: model.motion = [] }; // motion: fns(crankAngle) for "Run engine"
 
   // Root group, mirrored across Z. Part files are written with +Z = intake, which in this
   // right-handed scene would put the intake on the car's right. The real M54 has the intake on
