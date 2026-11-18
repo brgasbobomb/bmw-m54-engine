@@ -1,5 +1,5 @@
 // npm run shot -- --clear <idA> <idB,idC,...>  prints min surface-sample distance (last object registered as idA vs each idB) and exits
-// npm run shot -- <view> [--only <part-id>] [--focus <part-id> [--zoom N]] [--run]  (--run: Run engine ticked)  ->  shots/<view>.png
+// npm run shot -- <start|intake|exhaust|front|rear|top|below|oblique|explode> [--only <part-id>] [--focus <part-id> [--zoom N]] [--run]  (--run: Run engine ticked)  ->  shots/<view>.png
 import http from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
@@ -11,6 +11,7 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const VIEWS = {
   start: null,
   intake: [0, 0.2, -1],
+  oblique: [0.7, 0.7, 0.6],   // front-right, high: with --only intake-manifold the head-side runner tops and ribs show in relief
   exhaust: [0, 0.2, 1],
   front: [1, 0.15, 0],
   rear: [-1, 0.15, 0],

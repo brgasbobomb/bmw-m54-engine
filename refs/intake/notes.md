@@ -208,3 +208,7 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (rib close-up check): zoomed, cropped top shot of the six runner tops: U-ribs sit on the runners (round end toward the head, legs 17 apart),
   nipple dot inside each U, spine strip crosses all six, nothing floating. Ribs span out 16…37, the path change only touched out > 76, so they are
   unaffected; spine top 47 = runner crest top (40 + 7). Not checked: a low oblique close-up of the rib height (side shots hide the runner tops).
+
+- 2026-11-18 (oblique rib check): new `npm run shot -- oblique --only intake-manifold --focus intake-manifold --zoom 2.5` (dir 0.7, 0.7, 0.6: front/head side, high).
+  Shows the runner tops in relief: U-ribs read as raised tubes seated on each runner (round end toward the head, legs ~17 apart), nipples inside the U's,
+  spine strip across the crests. No floating ribs. Ribs look a little proud/round next to the photo's low double ridge (already listed above).
