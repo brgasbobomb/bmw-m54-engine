@@ -189,3 +189,8 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (lobe bottom jog): the lobe profile's bottom outer corner is now rounded (R 8 quadratic) so the outer wall rolls into the plenum
   wall instead of ending in a hard step. Rear-end focus shot: jog reduced to a small soft shoulder (~0.5 unit), not fully gone; the flush
   offset (+2.5 in `eh.o1`) is still empirical.
+
+- 2026-11-18 (lobe jog, measured): per-mesh bounding boxes (browser, car frame): plenum out max 93, up -6…25; lobe was 95.5 with the by-eye "+2.5".
+  Now `eh.o1 = pl.o1 + 3 - ehB` → lobe out max exactly 93 = plenum, flat flush (lobe up 8.5…55.5, x flush with the plenum ends). The "jog/bulge"
+  seen in end-on shots was the plenum's vertical seam strip (out 94, mid-length, `pl.o1 + 3` box), not the lobe. That seam silhouette still
+  shows as a small bulge at the left edge from the rear view; it is intended. Earlier "+2.5 empirical" notes are superseded.

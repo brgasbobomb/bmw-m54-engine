@@ -34,7 +34,7 @@ export function build(c) {
 
   // Hammerhead: both plenum ends turn up on the outer side (stand photo), beside the end runners
   const ehD = 5, ehB = 3.5, ehR = 14;
-  const eh = { o0: 58, o1: pl.o1 + 3 - ehB + 2.5, u0: 12, u1: 52 };   // the bevel grows the profile by ehB: o1 - ehB leaves the lobe flush with the plenum's bevelled wall
+  const eh = { o0: 58, o1: pl.o1 + 3 - ehB, u0: 12, u1: 52 };   // the bevel grows the profile by ehB: o1 - ehB leaves the lobe flush with the plenum's bevelled wall
   // inner wall sweeps out into the plenum top (up 22) in a concave fillet instead of meeting it at a step
   const ehShape = new T.Shape().moveTo(eh.o1, eh.u0 + 8).lineTo(eh.o1, eh.u1 - ehR)
     .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - ehR, eh.u1).lineTo(eh.o0 + ehR, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - ehR)
