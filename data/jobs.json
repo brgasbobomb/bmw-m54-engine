@@ -2,6 +2,18 @@
   "thermostat": {
     "name": "Thermostat",
     "target": "thermostat",
-    "remove": ["coolant-tank", "radiator"]
+    "remove": [
+      "coolant-tank",
+      "radiator"
+    ]
+  },
+  "vanos-seals": {
+    "name": "VANOS seals",
+    "target": "vanos-actuators",
+    "remove": [
+      "coolant-tank",
+      "radiator",
+      "serpentine-belt"
+    ]
   }
 }
