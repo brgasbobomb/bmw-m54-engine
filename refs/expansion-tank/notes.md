@@ -18,5 +18,5 @@ No photos used. Facts below are from memory and **unverified**. Layout comment i
 - Checked in full-engine intake shot: sits beside the radiator, no clash seen. Not checked close-up.
 
 ## Still off
-- Spigots are not tied to hoses.js (no hose attaches); radiator nipple at z 70 may not meet a spigot (spigot x -15, y +-14 vs nipple y 34 world offset).
+- hoses.js now has two thin hoses (r 2.4) from the tank spigots: lower to the lower-hose neck, upper up to the radiator top tank (bleed). Routes guessed; seen only in a front close-up (the lower one drops past the tank, the upper one is hidden behind it). The radiator nipple at z 70 butts against the tank wall, not a spigot.
 - No level markings, no bracket to the radiator, dimensions from memory (no photos).

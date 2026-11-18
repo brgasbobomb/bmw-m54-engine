@@ -33,5 +33,10 @@ export function build(c) {
     up(LEN / 2 + 76, radY - 39, 62),
     up(LEN / 2 + 90, radY - 38, 65)
   ]);
+  // Expansion-tank hoses (thin, 2.4 radius): tank spigots at world (220, radY+34±14, 81), see expansion-tank.js.
+  // Lower = coolant feed to the lower-hose neck, upper = bleed up to the radiator top tank.
+  const thin = pts => detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 24, 2.4, 8, false), matHose), hosesGrp);
+  thin([up(218, radY + 20, 81), up(219, radY + 4, 78), up(224, radY - 22, 72), up(230, radY - 30, 66)]);
+  thin([up(218, radY + 48, 81), up(219, radY + 56, 78), up(226, radY + 64, 72), up(232, radY + 64, 66)]);
   reg(hosesGrp, 'thermostat');
 }
