@@ -124,3 +124,19 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - Still off: the task mentioned "domes", but the code already had tube runners (no domes were found); the runners are
   still round tubes, not flattened ovals; hammerhead plenum not modelled; DISA size/position by eye; checked in one
   intake-side shot only, not close-up.
+
+## Photo overlay comparison (2026-11-18, `src/overlay.js`, "Overlay" checkbox bottom-left of the viewport)
+Compared the model at the "Photo angle" preset against the stand photo (one headless shot at 640 px wide, so rough).
+Biggest differences, worst first:
+1. Plenum/runner shape: photo has six fat, flattened oval humps joined into a hammerhead shell with a straight weld-seam
+   rail along the outer edge; model has round tubes in a plain box, so the whole intake reads thinner and lower.
+2. Valve cover / coil row: photo cover is much larger and taller (big oil-filler cap, coil-over-plug towers, fuel-rail
+   strip with pink connector tabs below it); model's head side is flatter and the rail strip/pink tabs are missing.
+3. Inlet boot: photo boot is a short fat elbow dropping down and forward at the front end, clearly bigger than the
+   throttle body; model boot is slimmer and sits higher/further forward.
+4. Front accessories (alternator, pulley area) sit lower-left in the photo; model's are further out in frame.
+5. Stand, wiring harness and ground are not modelled (expected).
+Preset camera dir is (0.5, 1, -1.1) from the current target at the current distance; tune it in `overlay.js` if the
+photo's FOV/roll needs a closer fit.
+
+- Still off: overlay only checked in one narrow-window shot; preset angle is by eye, not solved from the photo.

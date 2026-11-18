@@ -1,5 +1,6 @@
 import { buildProceduralEngine } from './parts/index.js';
 import { initExplode, explodedPosition } from './explode.js';
+import { initOverlay } from './overlay.js';
 
 // BMW M54 Engine 3D Model - Consolidated App
 // All code in one file to avoid module resolution issues in Electron
@@ -929,6 +930,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       try {
         console.log('Initializing scene...');
         scene = new Scene(canvasContainer);
+        initOverlay(canvasContainer, scene);
 
         console.log('Loading parts database...');
         const partsDatabase = await loadPartsDatabase();
