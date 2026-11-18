@@ -91,14 +91,16 @@ export function build(c) {
 
   // Head flange; collar nuts in two rows, in the slots and past each end. A web under each slot closes the
   // dark pocket seen from above.
-  detail(roundedBox(run + W + 24, 27, 4, 1.5, matIntake), intakeGrp).position.set(xm, headY + 5, zF + 1);   // bottom 1 over the oil filter
+  detail(roundedBox(run + W + 24, 30, 4, 1.5, matIntake), intakeGrp).position.set(xm, headY + 5, zF + 1);   // bottom 1 over the oil filter
   const nutGeo = new T.CylinderGeometry(2.9, 2.9, 2.4, 6), collarGeo = new T.CylinderGeometry(3.5, 3.5, 0.8, 16);
   // Port bosses: raised bevelled ovals around each port (user photos: bumps around each port; oval ports, 7 bolts alternating high/low between and outside the ports)
   const rimShape = new T.Shape().absellipse(0, 0, 17, 12, 0, Math.PI * 2);
   rimShape.holes.push(new T.Path().absellipse(0, 0, 12.4, 9.2, 0, Math.PI * 2, true));
   const rimGeo = new T.ExtrudeGeometry(rimShape, { depth: 3, bevelEnabled: true, bevelThickness: 1.2, bevelSize: 1.2, bevelSegments: 3, curveSegments: 24 });
+  const skirtGeo = new T.CylinderGeometry(0.85, 1, 2.4, 40, 1, true).rotateX(Math.PI / 2).scale(22, 15, 1);   // elliptical frustum, wide end on the flange
   for (let i = 0; i < 6; i++) {
     detail(new T.Mesh(rimGeo, matIntake), intakeGrp).position.set(cx(i), headY + 5, zF + 3);
+    detail(new T.Mesh(skirtGeo, matIntake), intakeGrp).position.set(cx(i), headY + 5, zF + 4.2);   // shoulder: flange face -> boss wall
   }
   [cx(0) - W / 2 - 6, ...gaps, cx(5) + W / 2 + 6].forEach((x, k) => { const y = k % 2 ? -3.5 : 13.5;
     for (const [geo, z] of [[nutGeo, 5.4], [collarGeo, 4.2]]) {

@@ -162,3 +162,8 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (lobe blend along X): each lobe's inner end face now has a concave fillet (10 long, up 40 -> plenum top 22) swept across the lobe's
   out range (`ehFil` in intake.js; mirrored with scale.x -1 at the +X end). Seen in a zoomed `top --focus` shot (left lobe shows the swoop).
   Sides of the fillet (out direction) end flat, not tapered; the fillet overlaps the end runners' drop slightly (same material).
+
+- 2026-11-18 (boss shoulders): each port boss now sits on an elliptical frustum skirt (`skirtGeo`: 44×30 at the flange face tapering to ~37×25
+  over 2.4) so the boss wall sweeps into the flange instead of stepping; flange slab raised 27 -> 30 to hold it. Seen in a cropped top shot
+  (shoulder visible around runner bases). Skirt top is slightly wider than the boss in X and narrower in Y, so a faint lip remains; skirts
+  and bosses still aren't tilted with the 30° runners.
