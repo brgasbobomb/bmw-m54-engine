@@ -57,6 +57,18 @@ npm start
 
 This will launch the Electron application with the BMW M54 engine 3D model.
 
+### In a plain browser
+
+```bash
+npm run serve   # http://localhost:8080 (optional: npm run serve -- 3000)
+```
+
+No build step: `index.html` loads everything from the repo (Three.js and its addons are vendored under `vendor/`, all paths are relative). `src/main.js` is the only Electron-specific file and the page never touches it.
+
+### Deploy to GitHub Pages
+
+Push the repo, then Settings → Pages → Source: *Deploy from a branch*, branch `main`, folder `/ (root)`. The site is served at `https://<user>.github.io/<repo>/`. `node_modules/` is not needed. Large `models/*.glb` files count toward Pages' 1 GB limit.
+
 ## Project Structure
 
 ```

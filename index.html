@@ -6,13 +6,11 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
   <title>BMW M54 Engine 3D Model</title>
   <link rel="stylesheet" href="styles/main.css">
-  <!-- vendor/addons has no controls/ or postprocessing/, so those come from the installed three (same r160) -->
+  <!-- everything is vendored (r160) so the page works from any static host, no node_modules -->
   <script type="importmap">
   {
     "imports": {
       "three": "./vendor/three.module.js",
-      "three/addons/controls/": "./node_modules/three/examples/jsm/controls/",
-      "three/addons/postprocessing/": "./node_modules/three/examples/jsm/postprocessing/",
       "three/addons/": "./vendor/addons/"
     }
   }
