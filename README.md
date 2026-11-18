@@ -4,6 +4,11 @@ An interactive 3D visualization of a BMW M54 inline-6 engine that lets you progr
 disassemble the engine by removing individual parts one by one. Ships with a built-in
 procedural M54, and can load any real `.glb` engine model at runtime.
 
+![Exhaust side](docs/overview.png)
+![Intake side](docs/overview-intake.png)
+
+*Screenshots: `npm run shot -- exhaust` / `intake` (software-rendered, so lighting is flatter than on a real GPU).*
+
 ## Features
 
 ✅ **Built-in procedural M54** - 30+ parts (block, head, crankshaft, intake/exhaust, cooling, oil, ignition, accessories) with rounded cast-metal geometry, studio lighting, image-based reflections, and contact shadows
