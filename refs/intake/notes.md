@@ -266,3 +266,8 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   pulleys 86, block 83, alternator 52, power-steering pump 32 (was 18). Boot is now a short elbow (throttle at the front end -> MAF just forward and a little lower),
   as in the photo; checked in `shot intake --focus airbox`. The airbox now sits at about the coolant tank's height beside it (16.8 apart in depth); the overlay
   window did not show it (off-frame). Not checked: boot hoop/rib spacing on the shorter run, idle hose length.
+
+- 2026-11-18 (idle hose check): the corrugated hose runs boot rear side (x -14 of the bore, out b0+2) -> out to ~112 -> under the plenum -> the idle valve's rear end:
+  polyline ≈ 81 long (tube r 2.8, ≈ 15 hose diameters); its last point equals the valve's rear end (xT-47, up pl.u0-8, out 66), i.e. 0 gap, valve top
+  touches the plenum floor (r 5 at up -11). Seen in `shot below|front --only intake-manifold --focus`: leaves the boot, loops under the plenum, meets the valve.
+  No code change. Long for a real idle hose; the photo doesn't show the underside, so the length is unverified. The corrugation rings follow the curve.
