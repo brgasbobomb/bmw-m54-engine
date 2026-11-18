@@ -32,6 +32,17 @@ export function build(c) {
   plenum.rotation.y = -Math.PI / 2;           // shape x -> out, extrusion -> x
   plenum.position.x = xm;
 
+  // Hammerhead: both plenum ends turn up on the outer side (stand photo), beside the end runners
+  const eh = { o0: 58, o1: pl.o1 + 2, u0: 12, u1: 52 }, ehD = 9;
+  const ehShape = new T.Shape().moveTo(eh.o0, eh.u0).lineTo(eh.o1, eh.u0).lineTo(eh.o1, eh.u1 - 8)
+    .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - 8, eh.u1).lineTo(eh.o0 + 8, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - 8).lineTo(eh.o0, eh.u0);
+  const ehGeo = new T.ExtrudeGeometry(ehShape, { depth: ehD, bevelEnabled: true, bevelThickness: 2, bevelSize: 2, bevelSegments: 3, curveSegments: 8 });
+  for (const s of [-1, 1]) {
+    const e = detail(new T.Mesh(ehGeo, matIntake), car);
+    e.rotation.y = -Math.PI / 2;
+    e.position.x = s > 0 ? xm + PX / 2 - 2 : xm - PX / 2 + ehD + 2;   // extrusion runs toward -x; outer face flush with the plenum end
+  }
+
   // Runners: flattened-oval tubes (r 7, x2: 28 wide, 14 thick) off the port rising 30 deg, over the crest, down the outer
   // side, ending inside the plenum. The outer drop stands ~5 proud of the plenum wall, as the ribbed outer face.
   const path = new T.CatmullRomCurve3([[-2, 4.5], [10, 13], [22, 33], [36, 40], [58, 40], [78, 35], [91, 21], [88, 7], [72, 6]]

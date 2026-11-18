@@ -145,3 +145,7 @@ photo's FOV/roll needs a closer fit.
   Crest raised 3 so the top stays ≈ 47 (ribs/spine/stubs unchanged); outer drop centre moved to out 91 to stay ~5 proud of
   the plenum wall. Checked in one intake-side shot only (humps read as flat ovals); no close-up, rib fit on the thinner top not checked.
 - Still off: hammerhead plenum, flange bumps around ports, runner section is constant (photo humps swell toward the crest).
+
+- 2026-11-18 (hammerhead): two upturned end lobes added to the plenum (out 58…92, up 12…52, 9 thick, flush with each plenum end, beside
+  the end runners; `eh`/`ehGeo` in intake.js). Rough: size/height by eye from the stand photo, one start-view shot only, front lobe not
+  seen clearly. Still off: lobes are plain slabs (photo's ends blend into the plenum with a smooth curve), flange bumps around ports.
