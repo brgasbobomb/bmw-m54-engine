@@ -14,8 +14,9 @@ No photos used; shape from memory of an E46 manual (Getrag) housing. Dimensions 
 - Rear and below checked 2026-11-18: round flanged bell, bolt heads evenly spaced, flywheel ring gear and clutch face visible from behind; no clipping with block or oil pan seen. Starter boss still not clearly seen from these angles.
 
 ## Still off
-- Starter boss not clearly visible in the shot; check the starter nose really enters the shell.
 - Ribs look like diagonal stripes, not cast ribs; wall looks too thin/wavy from some angles.
 - No inspection cover, clutch slave cylinder bore, bolt-hole pattern or locating dowels; real housing is much wider at the bottom and closed by the gearbox.
 - Block lugs/pad vs front ring: no clip seen from rear/below, not checked close-up.
 - 2026-11-18: `--focus` now picks the clearest side itself (raycast), so the starter close-up works from any view. From the side it shows the starter body running alongside the bell, nose at the front flange ring; still can't say the nose enters the shell (boss hidden). Check from `below` or `rear` with `--focus starter-motor`.
+
+- Starter boss checked 2026-11-18 (`--focus starter-motor` from below/rear, auto side): the round boss sits on the bell where the starter nose meets the front flange; the nose enters it. Resolved.
