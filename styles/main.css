@@ -355,3 +355,8 @@ canvas {
   box-shadow: none;
   transform: scale(1);
 }
+
+/* Repair job */
+#job-select { width: 100%; margin-bottom: 8px; padding: 6px; background: #3a3a3a; color: #eee; border: 1px solid #555; border-radius: 4px; }
+.controls-section .btn:disabled { opacity: 0.4; cursor: default; }
+#job-step { display: block; margin: 6px 0 12px; font-size: 12px; color: #bbb; }
