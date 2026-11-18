@@ -39,10 +39,16 @@ export function build(c) {
     .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - 8, eh.u1).lineTo(eh.o0 + 8, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - 8)
     .lineTo(eh.o0, 38).bezierCurveTo(eh.o0, 26, eh.o0 - 8, pl.u1, eh.o0 - 22, pl.u1).lineTo(eh.o0 - 22, eh.u0).lineTo(eh.o1, eh.u0);
   const ehGeo = new T.ExtrudeGeometry(ehShape, { depth: ehD, bevelEnabled: true, bevelThickness: ehB, bevelSize: ehB, bevelSegments: 5, curveSegments: 12 });
+  const ehFil = new T.ExtrudeGeometry(new T.Shape().moveTo(0, 16).lineTo(0, 40).bezierCurveTo(0, 28, 3, pl.u1, 10, pl.u1).lineTo(10, 16).lineTo(0, 16),
+    { depth: eh.o1 - eh.o0 - 8, bevelEnabled: false, curveSegments: 12 });
   for (const s of [-1, 1]) {
     const e = detail(new T.Mesh(ehGeo, matIntake), car);
     e.rotation.y = -Math.PI / 2;
     e.position.x = s > 0 ? xm + PX / 2 - ehB : xm - PX / 2 + ehD + ehB;   // extrusion runs toward -x; outer face flush with the plenum end
+    // concave fillet along X: the lobe's inner end face sweeps down into the plenum top (shape x = inward distance d)
+    const f = detail(new T.Mesh(ehFil, matIntake), car);
+    f.position.set(s > 0 ? xm + PX / 2 - ehD - 2 * ehB : xm - PX / 2 + ehD + 2 * ehB, 0, eh.o0 + 4);
+    f.scale.x = s > 0 ? -1 : 1;
   }
 
   // Runners: flattened-oval tubes (r 7, x2: 28 wide, 14 thick) off the port rising 30 deg, over the crest, down the outer

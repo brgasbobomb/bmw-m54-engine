@@ -158,3 +158,7 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (lobe blend): hammerhead lobe profile now has a concave fillet sweeping from its inner wall (out 58, up 38) down into the
   plenum top (up 22) at out 36, and 3.5 bevel on the end faces (was 2; depth 5). Seen from the rear end (`rear --focus`): lobe + plenum
   read as one silhouette. Not blended along X (end face still steps in beside the end runner); oblique views barely show the fillet.
+
+- 2026-11-18 (lobe blend along X): each lobe's inner end face now has a concave fillet (10 long, up 40 -> plenum top 22) swept across the lobe's
+  out range (`ehFil` in intake.js; mirrored with scale.x -1 at the +X end). Seen in a zoomed `top --focus` shot (left lobe shows the swoop).
+  Sides of the fillet (out direction) end flat, not tapered; the fillet overlaps the end runners' drop slightly (same material).
