@@ -27,3 +27,16 @@ Catalog `image_36.jpg` (Z4 M54 bay from the front-left, viewed). Findings below;
   from the intake side that it meets the throttle flange cleanly.
 - Explode view at 100% not viewed; distances reduced by calculation only.
 - Airbox lid detail (filter cover ribs, snorkel route, MAF plug direction) by eye only.
+
+## 2026-11-18 user photos (E46/X3 airbox, DISA, intake, cats; seen once, don't re-open)
+- Airbox: big flat rounded-rectangle lid plate over a shallower lower housing, clips on the seam, ribbed round outlet
+  neck on the side face, slatted grille low on one end, cold-air snorkel elbow rising from the top corner, flat
+  mounting tab with two bolts under the box. Added: lid plate, 3 neck rings, 5 slats, snorkel elbow, tab + 2 bolts.
+- Intake (not yet reworked): runners are six separate arched tubes ending in a flat flange with oval ports and 7 bolts;
+  plenum is a wide hammerhead U-shape with two upturned ends; DISA is a boxy black housing on the outer wall with a
+  round actuator can. Cats (not yet reworked): flat-sided oval can with a long horizontal slot, 2-bolt flange, front bank
+  pipe has a big S-bend.
+
+## Still off (update)
+- Snorkel sits on the far (+Z−) side, not seen in the shot; lid plate and slats by eye; bottom tab not checked from below.
+- Snorkel route to the kidney grille not modelled (ends in the air at y 78).

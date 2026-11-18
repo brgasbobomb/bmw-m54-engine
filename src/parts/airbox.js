@@ -33,6 +33,14 @@ export function build(c) {
     clip.rotation.y = Math.PI / 2;
     clip.position.set(A.x1 + 2, seam, A.z0 + f * ad);
   }
-  detail(roundedBox(12, 16, 30, 3, matIntake), ab).position.set(A.x1 + 4, 20, A.z1 - 26);
+  // From the photos (refs/airbox/notes.md): flat lid plate proud of the box, ribbed outlet neck, grille slats low on
+  // the front, cold-air snorkel elbow rising from the front face, mounting tab with two bolts under the box.
+  detail(roundedBox(aw - 8, A.y1 - seam - 4, 2.5, 4, matIntake), ab).position.set(ax, (seam + A.y1) / 2, A.z1 + 1.2);
+  for (const dx of [-3, 0, 3]) detail(new T.Mesh(new T.TorusGeometry(18.6, 0.9, 6, 28).rotateY(Math.PI / 2), matIntake), ab).position.set(A.x0 - 3 + dx, y, z);
+  for (let i = 0; i < 5; i++) detail(new T.Mesh(new T.BoxGeometry(1.4, 8, ad - 24), matIntake), ab).position.set(A.x1 + 0.8, A.y0 + 8 + i * 3.5, az);
+  const sn = new T.CatmullRomCurve3([new T.Vector3(A.x1 - 2, 42, A.z0 + 14), new T.Vector3(A.x1 + 14, 46, A.z0 + 14), new T.Vector3(A.x1 + 24, 62, A.z0 + 14), new T.Vector3(A.x1 + 26, 78, A.z0 + 14)]);
+  detail(new T.Mesh(new T.TubeGeometry(sn, 20, 10, 16, false), matIntake), ab);
+  detail(roundedBox(30, 3, 16, 2, matIntake), ab).position.set(ax, A.y0 - 1.5, az);
+  for (const dx of [-10, 10]) detail(new T.Mesh(new T.CylinderGeometry(2.4, 2.4, 3, 8), matSteelDk), ab).position.set(ax + dx, A.y0 - 3, az);
   reg(ab, 'airbox', false);
 }
