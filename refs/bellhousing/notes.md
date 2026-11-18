@@ -11,8 +11,10 @@ No photos used; shape from memory of an E46 manual (Getrag) housing. Dimensions 
 ## Checked
 - 2026-11-18 (session 1): one intake close-up (`npm run shot -- intake --focus bellhousing --zoom 1`). Reads as a bell behind the block with flanges; flywheel no longer bare.
 
+- Rear and below checked 2026-11-18: round flanged bell, bolt heads evenly spaced, flywheel ring gear and clutch face visible from behind; no clipping with block or oil pan seen. Starter boss still not clearly seen from these angles.
+
 ## Still off
 - Starter boss not clearly visible in the shot; check the starter nose really enters the shell.
 - Ribs look like diagonal stripes, not cast ribs; wall looks too thin/wavy from some angles.
 - No inspection cover, clutch slave cylinder bore, bolt-hole pattern or locating dowels; real housing is much wider at the bottom and closed by the gearbox.
-- Not checked from the rear or below; block.js lugs/pad at the flange may clip the front ring.
+- Block lugs/pad vs front ring: no clip seen from rear/below, not checked close-up.
