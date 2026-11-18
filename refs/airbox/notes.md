@@ -52,3 +52,12 @@ Catalog `image_36.jpg` (Z4 M54 bay from the front-left, viewed). Findings below;
   bolt tab with two rubber grommets on the neck end. No snorkel tube on the box itself — removed it.
 - Modelled: box x ≈ 0.36 × cover length, y 0…66 (seam 54, lid 66…69), extruded side profile.
 - Still off: the box bottom (y 0) not checked against the subframe/radiator; lid not tilted; grommet tab position by eye.
+
+## 2026-11-18 (4th pass, user-granted exemption from rule 9)
+- Lower housing now tapers across Z toward the bottom (vertex scale 0.72 at y0 → 1 at the seam).
+- Lid: black overhanging plate + raised rim + dark inset, tilted −4° toward the far end, bracket on the neck-end corner.
+- Outlet: flat 46×46 boss on the end face, neck 16 long with two ribs, clamp at A.x0−15.
+- Inlet: deep ribbed block 10 proud of the far end (7 fins); inner side has a dark recessed panel; mounting arm with
+  grommet reaches down under the neck end.
+- Still off: lid top reads light grey under top light; arm and grommet tab placement by eye; bottom (y0 0, arm to −25)
+  not clearance-checked against subframe/radiator.

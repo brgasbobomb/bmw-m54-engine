@@ -31,13 +31,31 @@ export function build(c) {
   prof.quadraticCurveTo(A.x0, A.y0, A.x0, A.y0 + 12);
   prof.closePath();
   const lower = new T.ExtrudeGeometry(prof, { depth: ad - 6, bevelEnabled: true, bevelSize: 2, bevelThickness: 2, bevelSegments: 2, curveSegments: 10 });
-  detail(new T.Mesh(lower.translate(0, 0, A.z0 + 3), matIntake), ab);
+  lower.translate(0, 0, A.z0 + 3);
+  // taper: the housing narrows across Z toward the bottom (photos: sloping sides, not a slab)
+  const pos = lower.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const t = (pos.getY(i) - A.y0) / (seam - A.y0);
+    pos.setZ(i, az + (pos.getZ(i) - az) * (0.72 + 0.28 * t));
+  }
+  lower.computeVertexNormals();
+  detail(new T.Mesh(lower, matIntake), ab);
   detail(roundedBox(aw + 2, A.y1 - seam, ad + 2, 4, matIntake), ab).position.set(ax, (seam + A.y1) / 2, az);   // upper shell
   detail(roundedBox(aw + 5, 3, ad + 5, 1.5, matIntake), ab).position.set(ax, seam, az);                       // seam lip
-  detail(roundedBox(aw + 10, 3, ad + 10, 3, matIntake), ab).position.set(ax, A.y1 + 1.5, az);                 // lid plate
-  detail(new T.Mesh(alongX(new T.CylinderGeometry(18, 19, 12, 28)), matIntake), ab).position.set(A.x0 - 6, y, z);
-  detail(new T.Mesh(new T.TorusGeometry(20.5, 1.6, 8, 28).rotateY(Math.PI / 2), matSteelDk), ab).position.set(A.x0 - 8, y, z);   // clamp: MAF flange to airbox neck
-  for (const dx of [-3, 0, 3]) detail(new T.Mesh(new T.TorusGeometry(18.6, 0.9, 6, 28).rotateY(Math.PI / 2), matIntake), ab).position.set(A.x0 - 3 + dx, y, z);
+  // lid: overhanging plate tilted down toward the far end, raised rim, bracket on the neck-end corner
+  const lid = new T.Group();
+  detail(roundedBox(aw + 12, 3, ad + 12, 3, matCover), lid);
+  detail(roundedBox(aw + 6, 2, ad + 6, 2, matCover), lid).position.y = 2;
+  detail(roundedBox(aw - 10, 1.5, ad - 10, 2, matCoil), lid).position.y = 3.5;
+  detail(roundedBox(16, 8, 10, 1.5, matCover), lid).position.set(-aw / 2 + 6, 6, ad / 2 - 8);
+  lid.position.set(ax, A.y1 + 2, az);
+  lid.rotation.z = -0.07;
+  ab.add(lid);
+  // outlet: flat boss on the end face, long ribbed neck
+  detail(roundedBox(4, 46, 46, 4, matIntake), ab).position.set(A.x0 - 2, y, z);
+  detail(new T.Mesh(alongX(new T.CylinderGeometry(18, 20, 16, 28)), matIntake), ab).position.set(A.x0 - 10, y, z);
+  detail(new T.Mesh(new T.TorusGeometry(20.5, 1.6, 8, 28).rotateY(Math.PI / 2), matSteelDk), ab).position.set(A.x0 - 15, y, z);   // clamp: MAF flange to airbox neck
+  for (const dx of [-8, -5]) detail(new T.Mesh(new T.TorusGeometry(19.8, 1.2, 6, 28).rotateY(Math.PI / 2), matIntake), ab).position.set(A.x0 + dx, y, z);
   const clipGeo = new T.BoxGeometry(8, 12, 3);
   for (const f of [0.2, 0.5, 0.8]) for (const zz of [A.z0 - 2, A.z1 + 2]) detail(new T.Mesh(clipGeo, matSteelDk), ab).position.set(A.x0 + f * aw, seam, zz);
   for (const f of [0.3, 0.7]) {
@@ -45,11 +63,20 @@ export function build(c) {
     clip.rotation.y = Math.PI / 2;
     clip.position.set(A.x1 + 3, seam, A.z0 + f * ad);
   }
-  // louvred inlet: stepped slats low on the far end, each one longer than the one above
-  for (let i = 0; i < 6; i++) detail(new T.Mesh(new T.BoxGeometry(4 + i * 1.2, 1.6, ad - 20), matIntake), ab).position.set(A.x1 + 1 + i * 0.6, A.y0 + 30 + i * 3.4, az);
-  detail(roundedBox(14, seam - 14, 5, 2, matIntake), ab).position.set(ax + 6, (seam + 14) / 2, A.z1 + 1.5);    // channel rib, outer side
+  // louvred inlet: deep ribbed block standing proud of the far end, upper half
+  const ix = A.x1 + 5, iy = A.y0 + 40, ih = 26, iw = ad - 22;
+  detail(roundedBox(10, ih, iw, 2, matIntake), ab).position.set(ix, iy, az);
+  for (let i = 0; i < 7; i++) detail(new T.Mesh(new T.BoxGeometry(4, 1.6, iw - 4), matCover), ab).position.set(ix + 6, iy - ih / 2 + 2.5 + i * 3.5, az);
+  // outer side: vertical channel rib; inner side: recessed panel
+  detail(roundedBox(14, seam - 14, 5, 2, matIntake), ab).position.set(ax + 6, (seam + 14) / 2, A.z1 + 1.5);
   detail(roundedBox(4, seam - 18, 2, 1, matCover), ab).position.set(ax + 6, (seam + 14) / 2, A.z1 + 4);
-  detail(roundedBox(3, 26, 30, 1.5, matIntake), ab).position.set(A.x0 - 1.5, 22, A.z1 - 18);                  // bolt tab on the MAF end
-  for (const dz of [-8, 8]) detail(new T.Mesh(alongX(new T.CylinderGeometry(4, 4, 4, 12)), matCoil), ab).position.set(A.x0 - 3, 22, A.z1 - 18 + dz);
+  detail(roundedBox(aw * 0.5, 22, 2, 2, matCoil), ab).position.set(ax - 4, seam - 16, A.z0 + 1.5);
+  // mounting: bolt tab with grommets on the neck end, arm reaching down from the bottom
+  detail(roundedBox(3, 26, 30, 1.5, matIntake), ab).position.set(A.x0 - 1.5, 18, A.z1 - 14);
+  for (const dz of [-8, 8]) detail(new T.Mesh(alongX(new T.CylinderGeometry(4, 4, 4, 12)), matCoil), ab).position.set(A.x0 - 3, 18, A.z1 - 14 + dz);
+  const arm = detail(roundedBox(8, 30, 3, 1, matIntake), ab);
+  arm.position.set(A.x0 + 18, A.y0 - 10, az + 10);
+  arm.rotation.z = 0.35;
+  detail(new T.Mesh(new T.CylinderGeometry(3.5, 3.5, 4, 12).rotateX(Math.PI / 2), matCoil), ab).position.set(A.x0 + 23, A.y0 - 23, az + 10);
   reg(ab, 'airbox', false);
 }
