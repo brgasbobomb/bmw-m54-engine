@@ -221,3 +221,7 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (ridge/spine junction): ridge legs now extend to out 39 so they end inside the spine instead of butting its face, and the spine is a
   `roundedBox` (r 1.3, 3.4 tall) instead of a sharp box. Seen in a zoomed oblique shot: the lips run into the spine cleanly, no stubs or gaps.
   The spine is still a plain straight bar (photo: a continuous moulded spine); its ends past runners 0 and 5 not inspected.
+
+- 2026-11-18 (spine ends): spine bar is now run + 10 long with a half-ellipsoid cap (6 × 1.7 × 3.5) at each end, so it rounds off in plan and height instead of ending
+  square 3 short of the outer runners' edges; same overall length as before. Seen in a zoomed oblique shot (both ends round, no stubs). Close-up of the
+  cap-to-bar seam not inspected; spine is still a plain bar between the caps.
