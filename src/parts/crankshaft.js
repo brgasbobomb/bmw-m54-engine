@@ -4,7 +4,7 @@ export function build(c) {
   const { T, matSteel, matSteelDk, reg, detail, LEN, blockY, cx, span } = c;
   const crankGrp = new T.Group();
   const axisY = blockY - 6;
-  const crankThrow = 12;
+  const crankThrow = 89.6 / 2 * c.MM; // stroke 89.6 mm
   const angles = [0, 2 * Math.PI / 3, 4 * Math.PI / 3, 4 * Math.PI / 3, 2 * Math.PI / 3, 0]; // standard I6 crank configuration
   const webT = 6, pinLen = 14, webOff = pinLen / 2 + webT / 2;
 

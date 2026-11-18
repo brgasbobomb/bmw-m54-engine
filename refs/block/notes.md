@@ -70,6 +70,11 @@ Before: deck was at crank+42 (blockY+36) and HEAD_H 34, i.e. block about 45 % an
 - Knock sensors (y blockY+1) and mount arms (blockY-4) now sit in the lower third of a much taller block.
 
 ## Still off (block)
-- Pistons/rods/crank throw undersized (see above).
 - Head height 140 mm unconfirmed; BW and COVER_H never measured.
 - Parts above may float or stretch: hoses, timing chain, front drive vs head, airbox/radiator heights — not checked visually except one intake-side shot.
+
+## Bottom end to spec (2026-11-18)
+crankshaft.js crankThrow = 20.0 (89.6/2 mm), pistons-rods.js rodLen = 60.3 (135 mm), crown raised to 13.94 above pin (31.2 mm).
+Computed: TDC crown y 88.29 = deck (flush); BDC crown 48.3, BDC skirt 21.3 vs counterweight top 16 (5 clear); crankpin boss bottom -36.0
+= skirt bottom; rod cap bottom -38.5 (below skirt, above pan top -42). Explode shot renders; pistons not visible in it (inside block).
+- Still off: crank web bosses (bx 10) now touch the skirt bottom line; rod caps swing ~2.5 below the skirt into the pan gap (realistic, unchecked visually).

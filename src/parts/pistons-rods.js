@@ -4,7 +4,7 @@ export function build(c) {
   const { T, matAlu, matSteel, matSteelDk, reg, detail, blockY, cx, crankThrow, angles } = c;
   const pistonsGrp = new T.Group();
   const rodsGrp = new T.Group();
-  const rodLen = 52, pinR = 4.5, crankPinR = 8, bigW = 13, smallW = 14;
+  const rodLen = 135 * c.MM, pinR = 4.5, crankPinR = 8, bigW = 13, smallW = 14;
   const PR = 17;
 
   const matAluDS = matAlu.clone(); matAluDS.side = T.DoubleSide;
@@ -12,8 +12,9 @@ export function build(c) {
   const matDark = new T.MeshStandardMaterial({ color: 0x2a2a2d, roughness: 0.8 });
 
   // Piston body: lathe profile (r, y) with crown dish, lands, 3 ring grooves, hollow skirt. y = 0 at the wrist-pin axis.
-  const grooves = [8.5, 6.1, 3.7], gH = 1.3, gR = 15.3, lR = PR - 0.4;
-  const prof = [[0, 10], [6.5, 10], [8.5, 11.2], [PR - 2.5, 11.2], [PR - 0.6, 10.6], [lR, 10.2]];
+  const CH = 31.2 * c.MM - 11.2; // raise crown + ring belt: compression height 31.2 mm (211 - 44.8 - 135)
+  const grooves = [8.5 + CH, 6.1 + CH, 3.7 + CH], gH = 1.3, gR = 15.3, lR = PR - 0.4;
+  const prof = [[0, 10], [6.5, 10], [8.5, 11.2], [PR - 2.5, 11.2], [PR - 0.6, 10.6], [lR, 10.2]].map(([r, y]) => [r, y + CH]);
   grooves.forEach(y => prof.push([lR, y + gH / 2], [gR, y + gH / 2], [gR, y - gH / 2], [lR, y - gH / 2]));
   prof.push([PR, 1.8], [PR, -13], [PR - 1.8, -13], [PR - 1.8, 1.5], [PR - 3, 1.5], [0, 1.5]);
   const pistonGeo = new T.LatheGeometry(prof.map(([r, y]) => new T.Vector2(r, y)), 32);
@@ -75,7 +76,7 @@ export function build(c) {
     // 4 valve reliefs (2 intake +Z, 2 exhaust -Z), dark pockets in the crown
     [[-1, 1], [1, 1], [-1, -1], [1, -1]].forEach(([sx, sz]) => {
       const v = detail(new T.Mesh(new T.CylinderGeometry(4.6, 4.6, 0.3, 20), matDark), pg);
-      v.scale.set(1, 1, 0.8); v.position.set(sx * 7.5, 11.25, sz * 8.5);
+      v.scale.set(1, 1, 0.8); v.position.set(sx * 7.5, 11.25 + CH, sz * 8.5);
       v.rotation.set(sz * 0.12, 0, -sx * 0.12);
     });
     detail(pg, pistonsGrp);
