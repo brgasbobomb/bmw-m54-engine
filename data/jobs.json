@@ -32,5 +32,15 @@
       "radiator",
       "serpentine-belt"
     ]
+  },
+  "valve-cover-gasket": {
+    "name": "Valve cover gasket",
+    "target": "cylinder-head",
+    "remove": [
+      "airbox",
+      "maf-sensor",
+      "ccv",
+      "ignition-coils"
+    ]
   }
 }
