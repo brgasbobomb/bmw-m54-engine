@@ -212,3 +212,8 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (oblique rib check): new `npm run shot -- oblique --only intake-manifold --focus intake-manifold --zoom 2.5` (dir 0.7, 0.7, 0.6: front/head side, high).
   Shows the runner tops in relief: U-ribs read as raised tubes seated on each runner (round end toward the head, legs ~17 apart), nipples inside the U's,
   spine strip across the crests. No floating ribs. Ribs look a little proud/round next to the photo's low double ridge (already listed above).
+
+- 2026-11-18 (double ridge): each runner's single r 1.6 U rib is now two thin r 0.9 U ridges (legs ±10.7 and ±6.3, half sunk, `ridge(w)` in intake.js), so
+  the top reads as a low strip with a lip on each edge like the stand photo/image_31. Seen in `shot oblique` (zoomed): two concentric lips on every
+  runner, nipple inside the inner U. Spine unchanged (3×7 strip); the spine/ridge junction and the lips' ends at out 36 not inspected.
+  (The shot tool's --focus framing is flaky: if the result is a different view, rerun.)

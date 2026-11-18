@@ -149,14 +149,18 @@ export function build(c) {
     }
     return best;
   };
-  const uPts = [];
-  for (let k = 0; k <= 4; k++) uPts.push([-8.5, 36 - 5 * k]);
-  for (let k = 1; k < 12; k++) { const a = Math.PI * k / 12; uPts.push([-8.5 * Math.cos(a), 16 - 8.5 * Math.sin(a)]); }
-  for (let k = 0; k <= 4; k++) uPts.push([8.5, 16 + 5 * k]);
-  const uGeo = new T.TubeGeometry(new T.CatmullRomCurve3(uPts.map(([x, o]) => new T.Vector3(x, surf(x, o) + 0.3, o))), 48, 1.6, 8, false);
+  // Double ridge (stand photo / image_31: a strip with a lip on each edge): two thin low U ribs 4.4 apart, half sunk into the skin
+  const ridge = w => {
+    const pts = [];
+    for (let k = 0; k <= 4; k++) pts.push([-w, 36 - 5 * k]);
+    for (let k = 1; k < 12; k++) { const a = Math.PI * k / 12; pts.push([-w * Math.cos(a), 16 - w * Math.sin(a)]); }
+    for (let k = 0; k <= 4; k++) pts.push([w, 16 + 5 * k]);
+    return new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(([x, o]) => new T.Vector3(x, surf(x, o) + 0.1, o))), 48, 0.9, 6, false);
+  };
+  const uGeos = [ridge(10.7), ridge(6.3)];
   const nipGeo = new T.CylinderGeometry(1.3, 1.6, 5, 8);
   for (let i = 0; i < 6; i++) {
-    detail(new T.Mesh(uGeo, matIntake), car).position.x = cx(i);
+    for (const g of uGeos) detail(new T.Mesh(g, matIntake), car).position.x = cx(i);
     detail(new T.Mesh(nipGeo, matIntake), car).position.set(cx(i), surf(0, 24) + 1.5, 24);
   }
   // Spine along the crest, half sunk into the runner tops (top 47)
