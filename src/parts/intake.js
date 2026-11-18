@@ -39,14 +39,30 @@ export function build(c) {
     .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - 8, eh.u1).lineTo(eh.o0 + 8, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - 8)
     .lineTo(eh.o0, 38).bezierCurveTo(eh.o0, 26, eh.o0 - 8, pl.u1, eh.o0 - 22, pl.u1).lineTo(eh.o0 - 22, eh.u0).lineTo(eh.o1, eh.u0);
   const ehGeo = new T.ExtrudeGeometry(ehShape, { depth: ehD, bevelEnabled: true, bevelThickness: ehB, bevelSize: ehB, bevelSegments: 5, curveSegments: 12 });
-  const ehFil = new T.ExtrudeGeometry(new T.Shape().moveTo(0, 16).lineTo(0, 40).bezierCurveTo(0, 28, 3, pl.u1, 10, pl.u1).lineTo(10, 16).lineTo(0, 16),
-    { depth: eh.o1 - eh.o0 - 8, bevelEnabled: false, curveSegments: 12 });
+  // X fillet: a lofted skin (d = inward distance from the lobe face, t along out). Its height above the plenum top fades to 0
+  // at both out ends, so the fillet tapers out instead of ending in a flat wall. Double-sided: only the top skin exists.
+  const ehFil = (() => {
+    const NU = 14, NT = 20, L = eh.o1 - eh.o0 - 8, pos = [], idx = [];
+    const bz = (u, a, b, c, d) => (1 - u) ** 3 * a + 3 * (1 - u) ** 2 * u * b + 3 * (1 - u) * u * u * c + u ** 3 * d;
+    for (let j = 0; j <= NT; j++) {
+      const t = j / NT, env = Math.sin(Math.PI * t) ** 0.6;
+      for (let k = 0; k <= NU; k++) {
+        const u = k / NU, y = bz(u, 40, 28, pl.u1, pl.u1);
+        pos.push(bz(u, 0, 0, 3, 10), pl.u1 + (y - pl.u1) * env, t * L);
+        if (j && k) { const q = j * (NU + 1) + k; idx.push(q - NU - 2, q - 1, q - NU - 1, q - 1, q, q - NU - 1); }
+      }
+    }
+    const g = new T.BufferGeometry();
+    g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals();
+    return g;
+  })();
+  const matFil = matIntake.clone(); matFil.side = T.DoubleSide;
   for (const s of [-1, 1]) {
     const e = detail(new T.Mesh(ehGeo, matIntake), car);
     e.rotation.y = -Math.PI / 2;
     e.position.x = s > 0 ? xm + PX / 2 - ehB : xm - PX / 2 + ehD + ehB;   // extrusion runs toward -x; outer face flush with the plenum end
     // concave fillet along X: the lobe's inner end face sweeps down into the plenum top (shape x = inward distance d)
-    const f = detail(new T.Mesh(ehFil, matIntake), car);
+    const f = detail(new T.Mesh(ehFil, matFil), car);
     f.position.set(s > 0 ? xm + PX / 2 - ehD - 2 * ehB : xm - PX / 2 + ehD + 2 * ehB, 0, eh.o0 + 4);
     f.scale.x = s > 0 ? -1 : 1;
   }

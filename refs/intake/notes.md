@@ -171,3 +171,7 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (boss tilt): the earlier "bosses not tilted with the 30° runners" was mostly a wrong worry. The runner's start tangent (out 12, up 8.5 in the
   car frame) is only 5.3° above the flange normal in the slanted frame (the car group's +30° cancels the slant), so bosses/skirts were already
   nearly aligned. They are now rotated by that 5.3° (`BOSS_TILT`, about X, tops toward +up). Not visible at shot scale; derived from the math only.
+
+- 2026-11-18 (lobe end tapers): the X fillet is now a lofted double-sided skin (`ehFil`, 14×20 grid, `matFil` = matIntake clone) whose height above the
+  plenum top fades with sin(πt)^0.6 along out, so it tapers to nothing at both out ends instead of ending in a flat wall. Seen in a zoomed
+  `start --focus` shot: no gaps or flat ends visible; the taper itself is subtle at that angle. The lobe's own out-direction fillet is unchanged.
