@@ -172,16 +172,16 @@ export function build(c) {
   const capGeo = new T.SphereGeometry(1, 20, 12).scale(6, 1.7, 3.5);
   for (const sgn of [-1, 1]) detail(new T.Mesh(capGeo, matIntake), car).position.set(xm + sgn * (run / 2 + 5), 46.5, 37);
 
-  // Throttle mount (3D scans): a neck under the plenum at mid-length, a little toward the front, ending in a square
-  // 4-bolt flange that faces outward; (no sheet bracket: it read as a floating panel).
-  const xT = xm + 8, uT = pl.u0 - 15, oT = 66;  // throttle bore centre (car frame); flange face at oT + 7
+  // Throttle mount (stand photo; the 3D scans put it at mid-length under the plenum): a neck on the outer wall at the front end, plenum level,
+  // ending in a square 4-bolt flange that faces outward; (no sheet bracket: it read as a floating panel).
+  const xT = xm + PX / 2 - 14, uT = (pl.u0 + pl.u1) / 2 - 1, oT = 100;  // throttle bore centre (car frame): front end, plenum level, outside the outer wall; flange face at oT + 7
   detail(roundedBox(34, 30, 22, 4, matIntake), car).position.set(xT, uT + 4, oT - 4);
   detail(roundedBox(36, 36, 3, 3, matIntake), car).position.set(xT, uT, oT + 5.5);
 
   // Idle valve under the plenum behind the throttle neck, on its rubber-mounted bracket
   const iv = detail(new T.Mesh(new T.CylinderGeometry(5, 5, 26, 14), matCover), car);
   iv.rotation.z = Math.PI / 2;
-  iv.position.set(xT - 34, uT + 2, oT - 6);
+  iv.position.set(xT - 34, pl.u0 - 8, 66);   // under the plenum, as before
 
   // Inlet boot (refs/intake/air intake hose.jpeg): one fat elbow out of the throttle body outward, bending forward
   // and rising a little to the MAF on the airbox (airbox.js builds from `bootEnd`). Radius grows from the throttle to
@@ -189,7 +189,7 @@ export function build(c) {
   // corrugated idle-air hose off its rear side to the idle valve.
   const V = (x, u, o) => new T.Vector3(x, u, o);
   const org = V(0, headY, zF).applyAxisAngle(V(1, 0, 0), -Math.PI / 6);  // car-group origin, upright engine frame
-  const bootEnd = V(28, 42, 108);                                          // MAF rear face, upright engine frame (moved 6 back, 6 up: short elbow)
+  const bootEnd = V(xm + PX / 2 + 8, 42, 128);                                          // MAF rear face, upright engine frame (moved 6 back, 6 up: short elbow)
   const e = bootEnd.clone().add(V(9, 0, 0)).sub(org), b0 = oT + 20;       // boot slips 9 over the MAF spigot
   const boot = new T.CubicBezierCurve3(V(xT, uT, b0), V(xT, uT, b0 + 10), V(e.x - 14, e.y, e.z), e);
   const TS = 48, RS = 24, rB = t => 13.6 + 3.4 * t * t * (3 - 2 * t);   // OD ≈ throttle body, flares to clamp over the MAF (r 17)
@@ -220,8 +220,8 @@ export function build(c) {
   detail(new T.Mesh(new T.BoxGeometry(10, 7, 3), matIntake), car).position.set(xT, uT - 17.5, b0 + 4);
   onBoot(new T.Mesh(new T.TorusGeometry(rB(1) + 0.3, 1.4, 6, 28), matSteelDk), 0.96);
   // Idle-air hose: corrugated, from the boot's rear side round to the idle valve's rear end
-  const icv = new T.CatmullRomCurve3([V(xT - 14, uT - 2, b0 + 8), V(xT - 28, uT - 4, b0 + 4), V(xT - 50, uT - 2, oT + 10),
-                                      V(xT - 58, uT + 2, oT - 2), V(xT - 48, uT + 2, oT - 6)]);
+  const icv = new T.CatmullRomCurve3([V(xT - 14, uT - 8, b0 + 2), V(xT - 28, uT - 16, b0 - 8), V(xT - 46, pl.u0 - 14, 92),
+                                      V(xT - 56, pl.u0 - 10, 74), V(xT - 47, pl.u0 - 8, 66)]);
   detail(new T.Mesh(new T.TubeGeometry(icv, 40, 2.8, 10, false), matIntake), car);
   const corrGeo = new T.TorusGeometry(3.1, 0.8, 5, 12);
   for (let t = 0.12; t < 0.86; t += 0.035) {

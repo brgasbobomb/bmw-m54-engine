@@ -246,3 +246,11 @@ intake side up, steep from above). Overlay at 50% and model alone, whole engine,
    widely spaced with orange connectors; its valve cover looks smaller/lower.
 5. Not in the photo (expected): radiator, fan, expansion tank, pulleys' hoses on the left; stand, harness and ground are not modelled.
 Still off: all of the above; overlay compared by eye in one render, alignment is approximate (perspective not solved).
+
+- 2026-11-18 (throttle/boot to the front, user choice after the overlay comparison; the 3D-scan mid-length position is dropped): `xT = xm + PX/2 - 14`,
+  `uT` = plenum mid-height, `oT = 100` so the neck/flange/throttle body sit on the outer wall at the front end, plenum level; idle valve stays
+  under the plenum (fixed at x xT-34, up pl.u0-8, out 66) with its hose re-routed. `bootEnd` (MAF rear face, drives airbox.js) moved to
+  `(xm + PX/2 + 8, 42, 128)` so the boot leaves forward and the airbox/MAF follow it forward and 20 further out. airbox.js itself untouched.
+  Clearance (`shot --clear airbox radiator,coolant-tank,pulleys`): was radiator 66 / tank 51; at out 108 it hit the tank (0.5), at 128: radiator 41, tank 16.8,
+  pulleys 59. Overlay: boot and throttle now land near the photo's (front, low, curving down-left). Not checked: airbox look from outside, the boot
+  shape on its new, longer-bend route, idle hose route, DISA vs the new throttle position.
