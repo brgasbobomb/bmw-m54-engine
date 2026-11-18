@@ -33,10 +33,10 @@ export function build(c) {
   plenum.position.x = xm;
 
   // Hammerhead: both plenum ends turn up on the outer side (stand photo), beside the end runners
-  const eh = { o0: 58, o1: pl.o1 + 2, u0: 12, u1: 52 }, ehD = 5, ehB = 3.5;
+  const eh = { o0: 58, o1: pl.o1 + 3, u0: 12, u1: 52 }, ehR = 14, ehD = 5, ehB = 3.5;
   // inner wall sweeps out into the plenum top (up 22) in a concave fillet instead of meeting it at a step
-  const ehShape = new T.Shape().moveTo(eh.o1, eh.u0).lineTo(eh.o1, eh.u1 - 8)
-    .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - 8, eh.u1).lineTo(eh.o0 + 8, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - 8)
+  const ehShape = new T.Shape().moveTo(eh.o1, eh.u0).lineTo(eh.o1, eh.u1 - ehR)
+    .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - ehR, eh.u1).lineTo(eh.o0 + ehR, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - ehR)
     .lineTo(eh.o0, 38).bezierCurveTo(eh.o0, 26, eh.o0 - 8, pl.u1, eh.o0 - 22, pl.u1).lineTo(eh.o0 - 22, eh.u0).lineTo(eh.o1, eh.u0);
   const ehGeo = new T.ExtrudeGeometry(ehShape, { depth: ehD, bevelEnabled: true, bevelThickness: ehB, bevelSize: ehB, bevelSegments: 5, curveSegments: 12 });
   // X fillet: a lofted skin (d = inward distance from the lobe face, t along out). Its height above the plenum top fades to 0

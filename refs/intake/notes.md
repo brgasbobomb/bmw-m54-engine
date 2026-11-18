@@ -175,3 +175,8 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (lobe end tapers): the X fillet is now a lofted double-sided skin (`ehFil`, 14×20 grid, `matFil` = matIntake clone) whose height above the
   plenum top fades with sin(πt)^0.6 along out, so it tapers to nothing at both out ends instead of ending in a flat wall. Seen in a zoomed
   `start --focus` shot: no gaps or flat ends visible; the taper itself is subtle at that angle. The lobe's own out-direction fillet is unchanged.
+
+- 2026-11-18 (lobe top edge): both top corners of the lobe profile now use radius 14 (`ehR`; was 8), so the top rolls over into the outer wall and
+  the inner fillet start (inner wall line shrank to zero); lobe outer face moved to out 93 = flush with the plenum's bevelled outer wall (was
+  2 inside, leaving a seam). Seen in a rear-end focus shot: smooth roll-over; a tiny notch remains where the lobe's outer wall meets the plenum
+  edge at the lower left of that view.
