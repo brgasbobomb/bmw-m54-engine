@@ -1,14 +1,14 @@
 // Crankshaft: 7 main journals, 6 pins, 12 webs (8 full counterweights + 4 small), snout, rear flange.
 // Counts from the RealOEM diagram, see refs/crankshaft/notes.md.
 export function build(c) {
-  const { T, matSteelDull: matSteel, matSteelDk, reg, detail, LEN, blockY, cx, span } = c;
+  const { T, matSteelDull, matSteelDk, reg, detail, LEN, blockY, cx, span } = c;
   const crankGrp = new T.Group();
   const axisY = blockY - 6;
   const crankThrow = 89.6 / 2 * c.MM; // stroke 89.6 mm
   const angles = [0, 2 * Math.PI / 3, 4 * Math.PI / 3, 4 * Math.PI / 3, 2 * Math.PI / 3, 0]; // standard I6 crank configuration
   const webT = 6, pinLen = 14, webOff = pinLen / 2 + webT / 2;
 
-  const cyl = (r, len, x, mat = matSteel, y = axisY, z = 0) => {
+  const cyl = (r, len, x, mat = matSteelDull, y = axisY, z = 0) => {
     const m = detail(new T.Mesh(new T.CylinderGeometry(r, r, len, 24), mat), crankGrp);
     m.rotation.z = Math.PI / 2;
     m.position.set(x, y, z);
@@ -36,7 +36,7 @@ export function build(c) {
 
   for (let i = 0; i < 6; i++) {
     const a = angles[i], x = cx(i);
-    cyl(8, pinLen, x, matSteel, axisY + Math.cos(a) * crankThrow, Math.sin(a) * crankThrow);
+    cyl(8, pinLen, x, matSteelDull, axisY + Math.cos(a) * crankThrow, Math.sin(a) * crankThrow);
     const geo = (i === 2 || i === 3) ? smallGeo : bigGeo; // photo: middle pins carry thin webs
     [-1, 1].forEach(o => {
       const web = detail(new T.Mesh(geo, matSteelDk), crankGrp);
@@ -58,7 +58,7 @@ export function build(c) {
   cyl(7, 6, rear - 2);
   for (let b = 0; b < 6; b++) {
     const t = b * Math.PI / 3;
-    cyl(2.5, 3, rear + 9.5, matSteel, axisY + Math.cos(t) * 17, Math.sin(t) * 17);
+    cyl(2.5, 3, rear + 9.5, matSteelDull, axisY + Math.cos(t) * 17, Math.sin(t) * 17);
   }
 
   const spin = c.spinGroup(crankGrp, axisY, 0);

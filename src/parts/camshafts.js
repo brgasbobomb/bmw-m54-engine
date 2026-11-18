@@ -1,6 +1,6 @@
 // DOHC camshafts: egg lobes (2 per cylinder per cam), 7 journals, front ends in the VANOS hub barrels.
 export function build(c) {
-  const { T, matSteelDull: matSteel, matSteelDk, reg, detail, LEN, headY, cx, span } = c;
+  const { T, matSteelDull, matSteelDk, reg, detail, LEN, headY, cx, span } = c;
   const grp = new T.Group();
   const camY = headY + 8, camZ = 18;           // same axis as the VANOS hubs (vanos.js: y = headY+4+4, z = ±18)
   const RB = 5.5, LIFT = 2.5, LW = 5;          // base circle, lift, lobe width
@@ -19,11 +19,11 @@ export function build(c) {
     const z = s * camZ, off = s > 0 ? 0 : 1.9;
     const put = (m, x) => { m.rotation.z = Math.PI / 2; m.position.set(x, camY, z); return detail(m, grp); };
     put(new T.Mesh(cylGeo(4, x1 - x0), matSteelDk), (x0 + x1) / 2);
-    put(new T.Mesh(cylGeo(6.2, 2), matSteel), x1 - 1);   // thrust collar at the hub
+    put(new T.Mesh(cylGeo(6.2, 2), matSteelDull), x1 - 1);   // thrust collar at the hub
     const journals = [0, 1, 2, 3, 4, 5].map(k => -LEN / 2 + 22 + k * span).concat(LEN / 2 - 22);
-    journals.forEach(x => put(new T.Mesh(cylGeo(5.2, 6), matSteel), x));
+    journals.forEach(x => put(new T.Mesh(cylGeo(5.2, 6), matSteelDull), x));
     for (let i = 0; i < 6; i++) for (const o of [-4, 4]) {
-      const lobe = detail(new T.Mesh(lobeGeo, matSteel), grp);
+      const lobe = detail(new T.Mesh(lobeGeo, matSteelDull), grp);
       lobe.position.set(cx(i) + o, camY, z);
       lobe.rotation.x = -Math.PI / 2 + firing[i] * Math.PI / 3 + off; // phase 0 = nose down onto the tappet
     }

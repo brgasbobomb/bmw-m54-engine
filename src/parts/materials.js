@@ -23,7 +23,7 @@ export function makeMaterials(T) {
   const cast = { roughnessMap: grain, bumpMap: grain, bumpScale: 0.15 };
 
   // ===== Materials =====
-  const matBlock    = new T.MeshStandardMaterial({ color: 0xc8ccd1, metalness: 0.55, roughness: 0.9, ...cast, bumpScale: 0.35 }); // rough sand-cast aluminium
+  const matBlock    = new T.MeshStandardMaterial({ color: 0xc8ccd1, metalness: 0.55, roughness: 0.9, ...cast, bumpScale: 1.2 }); // rough sand-cast aluminium
   const matCover    = new T.MeshStandardMaterial({ color: 0x1c1c1e, metalness: 0.0, roughness: 0.62, roughnessMap: grain }); // satin black plastic
   const matCoverAcc = new T.MeshStandardMaterial({ color: 0xcfcaba, metalness: 0.80, roughness: 0.28 }); // silver styling accent
   const matIntake   = new T.MeshStandardMaterial({ color: 0x1f2023, metalness: 0.0, roughness: 0.62, roughnessMap: grain }); // satin black intake manifold plastic
