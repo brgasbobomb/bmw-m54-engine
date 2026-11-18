@@ -44,3 +44,11 @@ Catalog `image_36.jpg` (Z4 M54 bay from the front-left, viewed). Findings below;
 ## 2026-11-18 (2nd pass) boot attachment
 - Chain is throttle → boot → MAF → airbox neck. Box taller (y 14…66, seam 36) like the photos so the neck sits mid-height on the end face; neck 12 long overlapping the MAF flange, steel clamp ring at the joint.
 - Still off: box height 66 not clearance-checked against expansion tank/manifold (looked fine in the intake shot only); lid plate not tilted like photos; boot→MAF is still one bolted MAF in between (real E46 has it too, but not photo-verified).
+
+## 2026-11-18 (3rd pass, last per rule 9) multi-angle catalog sheet (8 views, E46/X3 330i, user-supplied, not saved)
+- Shape: deep lower housing (taller than long), side profile tapers to a big rounded chamfer under the far end;
+  flat lid plate overhanging all round on top; clips on the seam on both long sides + far end; round outlet neck high
+  on one end; louvred inlet (stepped horizontal slats) low on the far end; vertical channel rib on one long side; flat
+  bolt tab with two rubber grommets on the neck end. No snorkel tube on the box itself — removed it.
+- Modelled: box x ≈ 0.36 × cover length, y 0…66 (seam 54, lid 66…69), extruded side profile.
+- Still off: the box bottom (y 0) not checked against the subframe/radiator; lid not tilted; grommet tab position by eye.
