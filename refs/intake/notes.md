@@ -204,3 +204,7 @@ photo's FOV/roll needs a closer fit.
   (plenum 93), so the drops no longer stand proud; the outer face reads as one wall with the runner humps only as shallow ribs (as in the
   RealOEM read). Unchanged: crest (36, 40…58, 40), ribs/spine (follow `surf` on the new path). Checked in one zoomed start shot; the
   plenum seam band and the lobe walls now line up with the drops at 93.
+
+- 2026-11-18 (rib close-up check): zoomed, cropped top shot of the six runner tops: U-ribs sit on the runners (round end toward the head, legs 17 apart),
+  nipple dot inside each U, spine strip crosses all six, nothing floating. Ribs span out 16…37, the path change only touched out > 76, so they are
+  unaffected; spine top 47 = runner crest top (40 + 7). Not checked: a low oblique close-up of the rib height (side shots hide the runner tops).
