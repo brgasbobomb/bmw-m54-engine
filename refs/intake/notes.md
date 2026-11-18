@@ -185,3 +185,7 @@ photo's FOV/roll needs a closer fit.
   bevelSize, so `o1: 93` really meant 96.5). Lobe outer out is now `pl.o1 + 3 - ehB + 2.5`; the +2.5 was found by eye in the rear-end shot
   (the calculated flush value left the plenum bulging past the lobe, so the plenum's real edge is further out than 93). A ~0.7 unit jog remains
   where the lobe's bottom edge ends on the outer wall (lower left in that view).
+
+- 2026-11-18 (lobe bottom jog): the lobe profile's bottom outer corner is now rounded (R 8 quadratic) so the outer wall rolls into the plenum
+  wall instead of ending in a hard step. Rear-end focus shot: jog reduced to a small soft shoulder (~0.5 unit), not fully gone; the flush
+  offset (+2.5 in `eh.o1`) is still empirical.
