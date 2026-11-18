@@ -102,3 +102,5 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
   in one oblique intake-side view; not checked close-up against the throttle flange or from above.
 - U-ribs are single round ribs; the real comb is a flat strip with a lip on each edge (double ridge).
 - Spine/rib not checked close-up in the viewer (screenshot was a side view).
+
+- 2026-11-18: `matIntake` lightened (0x18181a -> 0x34353a, roughness 0.62 -> 0.5) because runners read as flat black blobs in the assembled intake shot. Runner outlines and ridges now visible; boot/hoses share the material so they got lighter too (check they still read as rubber). Not checked close-up.

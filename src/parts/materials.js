@@ -26,7 +26,7 @@ export function makeMaterials(T) {
   const matBlock    = new T.MeshStandardMaterial({ color: 0xc8ccd1, metalness: 0.6, roughness: 0.7, ...cast }); // cast aluminium: matte, grainy
   const matCover    = new T.MeshStandardMaterial({ color: 0x1c1c1e, metalness: 0.0, roughness: 0.55, roughnessMap: grain }); // black plastic, soft sheen
   const matCoverAcc = new T.MeshStandardMaterial({ color: 0xcfcaba, metalness: 0.80, roughness: 0.28 }); // silver styling accent
-  const matIntake   = new T.MeshStandardMaterial({ color: 0x18181a, metalness: 0.0, roughness: 0.62, roughnessMap: grain }); // black intake manifold plastic
+  const matIntake   = new T.MeshStandardMaterial({ color: 0x34353a, metalness: 0.0, roughness: 0.5, roughnessMap: grain }); // black intake manifold plastic
   const matExhaust  = new T.MeshStandardMaterial({ color: 0xffffff, map: heat, metalness: 1.0, roughness: 0.42, roughnessMap: grain }); // heat-tinted stainless
   const matAlu      = new T.MeshStandardMaterial({ color: 0xe4e7eb, metalness: 1.0, roughness: 0.2 }); // machined aluminium
   const matAluDark  = new T.MeshStandardMaterial({ color: 0x80868e, metalness: 0.6, roughness: 0.66, ...cast }); // cast alloy dark
