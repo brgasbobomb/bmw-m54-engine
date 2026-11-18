@@ -1,0 +1,7 @@
+{
+  "thermostat": {
+    "name": "Thermostat",
+    "target": "thermostat",
+    "remove": ["coolant-tank", "radiator"]
+  }
+}

@@ -1079,6 +1079,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     function handleResetAll() {
+      jobReset();
       explodeSlider.value = 0;
       animationController.explodeAmount = 0;
       const hierarchy = engineModel.getHierarchy();
@@ -1151,7 +1152,48 @@ window.addEventListener('DOMContentLoaded', async () => {
       animate();
     }
 
+    // Repair job: step n = the first n parts of job.remove are removed; the target stays highlighted.
+    let jobs = {}, job = null, jobStep = 0;
+    const jobEl = id => document.getElementById(id);
+    const jobMeshes = () => explodeParts.filter(p => p.userData.partId === job.target)
+      .flatMap(g => { const m = []; g.traverse(o => o.isMesh && m.push(o)); return m; });
+    function jobGo(n) {
+      const hierarchy = engineModel.getHierarchy();
+      job.remove.forEach((id, i) => { if (hierarchy.isPartVisible(id) === (i < n)) handlePartClick(id); });
+      jobStep = n;
+      jobEl('job-back').disabled = n === 0;
+      jobEl('job-next').disabled = n === job.remove.length;
+      jobEl('job-step').textContent = n === job.remove.length
+        ? `Done: ${job.name} accessible` : `Step ${n}/${job.remove.length}: remove ${job.remove[n]}`;
+    }
+    function jobReset() {
+      if (!job) return;
+      jobMeshes().forEach(m => interactionManager.restoreMaterial(m));
+      job = null; jobStep = 0;
+      jobEl('job-select').value = '';
+      jobEl('job-step').textContent = '';
+      jobEl('job-back').disabled = jobEl('job-next').disabled = true;
+    }
+    function jobSelect(key) {
+      if (job) { jobGo(0); jobReset(); }
+      if (!key) return;
+      job = jobs[key];
+      jobEl('job-select').value = key;
+      jobMeshes().forEach(m => interactionManager.highlightPart(m));
+      uiPanel.displayPartInfo(job.target);
+      jobGo(0);
+    }
+    async function initJobs() {
+      jobs = await (await fetch('./data/jobs.json')).json();
+      const sel = jobEl('job-select');
+      for (const k in jobs) sel.add(new Option(jobs[k].name, k));
+      sel.addEventListener('change', () => jobSelect(sel.value));
+      jobEl('job-back').addEventListener('click', () => jobGo(jobStep - 1));
+      jobEl('job-next').addEventListener('click', () => jobGo(jobStep + 1));
+    }
+
     await init();
+    await initJobs();
 
   } catch (err) {
     console.error('Failed to load application:', err);
