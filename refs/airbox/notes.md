@@ -40,3 +40,7 @@ Catalog `image_36.jpg` (Z4 M54 bay from the front-left, viewed). Findings below;
 ## Still off (update)
 - Snorkel sits on the far (+Z−) side, not seen in the shot; lid plate and slats by eye; bottom tab not checked from below.
 - Snorkel route to the kidney grille not modelled (ends in the air at y 78).
+
+## 2026-11-18 (2nd pass) boot attachment
+- Chain is throttle → boot → MAF → airbox neck. Box taller (y 14…66, seam 36) like the photos so the neck sits mid-height on the end face; neck 12 long overlapping the MAF flange, steel clamp ring at the joint.
+- Still off: box height 66 not clearance-checked against expansion tank/manifold (looked fine in the intake shot only); lid plate not tilted like photos; boot→MAF is still one bolted MAF in between (real E46 has it too, but not photo-verified).

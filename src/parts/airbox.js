@@ -19,13 +19,14 @@ export function build(c) {
   // Airbox: lower housing + lid on a seam lip with clips, outlet neck for the MAF on the rear face, inlet snorkel
   // low on the front face. Inboard face z0 stays clear of the expansion tank (z ≤ 92).
   // Size from the photos: airbox length ≈ 0.33 × valve cover length (6·span), width ≈ 1.1 × BW, low (refs/airbox/notes.md).
-  const A = { x0: x0 + L + 6, x1: x0 + L + 6 + 0.33 * 6 * span, y0: 14, y1: 52, z0: z - 20, z1: z - 20 + 1.1 * BW }, seam = 32;
+  const A = { x0: x0 + L + 6, x1: x0 + L + 6 + 0.33 * 6 * span, y0: 14, y1: 66, z0: z - 20, z1: z - 20 + 1.1 * BW }, seam = 36;
   const ax = (A.x0 + A.x1) / 2, az = (A.z0 + A.z1) / 2, aw = A.x1 - A.x0, ad = A.z1 - A.z0;
   const ab = new T.Group();
   detail(roundedBox(aw - 4, seam - A.y0, ad - 4, 6, matIntake), ab).position.set(ax, (A.y0 + seam) / 2, az);
   detail(roundedBox(aw, A.y1 - seam, ad, 6, matIntake), ab).position.set(ax, (seam + A.y1) / 2, az);
   detail(roundedBox(aw + 3, 3, ad + 3, 1.5, matIntake), ab).position.set(ax, seam, az);
-  detail(new T.Mesh(alongX(new T.CylinderGeometry(18, 19, 6, 28)), matIntake), ab).position.set(A.x0 - 3, y, z);
+  detail(new T.Mesh(alongX(new T.CylinderGeometry(18, 19, 12, 28)), matIntake), ab).position.set(A.x0 - 6, y, z);
+  detail(new T.Mesh(new T.TorusGeometry(20.5, 1.6, 8, 28).rotateY(Math.PI / 2), matSteelDk), ab).position.set(A.x0 - 8, y, z);   // clamp: MAF flange to airbox neck
   const clipGeo = new T.BoxGeometry(8, 12, 3);
   for (const f of [0.2, 0.5, 0.8]) detail(new T.Mesh(clipGeo, matSteelDk), ab).position.set(A.x0 + f * aw, seam, A.z1 + 2);
   for (const f of [0.3, 0.7]) {
