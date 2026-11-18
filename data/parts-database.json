@@ -491,5 +491,21 @@
     ],
     "partNumber": "unverified",
     "source": "unverified"
+  },
+  "bellhousing": {
+    "id": "bellhousing",
+    "name": "Bellhousing",
+    "type": "Housing",
+    "weight": "unverified",
+    "material": "unverified",
+    "assembly": "Block",
+    "specs": "Cast aluminium housing between block and gearbox; covers flywheel and clutch, carries the starter",
+    "relationships": [
+      "Flywheel",
+      "Starter Motor",
+      "Engine Block"
+    ],
+    "partNumber": "unverified",
+    "source": "unverified"
   }
 }

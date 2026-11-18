@@ -25,6 +25,7 @@ import { build as thermostat } from './thermostat.js';
 import { build as oilFilter } from './oil-filter.js';
 import { build as starter } from './starter.js';
 import { build as flywheel } from './flywheel.js';
+import { build as bellhousing } from './bellhousing.js';
 import { build as radiator } from './radiator.js';
 import { build as hoses } from './hoses.js';
 import { build as expansionTank } from './expansion-tank.js';
@@ -52,6 +53,7 @@ const PARTS = [
   oilFilter,
   starter,
   flywheel,
+  bellhousing,
   radiator,
   hoses,
   expansionTank,
