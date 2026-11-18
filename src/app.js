@@ -710,23 +710,14 @@ class UIPanel {
       const parts = this.hierarchy.getPartsByAssembly(assembly);
       if (parts.length === 0) return;
 
-      const categoryDiv = document.createElement('div');
+      const categoryDiv = document.createElement('details');
       categoryDiv.className = 'parts-category';
-      categoryDiv.style.marginBottom = '12px';
-
-      const categoryTitle = document.createElement('div');
-      categoryTitle.style.fontSize = '11px';
-      categoryTitle.style.fontWeight = '700';
-      categoryTitle.style.color = '#ff6b35';
-      categoryTitle.style.marginBottom = '6px';
-      categoryTitle.style.textTransform = 'uppercase';
+      categoryDiv.open = true;
+      const categoryTitle = document.createElement('summary');
       categoryTitle.textContent = assembly;
-
       categoryDiv.appendChild(categoryTitle);
 
       const partsDiv = document.createElement('div');
-      partsDiv.style.display = 'grid';
-      partsDiv.style.gap = '4px';
 
       parts.forEach(part => {
         const partItem = document.createElement('div');

@@ -32,74 +32,60 @@
       <div class="panel-header">
         <h2 id="model-title">BMW M54 Engine</h2>
         <div class="panel-header-actions">
-          <button id="load-model-btn" class="btn btn-secondary">Load .glb…</button>
-          <button id="reset-btn" class="btn btn-primary">Reset All</button>
+          <button id="load-model-btn" class="btn btn-secondary" title="Load a .glb model">Load</button>
+          <button id="reset-btn" class="btn btn-primary" title="Restore all removed parts">Reset</button>
         </div>
       </div>
       <input type="file" id="model-file" accept=".glb,.gltf" style="display:none">
       <div id="model-status" class="model-status"></div>
 
       <div class="part-info">
-        <div class="info-section">
-          <h3 id="part-name">Engine Block</h3>
-          <div class="info-details">
-            <div class="info-item">
-              <span class="label">Type:</span>
-              <span id="part-type">-</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Weight:</span>
-              <span id="part-weight">-</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Material:</span>
-              <span id="part-material">-</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Assembly:</span>
-              <span id="part-assembly">-</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Part no.:</span>
-              <span id="part-number">-</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="info-section">
-          <h4>Relationships</h4>
+        <h3 id="part-name">Engine Block</h3>
+        <dl class="info-details">
+          <dt>Type</dt><dd id="part-type">-</dd>
+          <dt>Weight</dt><dd id="part-weight">-</dd>
+          <dt>Material</dt><dd id="part-material">-</dd>
+          <dt>Assembly</dt><dd id="part-assembly">-</dd>
+          <dt>Part no.</dt><dd id="part-number">-</dd>
+        </dl>
+        <details class="relationships">
+          <summary>Relationships</summary>
           <div id="part-relationships" class="relationships-list">
             <p class="placeholder">Select a part to view relationships</p>
           </div>
-        </div>
+        </details>
       </div>
 
-      <div class="parts-list-section">
-        <h4>Part Categories</h4>
-        <div id="parts-list" class="parts-list">
-          <!-- Dynamically populated -->
-        </div>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="tab-parts">Parts</button>
+        <button class="tab" data-tab="tab-job">Repair job</button>
+        <button class="tab" data-tab="tab-view">View</button>
       </div>
 
-      <div class="controls-section">
-        <h4>Repair job</h4>
+      <div id="tab-parts" class="tab-body active">
+        <div id="parts-list" class="parts-list"><!-- Dynamically populated --></div>
+      </div>
+
+      <div id="tab-job" class="tab-body">
         <select id="job-select"><option value="">None</option></select>
-        <div>
+        <div class="job-nav">
           <button id="job-back" class="btn btn-secondary" disabled>Back</button>
           <button id="job-next" class="btn btn-primary" disabled>Next</button>
-          <span id="job-step"></span>
         </div>
-        <h4>Camera Controls</h4>
-        <p class="hint">Drag to rotate • Scroll to zoom • Middle mouse to pan • Right-click a part to show only it</p>
-        <label class="explode-control">Explode
+        <span id="job-step"></span>
+      </div>
+
+      <div id="tab-view" class="tab-body">
+        <label class="row">Explode
           <input type="range" id="explode-slider" min="0" max="1" step="0.01" value="0">
         </label>
-        <label class="explode-control"><input type="checkbox" id="run-toggle"> Run engine</label>
-        <label class="explode-control">Speed
+        <label class="row">Speed
           <input type="range" id="rpm-slider" min="0" max="1" step="0.01" value="0.4">
           <span id="rpm-value"></span>
         </label>
-        <label class="explode-control"><input type="checkbox" id="ao-toggle" checked> Ambient occlusion</label>
+        <label class="check"><input type="checkbox" id="run-toggle"> Run engine</label>
+        <label class="check"><input type="checkbox" id="ao-toggle" checked> Ambient occlusion</label>
+        <p class="hint">Drag: rotate · Scroll: zoom · Middle mouse: pan · Right-click a part: show only it</p>
       </div>
     </div>
   </div>
@@ -107,5 +93,12 @@
   <!-- Modules run in order before DOMContentLoaded: boot.js sets window.THREE/GLTFLoader, then app.js (imports src/parts/) -->
   <script type="module" src="src/boot.js"></script>
   <script type="module" src="src/app.js"></script>
+  <script>
+    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+      document.querySelectorAll('.tab, .tab-body').forEach(e => e.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.tab).classList.add('active');
+    }));
+  </script>
 </body>
 </html>
