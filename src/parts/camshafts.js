@@ -1,6 +1,6 @@
 // DOHC camshafts: egg lobes (2 per cylinder per cam), 7 journals, front ends in the VANOS hub barrels.
 export function build(c) {
-  const { T, matSteel, matSteelDk, reg, detail, LEN, headY, cx, span } = c;
+  const { T, matSteelDull: matSteel, matSteelDk, reg, detail, LEN, headY, cx, span } = c;
   const grp = new T.Group();
   const camY = headY + 8, camZ = 18;           // same axis as the VANOS hubs (vanos.js: y = headY+4+4, z = ±18)
   const RB = 5.5, LIFT = 2.5, LW = 5;          // base circle, lift, lobe width

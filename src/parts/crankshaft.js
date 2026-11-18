@@ -1,7 +1,7 @@
 // Crankshaft: 7 main journals, 6 pins, 12 webs (8 full counterweights + 4 small), snout, rear flange.
 // Counts from the RealOEM diagram, see refs/crankshaft/notes.md.
 export function build(c) {
-  const { T, matSteel, matSteelDk, reg, detail, LEN, blockY, cx, span } = c;
+  const { T, matSteelDull: matSteel, matSteelDk, reg, detail, LEN, blockY, cx, span } = c;
   const crankGrp = new T.Group();
   const axisY = blockY - 6;
   const crankThrow = 89.6 / 2 * c.MM; // stroke 89.6 mm

@@ -23,14 +23,15 @@ export function makeMaterials(T) {
   const cast = { roughnessMap: grain, bumpMap: grain, bumpScale: 0.15 };
 
   // ===== Materials =====
-  const matBlock    = new T.MeshStandardMaterial({ color: 0xc8ccd1, metalness: 0.6, roughness: 0.7, ...cast }); // cast aluminium: matte, grainy
-  const matCover    = new T.MeshStandardMaterial({ color: 0x1c1c1e, metalness: 0.0, roughness: 0.55, roughnessMap: grain }); // black plastic, soft sheen
+  const matBlock    = new T.MeshStandardMaterial({ color: 0xc8ccd1, metalness: 0.55, roughness: 0.9, ...cast, bumpScale: 0.35 }); // rough sand-cast aluminium
+  const matCover    = new T.MeshStandardMaterial({ color: 0x1c1c1e, metalness: 0.0, roughness: 0.62, roughnessMap: grain }); // satin black plastic
   const matCoverAcc = new T.MeshStandardMaterial({ color: 0xcfcaba, metalness: 0.80, roughness: 0.28 }); // silver styling accent
-  const matIntake   = new T.MeshStandardMaterial({ color: 0x34353a, metalness: 0.0, roughness: 0.5, roughnessMap: grain }); // black intake manifold plastic
+  const matIntake   = new T.MeshStandardMaterial({ color: 0x1f2023, metalness: 0.0, roughness: 0.62, roughnessMap: grain }); // satin black intake manifold plastic
   const matExhaust  = new T.MeshStandardMaterial({ color: 0xffffff, map: heat, metalness: 1.0, roughness: 0.42, roughnessMap: grain }); // heat-tinted stainless
   const matAlu      = new T.MeshStandardMaterial({ color: 0xe4e7eb, metalness: 1.0, roughness: 0.2 }); // machined aluminium
   const matAluDark  = new T.MeshStandardMaterial({ color: 0x80868e, metalness: 0.6, roughness: 0.66, ...cast }); // cast alloy dark
   const matSteel    = new T.MeshStandardMaterial({ color: 0xd8dce2, metalness: 1.0, roughness: 0.22 }); // steel
+  const matSteelDull = new T.MeshStandardMaterial({ color: 0x9a9da3, metalness: 0.85, roughness: 0.55, roughnessMap: grain }); // dull machined steel (crank, cams)
   const matSteelDk  = new T.MeshStandardMaterial({ color: 0x3a3b40, metalness: 0.9, roughness: 0.42 }); // dark iron/steel
   const matBelt     = new T.MeshStandardMaterial({ color: 0x141414, metalness: 0.0, roughness: 1.0, side: T.DoubleSide }); // rubber, no sheen
   const matCoil     = new T.MeshStandardMaterial({ color: 0x1a1a1c, metalness: 0.0, roughness: 0.5 }); // black plastic
@@ -40,5 +41,5 @@ export function makeMaterials(T) {
   const matGold     = new T.MeshStandardMaterial({ color: 0xc89e4c, metalness: 0.85, roughness: 0.25 }); // brass/copper
   const matRadiator = new T.MeshStandardMaterial({ color: 0x242426, metalness: 0.25, roughness: 0.75 }); // radiator fins
   const matHose     = new T.MeshStandardMaterial({ color: 0x141414, metalness: 0.0, roughness: 1.0 }); // rubber coolant hoses, no sheen
-  return { matBlock, matCover, matCoverAcc, matIntake, matExhaust, matAlu, matAluDark, matSteel, matSteelDk, matBelt, matCoil, matCeramic, matBlueCap, matFace, matGold, matRadiator, matHose };
+  return { matBlock, matCover, matCoverAcc, matIntake, matExhaust, matAlu, matAluDark, matSteel, matSteelDull, matSteelDk, matBelt, matCoil, matCeramic, matBlueCap, matFace, matGold, matRadiator, matHose };
 }
