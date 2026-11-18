@@ -14,7 +14,8 @@
       "Cylinder Head"
     ],
     "source": "https://tractortechspecs.com/bmw_m54b30_specs.html",
-    "partNumber": "unverified"
+    "partNumber": "unverified",
+    "verified": false
   },
   "crankshaft": {
     "id": "crankshaft",
@@ -30,7 +31,8 @@
       "Main Bearings"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "connectingRods": {
     "id": "connecting-rods",
@@ -45,7 +47,8 @@
       "Pistons"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "pistons": {
     "id": "pistons",
@@ -60,7 +63,8 @@
       "Cylinder Head"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "cylinderHead": {
     "id": "cylinder-head",
@@ -77,7 +81,8 @@
       "Exhaust Manifold"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "camshafts": {
     "id": "camshafts",
@@ -93,7 +98,8 @@
       "VANOS Actuators"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "valves": {
     "id": "valves",
@@ -108,7 +114,8 @@
       "Camshafts"
     ],
     "source": "https://engine-specs.net/?p=9326",
-    "partNumber": "unverified"
+    "partNumber": "unverified",
+    "verified": false
   },
   "timingChain": {
     "id": "timing-chain",
@@ -123,7 +130,8 @@
       "Crankshaft"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "intakeManifold": {
     "id": "intake-manifold",
@@ -139,7 +147,8 @@
       "Throttle Body"
     ],
     "source": "https://catatwo.github.io/e46vault/engine/intake/intake-manifold",
-    "partNumber": "unverified"
+    "partNumber": "unverified",
+    "verified": false
   },
   "disaValve": {
     "id": "disa-valve",
@@ -153,7 +162,8 @@
       "Intake Manifold"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "fuelInjectors": {
     "id": "fuel-injectors",
@@ -167,7 +177,8 @@
       "Intake Manifold"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "throttleBody": {
     "id": "throttle-body",
@@ -181,7 +192,8 @@
       "Intake Manifold"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "mafSensor": {
     "id": "maf-sensor",
@@ -196,7 +208,8 @@
       "Throttle Body"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "airbox": {
     "id": "airbox",
@@ -210,7 +223,8 @@
       "Mass Air Flow Sensor (HFM)"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "exhaustManifold": {
     "id": "exhaust-manifold",
@@ -225,7 +239,8 @@
       "Oxygen Sensors"
     ],
     "source": "https://catatwo.github.io/e46vault/engine/exhaust/manifold",
-    "partNumber": "unverified"
+    "partNumber": "unverified",
+    "verified": false
   },
   "oxygenSensors": {
     "id": "oxygen-sensors",
@@ -239,7 +254,8 @@
       "Exhaust Manifold"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "waterPump": {
     "id": "water-pump",
@@ -254,7 +270,8 @@
       "Serpentine Belt"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "thermostat": {
     "id": "thermostat",
@@ -269,7 +286,8 @@
       "Coolant Lines"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "coolantTank": {
     "id": "coolant-tank",
@@ -284,7 +302,8 @@
       "Radiator"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "radiator": {
     "id": "radiator",
@@ -299,7 +318,8 @@
       "Cooling Fan"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "oilPan": {
     "id": "oil-pan",
@@ -314,7 +334,8 @@
       "Oil Pump"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "oilPump": {
     "id": "oil-pump",
@@ -329,7 +350,8 @@
       "Oil Filter Housing"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "oilFilter": {
     "id": "oil-filter",
@@ -343,7 +365,8 @@
       "Oil Pump"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "alternator": {
     "id": "alternator",
@@ -357,7 +380,8 @@
       "Serpentine Belt"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "sparkPlugs": {
     "id": "spark-plugs",
@@ -371,7 +395,8 @@
       "Ignition Coils"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "ignitionCoils": {
     "id": "ignition-coils",
@@ -385,7 +410,8 @@
       "Cylinder Head"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "starter": {
     "id": "starter-motor",
@@ -399,7 +425,8 @@
       "Flywheel"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "serpentineBelt": {
     "id": "serpentine-belt",
@@ -416,7 +443,8 @@
       "AC Compressor"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "pulleys": {
     "id": "pulleys",
@@ -432,7 +460,8 @@
       "Alternator"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "powerSteeringPump": {
     "id": "power-steering-pump",
@@ -446,7 +475,8 @@
       "Serpentine Belt"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "acCompressor": {
     "id": "ac-compressor",
@@ -460,7 +490,8 @@
       "Serpentine Belt"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "vanosActuators": {
     "id": "vanos-actuators",
@@ -474,7 +505,8 @@
       "Camshafts"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "flywheel": {
     "id": "flywheel",
@@ -489,7 +521,8 @@
       "Starter Motor"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "ccv": {
     "id": "ccv",
@@ -504,7 +537,8 @@
       "Intake Manifold"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   },
   "bellhousing": {
     "id": "bellhousing",
@@ -520,6 +554,7 @@
       "Engine Block"
     ],
     "partNumber": "unverified",
-    "source": "unverified"
+    "source": "unverified",
+    "verified": false
   }
 }

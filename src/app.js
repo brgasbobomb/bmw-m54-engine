@@ -755,7 +755,7 @@ class UIPanel {
     this.partWeight.textContent = part.weight;
     this.partMaterial.textContent = part.material;
     this.partAssembly.textContent = part.assembly;
-    this.partNumber.textContent = part.partNumber || 'unverified';
+    this.partNumber.textContent = (part.partNumber || 'unverified') + (part.verified ? '' : ' [unverified]');
 
     this.displayRelationships(part.id);
     this.highlightPartInList(part.id);
