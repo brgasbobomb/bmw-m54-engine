@@ -217,3 +217,7 @@ photo's FOV/roll needs a closer fit.
   the top reads as a low strip with a lip on each edge like the stand photo/image_31. Seen in `shot oblique` (zoomed): two concentric lips on every
   runner, nipple inside the inner U. Spine unchanged (3×7 strip); the spine/ridge junction and the lips' ends at out 36 not inspected.
   (The shot tool's --focus framing is flaky: if the result is a different view, rerun.)
+
+- 2026-11-18 (ridge/spine junction): ridge legs now extend to out 39 so they end inside the spine instead of butting its face, and the spine is a
+  `roundedBox` (r 1.3, 3.4 tall) instead of a sharp box. Seen in a zoomed oblique shot: the lips run into the spine cleanly, no stubs or gaps.
+  The spine is still a plain straight bar (photo: a continuous moulded spine); its ends past runners 0 and 5 not inspected.

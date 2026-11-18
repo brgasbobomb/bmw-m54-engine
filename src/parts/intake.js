@@ -152,9 +152,11 @@ export function build(c) {
   // Double ridge (stand photo / image_31: a strip with a lip on each edge): two thin low U ribs 4.4 apart, half sunk into the skin
   const ridge = w => {
     const pts = [];
+    pts.push([-w, 39]);   // run on into the spine so the lip ends inside it, not against its face
     for (let k = 0; k <= 4; k++) pts.push([-w, 36 - 5 * k]);
     for (let k = 1; k < 12; k++) { const a = Math.PI * k / 12; pts.push([-w * Math.cos(a), 16 - w * Math.sin(a)]); }
     for (let k = 0; k <= 4; k++) pts.push([w, 16 + 5 * k]);
+    pts.push([w, 39]);
     return new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(([x, o]) => new T.Vector3(x, surf(x, o) + 0.1, o))), 48, 0.9, 6, false);
   };
   const uGeos = [ridge(10.7), ridge(6.3)];
@@ -164,7 +166,7 @@ export function build(c) {
     detail(new T.Mesh(nipGeo, matIntake), car).position.set(cx(i), surf(0, 24) + 1.5, 24);
   }
   // Spine along the crest, half sunk into the runner tops (top 47)
-  detail(new T.Mesh(new T.BoxGeometry(run + 22, 3, 7), matIntake), car).position.set(xm, 46.5, 37);
+  detail(roundedBox(run + 22, 3.4, 7, 1.3, matIntake), car).position.set(xm, 46.5, 37);   // rounded edges: the ridges melt into it
 
   // Throttle mount (3D scans): a neck under the plenum at mid-length, a little toward the front, ending in a square
   // 4-bolt flange that faces outward; (no sheet bracket: it read as a floating panel).
