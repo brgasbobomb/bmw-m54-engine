@@ -61,3 +61,12 @@ on). Not opened: image_6 (fuel-rail close-up). Perspective photos, no scale: sha
   - OK: six wells now sit along the exhaust edge, plateau reads as a raised strip with a darker inset panel, roundel on the plateau and cap decal visible, nose dome with the CCV nipple at the front, no floating pieces.
   - Wrong/missing (unchanged from the lists above): rim only on the exhaust edge and open at the rear end, no yellow HV sticker, no harness clips, no gasket lip, only 3 plateau bolts (photo has more, plus 2 trough and a few nose bolts), no part-number text, underside not modelled.
   - New: CCV nipple stands nearly vertical in the exhaust view; the notes call it a 45 deg up-and-out barb toward the intake, so recheck it against ccv.js.
+
+## Session 4 (user-requested, overrides rule 9) — reference `reference-top-aftermarket.png`
+Aftermarket cover, top view, product shot (front/dome at left, intake edge at bottom: oil hole, label recess and CCV nipple sit on it). Read once; no need to reopen:
+- Flat black plastic. Two raised flanks along the long edges, each with a row of ~9-10 small round bolt bosses; a central recessed channel between them.
+- In the channel: one silver (aluminium) stiffener plate per cylinder, each with the large plug-well hole and small bolt holes either side.
+- Large keyhole-shaped oil-filler opening on the intake flank near the front third; a rectangular label recess just behind it (toward the rear).
+- Bulbous front dome; short thick CCV stub out of the front intake corner.
+Model changes: plateau/rim replaced by two raised flanks (exhaust z -35..-16, intake z 10..35), a silver plate + 2 bolts per cylinder in the channel (z -3), 10 bolt bosses per flank, label recess at x -26. Roundel, oil cap, wells, nose and CCV stub unchanged. Checked in top and exhaust-side isolated shots: layout matches the photo.
+Still off: wells/plates not segmented like the photo's stamped plates; oil opening modelled as an installed cap, not the keyhole; underside, harness clips, yellow HV sticker, gasket lip still missing; CCV stub angle still to recheck vs ccv.js.

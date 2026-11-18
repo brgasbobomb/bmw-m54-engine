@@ -1,6 +1,6 @@
 // Valve cover
 export function build(c) {
-  const { T, matCover, matSteel, reg, detail, roundedBox, LEN, BW, COVER_H, coverY, cx } = c;
+  const { T, matCover, matSteel, matAlu, reg, detail, roundedBox, LEN, BW, COVER_H, coverY, cx } = c;
   // ----- VALVE COVER (matte black plastic: raised intake-side plateau, exhaust-side coil trough, front nose) -----
   // Local y: 0 = cover centre, `top` = plateau. The trough floor is 4 lower; the coils (bottom at top+3) stand on the plug-well rims.
   const top = COVER_H / 2, floor = top - 4;
@@ -8,12 +8,25 @@ export function build(c) {
   // Trough-level body over the full footprint
   const coverBase = detail(roundedBox(LEN - 10, COVER_H - 4, BW - 8, 3, matCover), coverGrp);
   coverBase.position.y = -2;
-  // Raised plateau on the intake half (label, oil cap, bolts); x runs from 10 in from the rear end to the nose apex
-  const plateau = detail(roundedBox(LEN - 27, 6, 32, 2, matCover), coverGrp);
-  plateau.position.set(1.5, top - 3, 19);
-  // Low rim along the exhaust edge of the trough
-  const rim = detail(roundedBox(LEN - 14, 4, 3, 1, matCover), coverGrp);
-  rim.position.set(0, floor + 1, -33);
+  // Reference refs/valve-cover/reference-top-aftermarket.png: flat black cover, two raised flanks (bolt-boss rows along both
+  // long edges) and a central recessed channel with a silver stiffener plate per cylinder carrying the plug wells.
+  const flank = (z0, z1) => { // z0 < z1, top at `top`
+    const m = detail(roundedBox(LEN - 22, 4, z1 - z0, 1.5, matCover), coverGrp);
+    m.position.set(1.5, floor + 2, (z0 + z1) / 2);
+  };
+  flank(-35, -16);  // exhaust flank
+  flank(10, 35);    // intake flank: label, oil cap, roundel, bolts
+  for (let i = 0; i < 6; i++) { // silver plate with a bolt either side of the well
+    detail(roundedBox(34, 1, 22, 0.4, matAlu), coverGrp).position.set(cx(i), floor + 0.5, -3);
+    for (const dx of [-13, 13]) detail(new T.Mesh(new T.CylinderGeometry(1.8, 1.8, 1.2, 10), matSteel), coverGrp).position.set(cx(i) + dx, floor + 1.4, -3);
+  }
+  // Perimeter bolt bosses along both flanks (~10 per side)
+  for (let i = 0; i < 10; i++) {
+    const x = -LEN / 2 + 22 + i * (LEN - 56) / 9;
+    for (const z of [-26, 32]) detail(new T.Mesh(new T.CylinderGeometry(2.4, 2.4, 1, 12), matSteel), coverGrp).position.set(x, top + 0.5, z);
+  }
+  // Rectangular label recess on the intake flank, right of the oil cap
+  detail(roundedBox(32, 0.8, 10, 0.3, matCover), coverGrp).position.set(-26, top + 0.4, 22);
   // Six plug wells in line with the coils and plugs (z = -6)
   const wellGeo = new T.LatheGeometry([[5.2, 0], [8, 0], [8, 7], [5.2, 7], [5.2, 0]].map(([r, y]) => new T.Vector2(r, y)), 20);
   for (let i = 0; i < 6; i++) detail(new T.Mesh(wellGeo, matCover), coverGrp).position.set(cx(i), floor, -6);
