@@ -199,3 +199,8 @@ photo's FOV/roll needs a closer fit.
   bevelSize 3.8 → out max 93.8, up -6.8…25.8), not a flat box sticking out past the corners. CORRECTION to the previous entry: the left-edge bulge
   seen end-on at up ≈ 8–25 is NOT the seam; it is the end runner's outer drop (runner tube bounding box out max 98.3, i.e. ~5 proud of the
   plenum wall by design). It was unchanged by the seam fix. Lobe wall (93) sits ~5 inside that drop.
+
+- 2026-11-18 (runner drops flush): path points [78,35],[91,21],[88,7] -> [76,35],[85.7,21],[84,7]. Measured runner bounding box out max 98.3 -> 93.2
+  (plenum 93), so the drops no longer stand proud; the outer face reads as one wall with the runner humps only as shallow ribs (as in the
+  RealOEM read). Unchanged: crest (36, 40…58, 40), ribs/spine (follow `surf` on the new path). Checked in one zoomed start shot; the
+  plenum seam band and the lobe walls now line up with the drops at 93.

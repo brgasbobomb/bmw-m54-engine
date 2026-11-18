@@ -70,7 +70,7 @@ export function build(c) {
 
   // Runners: flattened-oval tubes (r 7, x2: 28 wide, 14 thick) off the port rising 30 deg, over the crest, down the outer
   // side, ending inside the plenum. The outer drop stands ~5 proud of the plenum wall, as the ribbed outer face.
-  const path = new T.CatmullRomCurve3([[-2, 4.5], [10, 13], [22, 33], [36, 40], [58, 40], [78, 35], [91, 21], [88, 7], [72, 6]]
+  const path = new T.CatmullRomCurve3([[-2, 4.5], [10, 13], [22, 33], [36, 40], [58, 40], [76, 35], [85.7, 21], [84, 7], [72, 6]]
     .map(([o, u]) => P(o, u)), false, 'centripetal');
   const tubeGeo = new T.TubeGeometry(path, 120, 7, 18, false);
   const bossGeo2 = new T.CylinderGeometry(2.2, 2.6, 5, 10);
