@@ -288,3 +288,8 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   footprint is 1.6 (to the seam band floor; ~2.4 to the plenum floor at -6), i.e. clear but tight, probably at the valve end where the hose meets the
   valve (valve top is at the plenum floor by design). Not measured: hose vs the engine block, alternator, oil filter or the airbox (whole-part `--clear`
   can't isolate the hose).
+
+- 2026-11-18 (hose clearance to other parts; hose ring centres minus tube r 2.8 vs sampled triangle points of each part, browser script, world units): engine-block 48.7,
+  alternator 27.9, oil-filter 32.6, power-steering-pump 22.2, cylinder-head 49.9, water-pump 71, oil-pan 113, pulleys 102, airbox 41.8, MAF 13.8, throttle-body 11
+  (expected: hose starts at the boot beside it), DISA 51.8, radiator 113, coolant-tank 105. Corrugation rings stand ~1.1 further out than the tube; still all
+  clear. Hose is nowhere near hitting the block or alternator.
