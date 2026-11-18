@@ -15,5 +15,13 @@
       "radiator",
       "serpentine-belt"
     ]
+  },
+  "ccv": {
+    "name": "CCV",
+    "target": "ccv",
+    "remove": [
+      "airbox",
+      "maf-sensor"
+    ]
   }
 }
