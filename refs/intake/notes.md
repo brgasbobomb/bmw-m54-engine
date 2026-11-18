@@ -261,3 +261,8 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   the photo's short fat elbow curving down-left; the four hoops/cage ribs are stretched along it. Cuff + tab and the clamp ring at the end look fine.
   Idle-air hose now leaves the boot's rear and loops under the plenum; it looks plausible but is short of the valve in the intake-side shot.
   Fix options (not done): raise `bootEnd` up (airbox.js follows) toward ~80, or put the throttle lower on the end face so the drop shortens.
+
+- 2026-11-18 (airbox raised): `bootEnd` up 42 -> 80 (still out 128, x front + 8); airbox.js follows, untouched. Clearances (`--clear airbox ...`): radiator 41, tank 16.8,
+  pulleys 86, block 83, alternator 52, power-steering pump 32 (was 18). Boot is now a short elbow (throttle at the front end -> MAF just forward and a little lower),
+  as in the photo; checked in `shot intake --focus airbox`. The airbox now sits at about the coolant tank's height beside it (16.8 apart in depth); the overlay
+  window did not show it (off-frame). Not checked: boot hoop/rib spacing on the shorter run, idle hose length.

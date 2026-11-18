@@ -189,7 +189,7 @@ export function build(c) {
   // corrugated idle-air hose off its rear side to the idle valve.
   const V = (x, u, o) => new T.Vector3(x, u, o);
   const org = V(0, headY, zF).applyAxisAngle(V(1, 0, 0), -Math.PI / 6);  // car-group origin, upright engine frame
-  const bootEnd = V(xm + PX / 2 + 8, 42, 128);                                          // MAF rear face, upright engine frame (moved 6 back, 6 up: short elbow)
+  const bootEnd = V(xm + PX / 2 + 8, 80, 128);                                          // MAF rear face, upright engine frame (moved 6 back, 6 up: short elbow)
   const e = bootEnd.clone().add(V(9, 0, 0)).sub(org), b0 = oT + 20;       // boot slips 9 over the MAF spigot
   const boot = new T.CubicBezierCurve3(V(xT, uT, b0), V(xT, uT, b0 + 10), V(e.x - 14, e.y, e.z), e);
   const TS = 48, RS = 24, rB = t => 13.6 + 3.4 * t * t * (3 - 2 * t);   // OD ≈ throttle body, flares to clamp over the MAF (r 17)
