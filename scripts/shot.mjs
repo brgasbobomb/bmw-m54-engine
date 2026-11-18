@@ -30,6 +30,8 @@ const zoom = zi >= 0 ? Number(args.splice(zi, 2)[1]) : 3;
 const ri = args.indexOf('--run'), run = ri >= 0 && !!args.splice(ri, 1);
 const ci = args.indexOf('--clear');
 const clear = ci >= 0 ? args.splice(ci, 3).slice(1) : null;
+const xi = args.indexOf('--xmax');
+const xmax = xi >= 0 ? Number(args.splice(xi, 2)[1]) : Infinity; // ignore B points beyond this world x (e.g. skip the radiator necks)
 const view = clear ? 'start' : args[0];
 if (!(view in VIEWS)) { console.error('usage: npm run shot -- <' + Object.keys(VIEWS).join('|') + '> [--only <part-id>]'); process.exit(1); }
 
@@ -52,27 +54,28 @@ await page.goto(`http://localhost:${server.address().port}/index.html`);
 await loaded;
 
 if (clear) {
-  const res = await page.evaluate(async ([a, bs]) => {
+  const res = await page.evaluate(async ([[a, bs], xmax]) => {
     const THREE = await import('three');
     const { model } = window.__shot, root = model.getEngineGroup();
     root.updateWorldMatrix(true, true);
     const objs = id => { const r = []; root.traverse(o => { if (o.userData.partId === id) r.push(o); }); return r; };
-    const pts = o => { const out = []; const v = new THREE.Vector3(); o.updateWorldMatrix(true, true);
+    const meshOf = new Map();
+    const pts = o => { const out = []; o.updateWorldMatrix(true, true);
       o.traverse(m => { if (!m.geometry) return; const g = m.geometry, pa = g.attributes.position, ix = g.index;
         const P = i => new THREE.Vector3().fromBufferAttribute(pa, i).applyMatrix4(m.matrixWorld);
         const n = ix ? ix.count : pa.count;
         for (let t = 0; t + 2 < n; t += 3) { const q = [0, 1, 2].map(k => P(ix ? ix.getX(t + k) : t + k));
-          out.push(...q, q[0].clone().add(q[1]).add(q[2]).multiplyScalar(1 / 3), q[0].clone().add(q[1]).multiplyScalar(0.5), q[1].clone().add(q[2]).multiplyScalar(0.5), q[0].clone().add(q[2]).multiplyScalar(0.5)); } });
+          const L = out.length; out.push(...q, q[0].clone().add(q[1]).add(q[2]).multiplyScalar(1 / 3), q[0].clone().add(q[1]).multiplyScalar(0.5), q[1].clone().add(q[2]).multiplyScalar(0.5), q[0].clone().add(q[2]).multiplyScalar(0.5)); for (let k = L; k < out.length; k++) meshOf.set(out[k], m); } });
       return out; };
     const A = objs(a).at(-1); if (!A) return { error: 'no part ' + a };
     const pa = pts(A), out = {};
     for (const b of bs.split(',')) {
-      let best = Infinity, at = null;
-      for (const o of objs(b)) if (o !== A) for (const q of pts(o)) for (const p of pa) { const d = p.distanceToSquared(q); if (d < best) { best = d; at = p; } }
-      out[b] = best === Infinity ? null : { min: +Math.sqrt(best).toFixed(2), at: at && at.toArray().map(x => +x.toFixed(1)) };
+      let best = Infinity, at = null, bm = null;
+      for (const o of objs(b)) if (o !== A) for (const q of pts(o)) { if (q.x > xmax) continue; for (const p of pa) { const d = p.distanceToSquared(q); if (d < best) { best = d; at = p; bm = meshOf.get(q); } } }
+      out[b] = best === Infinity ? null : { min: +Math.sqrt(best).toFixed(2), at: at && at.toArray().map(x => +x.toFixed(1)), mesh: bm && [bm.geometry.type, bm.parent?.userData?.partId, bm.parent?.children.indexOf(bm), bm.geometry.parameters ? JSON.stringify(bm.geometry.parameters).slice(0, 90) : ''] };
     }
     return out;
-  }, clear);
+  }, [clear, xmax]);
   console.log(JSON.stringify(res, null, 1));
   await browser.close(); server.close(); process.exit(0);
 }

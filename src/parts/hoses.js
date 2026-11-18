@@ -28,8 +28,8 @@ export function build(c) {
   ]);
   hose([ // lower: elbowed neck -> radiator +Z tank neck
     O.clone().add(P(10.3, -22.9, 3.5)),
-    O.clone().add(P(24, -26, 5)),
-    P(LEN / 2 + 50, blockY - 8, 30),
+    O.clone().add(P(31, -24, 7)),
+    P(LEN / 2 + 66, blockY - 4, 34),
     up(LEN / 2 + 76, radY - 39, 62),
     up(LEN / 2 + 90, radY - 38, 65)
   ]);
