@@ -1,3 +1,4 @@
+// npm run shot -- --clear <idA> <idB,idC,...>  prints min surface-sample distance (last object registered as idA vs each idB) and exits
 // npm run shot -- <view> [--only <part-id>] [--focus <part-id> [--zoom N]] [--run]  (--run: Run engine ticked)  ->  shots/<view>.png
 import http from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
@@ -27,7 +28,9 @@ const focus = fi >= 0 ? args.splice(fi, 2)[1] : null;
 const zi = args.indexOf('--zoom');
 const zoom = zi >= 0 ? Number(args.splice(zi, 2)[1]) : 3;
 const ri = args.indexOf('--run'), run = ri >= 0 && !!args.splice(ri, 1);
-const view = args[0];
+const ci = args.indexOf('--clear');
+const clear = ci >= 0 ? args.splice(ci, 3).slice(1) : null;
+const view = clear ? 'start' : args[0];
 if (!(view in VIEWS)) { console.error('usage: npm run shot -- <' + Object.keys(VIEWS).join('|') + '> [--only <part-id>]'); process.exit(1); }
 
 const server = http.createServer(async (req, res) => {
@@ -48,6 +51,31 @@ const loaded = page.waitForEvent('console', { predicate: m => m.text().includes(
 await page.goto(`http://localhost:${server.address().port}/index.html`);
 await loaded;
 
+if (clear) {
+  const res = await page.evaluate(async ([a, bs]) => {
+    const THREE = await import('three');
+    const { model } = window.__shot, root = model.getEngineGroup();
+    root.updateWorldMatrix(true, true);
+    const objs = id => { const r = []; root.traverse(o => { if (o.userData.partId === id) r.push(o); }); return r; };
+    const pts = o => { const out = []; const v = new THREE.Vector3(); o.updateWorldMatrix(true, true);
+      o.traverse(m => { if (!m.geometry) return; const g = m.geometry, pa = g.attributes.position, ix = g.index;
+        const P = i => new THREE.Vector3().fromBufferAttribute(pa, i).applyMatrix4(m.matrixWorld);
+        const n = ix ? ix.count : pa.count;
+        for (let t = 0; t + 2 < n; t += 3) { const q = [0, 1, 2].map(k => P(ix ? ix.getX(t + k) : t + k));
+          out.push(...q, q[0].clone().add(q[1]).add(q[2]).multiplyScalar(1 / 3), q[0].clone().add(q[1]).multiplyScalar(0.5), q[1].clone().add(q[2]).multiplyScalar(0.5), q[0].clone().add(q[2]).multiplyScalar(0.5)); } });
+      return out; };
+    const A = objs(a).at(-1); if (!A) return { error: 'no part ' + a };
+    const pa = pts(A), out = {};
+    for (const b of bs.split(',')) {
+      let best = Infinity, at = null;
+      for (const o of objs(b)) if (o !== A) for (const q of pts(o)) for (const p of pa) { const d = p.distanceToSquared(q); if (d < best) { best = d; at = p; } }
+      out[b] = best === Infinity ? null : { min: +Math.sqrt(best).toFixed(2), at: at && at.toArray().map(x => +x.toFixed(1)) };
+    }
+    return out;
+  }, clear);
+  console.log(JSON.stringify(res, null, 1));
+  await browser.close(); server.close(); process.exit(0);
+}
 if (only) await page.evaluate(id => window.__shot.isolate(id), only);
 if (run) await page.evaluate(() => { document.getElementById('run-toggle').checked = true; });
 if (view === 'explode') await page.evaluate(() => {
