@@ -180,3 +180,8 @@ photo's FOV/roll needs a closer fit.
   the inner fillet start (inner wall line shrank to zero); lobe outer face moved to out 93 = flush with the plenum's bevelled outer wall (was
   2 inside, leaving a seam). Seen in a rear-end focus shot: smooth roll-over; a tiny notch remains where the lobe's outer wall meets the plenum
   edge at the lower left of that view.
+
+- 2026-11-18 (lobe/plenum notch): the notch was the lobe's outer wall standing ~3.5 proud of the plenum (ExtrudeGeometry's bevel grows the profile by
+  bevelSize, so `o1: 93` really meant 96.5). Lobe outer out is now `pl.o1 + 3 - ehB + 2.5`; the +2.5 was found by eye in the rear-end shot
+  (the calculated flush value left the plenum bulging past the lobe, so the plenum's real edge is further out than 93). A ~0.7 unit jog remains
+  where the lobe's bottom edge ends on the outer wall (lower left in that view).
