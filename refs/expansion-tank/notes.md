@@ -13,7 +13,10 @@ No photos used. Facts below are from memory and **unverified**. Layout comment i
 - Hoses: top-of-radiator bleed/vent line and lower coolant feed to the system; E46 M54 uses a small level sensor in the tank.
 - Roughly a rounded rectangular tank of ~1.5 L total; cap sits at the highest point of the cooling system.
 
+## Rebuilt 2026-11-18 (session 1 of 3)
+- Rounded translucent shell (26x44x22), green coolant fill, neck + cap with grip, black level-sensor block, two spigots on the radiator side, mounting ear. Still one group, id `coolant-tank`, upright.
+- Checked in full-engine intake shot: sits beside the radiator, no clash seen. Not checked close-up.
+
 ## Still off
-- Plain box, no cap, neck, mount, hose spigots or level sensor.
-- Dimensions and exact position not checked against reference photos.
-- Not connected to hoses.js (check which hoses attach).
+- Spigots are not tied to hoses.js (no hose attaches); radiator nipple at z 70 may not meet a spigot (spigot x -15, y +-14 vs nipple y 34 world offset).
+- No level markings, no bracket to the radiator, dimensions from memory (no photos).
