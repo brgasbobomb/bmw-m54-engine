@@ -83,7 +83,11 @@ export function build(c) {
 
   // Plenum seams: lip along the bottom of the outer wall, vertical seam at mid-length between the two halves
   detail(new T.Mesh(new T.BoxGeometry(PX + 2, 2.4, 3), matCover), car).position.set(xm, pl.u0 + 1, pl.o1 + 3.5);
-  detail(new T.Mesh(new T.BoxGeometry(2, pl.u1 - pl.u0 + 6, 2), matCover), car).position.set(xm, plU, pl.o1 + 3);
+  // vertical seam: a thin band that follows the plenum's rounded section 0.8 proud (was a flat box that stuck out past the corners)
+  const seam = detail(new T.Mesh(new T.ExtrudeGeometry(plShape, { depth: 1.2, bevelEnabled: true, bevelThickness: 0.4, bevelSize: 3.8,
+    bevelSegments: 2, curveSegments: 8 }), matCover), car);
+  seam.rotation.y = -Math.PI / 2;
+  seam.position.x = xm + 0.6;
 
   // DISA valve (user photos 2026-11-18): boxy black housing ~70 long on the outer wall at mid-length near the bottom,
   // lid seam, round actuator can on its front end with a plug above it; white label on the plenum behind it.

@@ -194,3 +194,8 @@ photo's FOV/roll needs a closer fit.
   Now `eh.o1 = pl.o1 + 3 - ehB` → lobe out max exactly 93 = plenum, flat flush (lobe up 8.5…55.5, x flush with the plenum ends). The "jog/bulge"
   seen in end-on shots was the plenum's vertical seam strip (out 94, mid-length, `pl.o1 + 3` box), not the lobe. That seam silhouette still
   shows as a small bulge at the left edge from the rear view; it is intended. Earlier "+2.5 empirical" notes are superseded.
+
+- 2026-11-18 (seam strip + correction): the vertical seam is now a thin band following the plenum's rounded section (`seam`, plShape extruded 1.2 with
+  bevelSize 3.8 → out max 93.8, up -6.8…25.8), not a flat box sticking out past the corners. CORRECTION to the previous entry: the left-edge bulge
+  seen end-on at up ≈ 8–25 is NOT the seam; it is the end runner's outer drop (runner tube bounding box out max 98.3, i.e. ~5 proud of the
+  plenum wall by design). It was unchanged by the seam fix. Lobe wall (93) sits ~5 inside that drop.
