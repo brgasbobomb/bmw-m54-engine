@@ -23,5 +23,14 @@
       "airbox",
       "maf-sensor"
     ]
+  },
+  "water-pump": {
+    "name": "Water pump",
+    "target": "water-pump",
+    "remove": [
+      "coolant-tank",
+      "radiator",
+      "serpentine-belt"
+    ]
   }
 }
