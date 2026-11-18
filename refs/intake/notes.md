@@ -233,3 +233,16 @@ photo's FOV/roll needs a closer fit.
 
 - 2026-11-18 (other end cap): inspected the second spine cap close-up (camera 22 from it): clean rounded end, no lip; only a faint hairline where cap meets rod
   (normal shading change at the join, not a step). Both caps now checked.
+
+## Overlay comparison, round 2 (2026-11-18, `src/overlay.js` preset retuned to dir (1, 1.15, -0.9), distance ×0.65)
+The first preset left the model small and nearly side-on; the new one puts the engine at about the photo's size and orientation (front lower-left,
+intake side up, steep from above). Overlay at 50% and model alone, whole engine, 1100×853 window. Differences, biggest first:
+1. Throttle/boot: photo has the silver throttle body and the fat elbow boot at the FRONT end of the plenum, low above the alternator, curving down-left.
+   Model hangs the neck and boot from the underside at mid-length (from the 3D scans). The two sources disagree; decide which wins.
+2. Plenum ends: model's hammerhead lobes read as tall blocks; in the photo the manifold just ends with the last hump and a low rounded end, no tall lobes.
+   (Lobes may be too tall/boxy: u1 52 vs the photo's roughly hump height.)
+3. Runners: photo humps are fatter, nearly touching, with a dark straight weld rail along the outer edge; model runners are slimmer with big dark gaps.
+4. Head top: photo valve cover is much bigger/taller with the oil cap and a flat strip carrying the pink injector tabs; model coils stand tall and
+   widely spaced with orange connectors; its valve cover looks smaller/lower.
+5. Not in the photo (expected): radiator, fan, expansion tank, pulleys' hoses on the left; stand, harness and ground are not modelled.
+Still off: all of the above; overlay compared by eye in one render, alignment is approximate (perspective not solved).

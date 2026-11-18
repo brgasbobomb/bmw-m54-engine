@@ -22,7 +22,7 @@ export function initOverlay(container, scene) {
   // Photo: intake side from above, front (pulley) at left, rear receding. Camera is the car's left, ahead of mid-length.
   $('#ov-cam').onclick = () => {
     const cam = scene.getCamera(), c = scene.controls, d = cam.position.distanceTo(c.target);
-    cam.position.copy(c.target).addScaledVector(new window.THREE.Vector3(0.5, 1, -1.1).normalize(), d);
+    cam.position.copy(c.target).addScaledVector(new window.THREE.Vector3(1, 1.15, -0.9).normalize(), d * 0.65);
     cam.lookAt(c.target);
     c.update();
   };
