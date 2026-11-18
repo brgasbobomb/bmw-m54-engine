@@ -282,3 +282,9 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   runs back under the plenum and ends at the idle valve's front end (xT - 21). It is longer than the 61 route (estimated ~110-120, not measured) as expected,
   since the valve is behind the throttle and the MAF end is ahead of it. Seen in `shot front|below --only intake-manifold --focus`: leaves the boot, corrugated run
   to the valve bar, no gaps. Not checked: that the hose clears the plenum's underside along its whole length, or the airbox (hidden by --only).
+
+- 2026-11-18 (hose clearance under the plenum, measured in the browser: hose tube vertices in the car frame vs the plenum box x -120.7…128.7, out 31…93.8,
+  up -6.8…25.8 incl. the seam band): 0 of 451 vertices inside; hose top at up -8.4, lowest point -41.7 (down at the boot end). Smallest gap under the plenum
+  footprint is 1.6 (to the seam band floor; ~2.4 to the plenum floor at -6), i.e. clear but tight, probably at the valve end where the hose meets the
+  valve (valve top is at the plenum floor by design). Not measured: hose vs the engine block, alternator, oil filter or the airbox (whole-part `--clear`
+  can't isolate the hose).
