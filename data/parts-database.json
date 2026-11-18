@@ -129,8 +129,8 @@
       "Camshafts",
       "Crankshaft"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "11311432176 (main chain)",
+    "source": "https://www.bimmerworld.com/Engine/Camshafts/Timing-Chain-Overhaul-Kit-OEM-E46-E39-Z4.html",
     "verified": false
   },
   "intakeManifold": {
@@ -146,8 +146,8 @@
       "Fuel Injectors",
       "Throttle Body"
     ],
-    "source": "https://catatwo.github.io/e46vault/engine/intake/intake-manifold",
-    "partNumber": "unverified",
+    "source": "https://www.bimmerworld.com/Intake-Fuel/Intake-Manifold/Intake-Manifold-E46-E39-E60-X3-X5-Z3-Z4-11617525753.html",
+    "partNumber": "11617525753",
     "verified": false
   },
   "disaValve": {
@@ -161,8 +161,8 @@
     "relationships": [
       "Intake Manifold"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "11617544805",
+    "source": "https://www.ecstuning.com/BMW-E46-330i-M54_3.0L/Engine/Intake/Valves/DISA_Valve/",
     "verified": false
   },
   "fuelInjectors": {
@@ -269,8 +269,8 @@
       "Engine Block",
       "Serpentine Belt"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "11517509985",
+    "source": "https://www.turnermotorsport.com/p-1030-water-pump-m52tu-m54-original-bmw/",
     "verified": false
   },
   "thermostat": {
@@ -285,8 +285,8 @@
       "Cylinder Head",
       "Coolant Lines"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "11537509227",
+    "source": "https://www.ecstuning.com/BMW-E46-330i-M54_3.0L/Engine/Cooling/Thermostat/",
     "verified": false
   },
   "coolantTank": {
@@ -301,8 +301,8 @@
       "Water Pump",
       "Radiator"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "17117573781",
+    "source": "https://www.ecstuning.com/BMW-E46-330i-M54_3.0L/Engine/Cooling/Expansion_Tank/",
     "verified": false
   },
   "radiator": {
@@ -394,8 +394,8 @@
     "relationships": [
       "Ignition Coils"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "12120037607",
+    "source": "https://www.go-parts.com/garage/ps-2002-2006-bmw-328i-spark-plug",
     "verified": false
   },
   "ignitionCoils": {
@@ -409,8 +409,8 @@
     "relationships": [
       "Cylinder Head"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "12131748018",
+    "source": "https://www.ebay.com/itm/132053699052",
     "verified": false
   },
   "starter": {
@@ -442,8 +442,8 @@
       "Power Steering Pump",
       "AC Compressor"
     ],
-    "partNumber": "unverified",
-    "source": "unverified",
+    "partNumber": "11287636379 (accessory), 11281437450 (A/C)",
+    "source": "http://blog.fcpeuro.com/m52tu-m54-serpentine-belts-explained",
     "verified": false
   },
   "pulleys": {
