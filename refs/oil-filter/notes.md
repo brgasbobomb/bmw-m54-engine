@@ -23,3 +23,7 @@ Looked at: `oil-filter-1.webp` (bmwfans exploded parts diagram), `oil-filter-2.j
 - Never visually checked close-up: static preview (python http.server) renders a blank canvas, so use Electron (`npm run dev`) and remove the airbox.
 - Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
   - Housing + canister look right, canister on top. The thin VANOS line leaves the housing and ends in free air (expected only if vanos.js hose meets it; unverified). Housing is small relative to the pan: check against block pad.
+- Clearance 2026-11-18 (VANOS steel line only: temporarily tagged the tube mesh `partId='vline'`, reverted; `npm run shot -- --clear vline ...`, world units, tube surface incl. r1.6):
+  **alternator 0.18 at (140.2,39,-30.6) = TOUCHES a 14x5x12 box of the alternator (child 4, a mounting ear)**; engine-block 6.6 at (139.4,44,-24.3); power-steering-pump 10.1; pulleys 14.4;
+  water-pump 27.8; oil-pan 44.3; cylinder-head 61.3. `vanos`/`intake`/`front-drive`/`starter` ids returned null (no object with that partId, not "far"). The vanos.js hose junction was not tested.
+  Fix idea: reroute the line's last points (local ~50..58) away from the alternator ear, or move the ear. Not done.
