@@ -56,3 +56,8 @@ on). Not opened: image_6 (fuel-rail close-up). Perspective photos, no scale: sha
 - Underside (gasket, oil-separator labyrinth, honeycomb baffle) not modelled; only matters if the cover is shown removed.
 - Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
   - Same shot as head (shared id). Cover top is mostly black with light-grey well bottoms; roundel/decals not readable at this zoom. Nothing floating. Cover rim looks proud of the head flange at the exhaust edge, check at close zoom.
+
+- Review 2026-11-18 (`npm run shot -- top|exhaust --only cylinder-head`, cover + head isolated). Rule 9: 3 sessions already spent, so no rebuild; findings only.
+  - OK: six wells now sit along the exhaust edge, plateau reads as a raised strip with a darker inset panel, roundel on the plateau and cap decal visible, nose dome with the CCV nipple at the front, no floating pieces.
+  - Wrong/missing (unchanged from the lists above): rim only on the exhaust edge and open at the rear end, no yellow HV sticker, no harness clips, no gasket lip, only 3 plateau bolts (photo has more, plus 2 trough and a few nose bolts), no part-number text, underside not modelled.
+  - New: CCV nipple stands nearly vertical in the exhaust view; the notes call it a 45 deg up-and-out barb toward the intake, so recheck it against ccv.js.
