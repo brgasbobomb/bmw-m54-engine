@@ -149,3 +149,8 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (hammerhead): two upturned end lobes added to the plenum (out 58…92, up 12…52, 9 thick, flush with each plenum end, beside
   the end runners; `eh`/`ehGeo` in intake.js). Rough: size/height by eye from the stand photo, one start-view shot only, front lobe not
   seen clearly. Still off: lobes are plain slabs (photo's ends blend into the plenum with a smooth curve), flange bumps around ports.
+
+- 2026-11-18 (flange bumps): each port rim is now a raised bevelled oval boss (outer 34×24, 3 deep + 1.2 bevel; hole unchanged 12.4×9.2),
+  flange slab raised 22 -> 27 so the bosses fit. Seen in a zoomed top shot (--only intake-manifold): bosses read as bumps around the
+  runner bases. Not tilted with the 30° runners, not compared against the photo with the overlay.
+- Still off: bosses are plain ovals (photo's blend into the flange with a softer shoulder); hammerhead lobes are slabs.
