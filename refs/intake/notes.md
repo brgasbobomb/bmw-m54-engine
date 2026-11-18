@@ -167,3 +167,7 @@ photo's FOV/roll needs a closer fit.
   over 2.4) so the boss wall sweeps into the flange instead of stepping; flange slab raised 27 -> 30 to hold it. Seen in a cropped top shot
   (shoulder visible around runner bases). Skirt top is slightly wider than the boss in X and narrower in Y, so a faint lip remains; skirts
   and bosses still aren't tilted with the 30° runners.
+
+- 2026-11-18 (boss tilt): the earlier "bosses not tilted with the 30° runners" was mostly a wrong worry. The runner's start tangent (out 12, up 8.5 in the
+  car frame) is only 5.3° above the flange normal in the slanted frame (the car group's +30° cancels the slant), so bosses/skirts were already
+  nearly aligned. They are now rotated by that 5.3° (`BOSS_TILT`, about X, tops toward +up). Not visible at shot scale; derived from the math only.

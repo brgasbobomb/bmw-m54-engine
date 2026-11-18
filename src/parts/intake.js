@@ -103,8 +103,8 @@ export function build(c) {
   for (let i = 0; i < 6; i++) {
     const boss = detail(new T.Mesh(rimGeo, matIntake), intakeGrp), skirt = detail(new T.Mesh(skirtGeo, matIntake), intakeGrp);
     boss.position.set(cx(i), headY + 5, zF + 3);
-    skirt.position.set(cx(i), headY + 5, zF + 4.2);
-    boss.rotation.x = skirt.rotation.x = BOSS_TILT;   // shoulder: flange face -> boss wall
+    skirt.position.set(cx(i), headY + 5, zF + 4.2);   // skirt = shoulder from flange face to boss wall
+    boss.rotation.x = skirt.rotation.x = BOSS_TILT;
   }
   [cx(0) - W / 2 - 6, ...gaps, cx(5) + W / 2 + 6].forEach((x, k) => { const y = k % 2 ? -3.5 : 13.5;
     for (const [geo, z] of [[nutGeo, 5.4], [collarGeo, 4.2]]) {
