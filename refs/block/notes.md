@@ -38,3 +38,38 @@ Photos opened (2): `refs/catalog/images/image_1.webp` (whole engine, front 3/4 f
 - Old per-cylinder side ribs kept as-is.
 - Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
   - Renders, no floating bits or obvious wrong size. Round disc and black rectangle on the upper face and a grey plate at the rear end are unidentified; check what they are (deck features vs leftovers). Skirt ends in black dowel-like stubs, check they are the cap bosses.
+
+## Proportions (session 2026-11-18, layout.js)
+Scale: bore spacing 91 mm = span = (LEN-36)/6 = 40.67 units -> **0.4469 units/mm** (1 unit = 2.238 mm).
+Crank centreline at y = blockY-6 (unchanged).
+
+| Value | mm | units | Source |
+|---|---|---|---|
+| Bore spacing | 91 | 40.67 | BMW spec sheet (web) |
+| Deck height, crank CL -> deck | 211 | 94.3 | BMW spec sheet (web) |
+| Stroke | 89.6 | 40.0 (throw 20.0) | BMW spec sheet (web) |
+| Rod length (c-c) | 135 | 60.3 | BMW spec sheet (web) |
+| Piston compression height (derived 211-44.8-135) | 31.2 | 14.0 | derived, not looked up |
+| Head height | 140 | 62.6 -> HEAD_H 63 | **unconfirmed** (engine-spec sites) |
+| Block width BW | – | 78 (unchanged) | **not measured**, left as-is |
+| Cover height COVER_H | – | 20 (unchanged) | **not measured**, left as-is |
+
+layout.js now: deckY = blockY-6+94.3 = blockY+88.3; block box bottom kept at blockY-36 (`blockBot`), so BH = 124.3
+and the box centre is blockY+26.2 (block.js / oil-pan.js position from `blockBot`). headY = deckY + HEAD_H/2.
+Before: deck was at crank+42 (blockY+36) and HEAD_H 34, i.e. block about 45 % and head about 54 % of real height.
+
+### Fit check after the proportion change (computed, plus one intake-side shot)
+- Inside the block, nothing pokes through: crank webs reach y≈-28, pins -26 (skirt bottom -36); pistons r 17.15 in bores r 18; bores now run y -32..84.
+- Pistons/rods are now too short for the block: throw 12 (real 20.0), rod 52 (real 60.3), crown 11.2 above pin (real 14.0).
+  Piston crown at TDC = y 69.2, deck = 88.3 -> crowns stop ~19 units below the deck (they used to poke 33 units into the head).
+  Fix belongs in crankshaft.js (crankThrow) and pistons-rods.js (rodLen, piston profile), not done here.
+- Stayed at blockY-relative heights while head/cover/intake/exhaust moved up ~81 units: front-drive pulleys (water pump y blockY+66 now
+  sits on the block, real one is on the upper block/front cover — probably OK, but the belt run vs head is unchecked),
+  radiator/expansion tank (radY = blockY+38), airbox, hoses.js (radiator end fixed, head end moved -> long stretched hoses),
+  timing-chain (crank sprocket fixed, cam sprocket follows headY, chain length grows — check it still closes).
+- Knock sensors (y blockY+1) and mount arms (blockY-4) now sit in the lower third of a much taller block.
+
+## Still off (block)
+- Pistons/rods/crank throw undersized (see above).
+- Head height 140 mm unconfirmed; BW and COVER_H never measured.
+- Parts above may float or stretch: hoses, timing chain, front drive vs head, airbox/radiator heights — not checked visually except one intake-side shot.

@@ -58,6 +58,6 @@ export function build(c) {
   const tube = detail(new T.Mesh(new T.CylinderGeometry(2.5, 2.5, 26, 8), matSteel), panGrp);
   tube.position.set(L * 0.3, 7, -W / 2 + 2);
 
-  panGrp.position.y = blockY - BH / 2 - 6;
+  panGrp.position.y = c.blockBot - 6;
   reg(panGrp, 'oil-pan');
 }

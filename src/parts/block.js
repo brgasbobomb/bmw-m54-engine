@@ -1,19 +1,20 @@
 // Engine block
 export function build(c) {
-  const { T, matBlock, matAluDark, reg, detail, roundedBox, LEN, BW, BH, blockY, cx } = c;
+  const { T, matBlock, matAluDark, reg, detail, roundedBox, LEN, BW, BH, blockY, blockBot, cx } = c;
+  const midY = blockBot + BH / 2; // box centre (deck is far above blockY)
   // ----- ENGINE BLOCK -----
   const blockGrp = new T.Group();
   // Main block casing
-  detail(roundedBox(LEN, BH, BW, 8, matBlock), blockGrp);
+  detail(roundedBox(LEN, BH, BW, 8, matBlock), blockGrp).position.y = midY;
   // Cylinder bores (6 hollow visual channels on top)
   for (let i = 0; i < 6; i++) {
     const bore = detail(new T.Mesh(new T.CylinderGeometry(18, 18, BH - 8, 24), new T.MeshStandardMaterial({ color: 0x101012, roughness: 0.9 })), blockGrp);
-    bore.position.set(cx(i), 4, 0);
+    bore.position.set(cx(i), midY + 4, 0);
     // External reinforcing structural ribs on block sides
     const ribL = detail(new T.Mesh(new T.BoxGeometry(4, BH - 12, 3), matBlock), blockGrp);
-    ribL.position.set(cx(i), 0, BW / 2 + 1);
+    ribL.position.set(cx(i), midY, BW / 2 + 1);
     const ribR = detail(new T.Mesh(new T.BoxGeometry(4, BH - 12, 3), matBlock), blockGrp);
-    ribR.position.set(cx(i), 0, -BW / 2 - 1);
+    ribR.position.set(cx(i), midY, -BW / 2 - 1);
   }
   const add = (g, x, y, z, rot) => { const m = detail(new T.Mesh(...g), blockGrp); m.position.set(x, y, z); if (rot) m.rotation.set(...rot); return m; };
   const ZAX = [Math.PI / 2, 0, 0]; // cylinder axis -> Z
