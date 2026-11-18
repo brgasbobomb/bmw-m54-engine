@@ -97,10 +97,14 @@ export function build(c) {
   const rimShape = new T.Shape().absellipse(0, 0, 17, 12, 0, Math.PI * 2);
   rimShape.holes.push(new T.Path().absellipse(0, 0, 12.4, 9.2, 0, Math.PI * 2, true));
   const rimGeo = new T.ExtrudeGeometry(rimShape, { depth: 3, bevelEnabled: true, bevelThickness: 1.2, bevelSize: 1.2, bevelSegments: 3, curveSegments: 24 });
+  // runner leaves the port along (out 12, up 8.5) in the car frame = 5.3 deg above the flange normal once the 30 deg slant is added
+  const BOSS_TILT = -Math.atan2(8.5 * Math.cos(Math.PI / 6) - 12 * Math.sin(Math.PI / 6), 8.5 * Math.sin(Math.PI / 6) + 12 * Math.cos(Math.PI / 6));
   const skirtGeo = new T.CylinderGeometry(0.85, 1, 2.4, 40, 1, true).rotateX(Math.PI / 2).scale(22, 15, 1);   // elliptical frustum, wide end on the flange
   for (let i = 0; i < 6; i++) {
-    detail(new T.Mesh(rimGeo, matIntake), intakeGrp).position.set(cx(i), headY + 5, zF + 3);
-    detail(new T.Mesh(skirtGeo, matIntake), intakeGrp).position.set(cx(i), headY + 5, zF + 4.2);   // shoulder: flange face -> boss wall
+    const boss = detail(new T.Mesh(rimGeo, matIntake), intakeGrp), skirt = detail(new T.Mesh(skirtGeo, matIntake), intakeGrp);
+    boss.position.set(cx(i), headY + 5, zF + 3);
+    skirt.position.set(cx(i), headY + 5, zF + 4.2);
+    boss.rotation.x = skirt.rotation.x = BOSS_TILT;   // shoulder: flange face -> boss wall
   }
   [cx(0) - W / 2 - 6, ...gaps, cx(5) + W / 2 + 6].forEach((x, k) => { const y = k % 2 ? -3.5 : 13.5;
     for (const [geo, z] of [[nutGeo, 5.4], [collarGeo, 4.2]]) {
