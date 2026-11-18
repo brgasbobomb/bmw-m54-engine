@@ -31,9 +31,10 @@
       "Connecting Rods",
       "Main Bearings"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11211403867",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "connectingRods": {
     "id": "connecting-rods",
@@ -234,9 +235,10 @@
     "relationships": [
       "Mass Air Flow Sensor (HFM)"
     ],
-    "partNumber": "unverified",
+    "partNumber": "13717548614",
     "source": "unverified",
-    "verified": false
+    "verified": false,
+    "partSource": "user-supplied list, not found in RealOEM diagrams checked"
   },
   "exhaustManifold": {
     "id": "exhaust-manifold",
@@ -251,8 +253,9 @@
       "Oxygen Sensors"
     ],
     "source": "https://catatwo.github.io/e46vault/engine/exhaust/manifold",
-    "partNumber": "unverified",
-    "verified": false
+    "partNumber": "11621715344 (left), 11621715345 (right)",
+    "verified": false,
+    "partSource": "user-supplied list, not found in RealOEM diagrams checked"
   },
   "oxygenSensors": {
     "id": "oxygen-sensors",
@@ -447,9 +450,10 @@
     "relationships": [
       "Flywheel"
     ],
-    "partNumber": "unverified",
+    "partNumber": "12411750803",
     "source": "unverified",
-    "verified": false
+    "verified": false,
+    "partSource": "user-supplied list, not found in RealOEM diagrams checked"
   },
   "serpentineBelt": {
     "id": "serpentine-belt",
@@ -483,9 +487,10 @@
       "Water Pump",
       "Alternator"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11281748131 (belt tensioner)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "powerSteeringPump": {
     "id": "power-steering-pump",
@@ -498,9 +503,10 @@
     "relationships": [
       "Serpentine Belt"
     ],
-    "partNumber": "unverified",
+    "partNumber": "32411095545",
     "source": "unverified",
-    "verified": false
+    "verified": false,
+    "partSource": "user-supplied list, not found in RealOEM diagrams checked"
   },
   "acCompressor": {
     "id": "ac-compressor",
@@ -563,9 +569,10 @@
       "Valve Cover",
       "Intake Manifold"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11617533400 (pressure regulating valve)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "bellhousing": {
     "id": "bellhousing",
@@ -580,8 +587,9 @@
       "Starter Motor",
       "Engine Block"
     ],
-    "partNumber": "unverified",
+    "partNumber": "23111225624",
     "source": "unverified",
-    "verified": false
+    "verified": false,
+    "partSource": "user-supplied list, not found in RealOEM diagrams checked"
   }
 }
