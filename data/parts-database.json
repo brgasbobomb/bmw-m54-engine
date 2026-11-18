@@ -89,6 +89,23 @@
     "verified": true,
     "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
+  "valveCover": {
+    "id": "valve-cover",
+    "name": "Valve Cover",
+    "type": "Cylinder Head",
+    "weight": "unverified",
+    "material": "unverified",
+    "assembly": "Head",
+    "specs": "Plastic cover with oil filler cap, spark plug wells and CCV nipple; sealed to the head by a gasket",
+    "relationships": [
+      "Cylinder Head",
+      "Ignition Coils",
+      "CCV"
+    ],
+    "partNumber": "unverified",
+    "source": "unverified",
+    "verified": false
+  },
   "camshafts": {
     "id": "camshafts",
     "name": "Camshafts (2 pcs)",

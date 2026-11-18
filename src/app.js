@@ -1055,7 +1055,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     function handlePartClick(partId) {
       if (!engineModel.getPart3D(partId)) return;
-      // every object registered under this id (the valve cover shares 'cylinder-head')
+      // every object registered under this id
       const objects = explodeParts.filter(p => p.userData.partId === partId);
 
       const hierarchy = engineModel.getHierarchy();

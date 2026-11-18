@@ -1,12 +1,13 @@
 // Explode view: part id → [x, y, z, distance], in the part files' axes (+X front, Y up,
 // +Z intake) but upright, i.e. before the 30° slant, so "up" is up on screen.
-// An id registered more than once (valve cover reuses 'cylinder-head') takes a list:
+// An id registered more than once (pulleys, belt) takes a list:
 // the nth registered object gets the nth entry, in build order (src/parts/index.js).
 // The engine block stays put; ids not listed don't move.
 // Global spread factor: raise to push every part further apart at 100%.
 const EXPLODE_SCALE = 1;
 export const EXPLODE = {
-  'cylinder-head':      [[0, 1, 0, 180], [0, 1, 0, 400]], // head, valve cover
+  'cylinder-head':      [0, 1, 0, 180],
+  'valve-cover':        [0, 1, 0, 400],
   'ignition-coils':     [0, 1, 0, 560],
   'spark-plugs':        [0, 1, 0, 480],
   'camshafts':          [0, 1, 0, 320],

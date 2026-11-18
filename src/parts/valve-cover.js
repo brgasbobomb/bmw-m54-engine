@@ -54,6 +54,6 @@ export function build(c) {
   }
 
   coverGrp.position.y = coverY;
-  reg(coverGrp, 'cylinder-head'); // Tagged under cylinder-head removable block
-  coverGrp.userData.partId = 'cylinder-head';
+  reg(coverGrp, 'valve-cover');
+  coverGrp.userData.partId = 'valve-cover';
 }

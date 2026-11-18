@@ -35,7 +35,7 @@
   },
   "valve-cover-gasket": {
     "name": "Valve cover gasket",
-    "target": "cylinder-head",
+    "target": "valve-cover",
     "remove": [
       "airbox",
       "maf-sensor",
