@@ -154,3 +154,7 @@ photo's FOV/roll needs a closer fit.
   flange slab raised 22 -> 27 so the bosses fit. Seen in a zoomed top shot (--only intake-manifold): bosses read as bumps around the
   runner bases. Not tilted with the 30° runners, not compared against the photo with the overlay.
 - Still off: bosses are plain ovals (photo's blend into the flange with a softer shoulder); hammerhead lobes are slabs.
+
+- 2026-11-18 (lobe blend): hammerhead lobe profile now has a concave fillet sweeping from its inner wall (out 58, up 38) down into the
+  plenum top (up 22) at out 36, and 3.5 bevel on the end faces (was 2; depth 5). Seen from the rear end (`rear --focus`): lobe + plenum
+  read as one silhouette. Not blended along X (end face still steps in beside the end runner); oblique views barely show the fillet.

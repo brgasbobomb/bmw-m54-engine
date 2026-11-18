@@ -33,14 +33,16 @@ export function build(c) {
   plenum.position.x = xm;
 
   // Hammerhead: both plenum ends turn up on the outer side (stand photo), beside the end runners
-  const eh = { o0: 58, o1: pl.o1 + 2, u0: 12, u1: 52 }, ehD = 9;
-  const ehShape = new T.Shape().moveTo(eh.o0, eh.u0).lineTo(eh.o1, eh.u0).lineTo(eh.o1, eh.u1 - 8)
-    .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - 8, eh.u1).lineTo(eh.o0 + 8, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - 8).lineTo(eh.o0, eh.u0);
-  const ehGeo = new T.ExtrudeGeometry(ehShape, { depth: ehD, bevelEnabled: true, bevelThickness: 2, bevelSize: 2, bevelSegments: 3, curveSegments: 8 });
+  const eh = { o0: 58, o1: pl.o1 + 2, u0: 12, u1: 52 }, ehD = 5, ehB = 3.5;
+  // inner wall sweeps out into the plenum top (up 22) in a concave fillet instead of meeting it at a step
+  const ehShape = new T.Shape().moveTo(eh.o1, eh.u0).lineTo(eh.o1, eh.u1 - 8)
+    .quadraticCurveTo(eh.o1, eh.u1, eh.o1 - 8, eh.u1).lineTo(eh.o0 + 8, eh.u1).quadraticCurveTo(eh.o0, eh.u1, eh.o0, eh.u1 - 8)
+    .lineTo(eh.o0, 38).bezierCurveTo(eh.o0, 26, eh.o0 - 8, pl.u1, eh.o0 - 22, pl.u1).lineTo(eh.o0 - 22, eh.u0).lineTo(eh.o1, eh.u0);
+  const ehGeo = new T.ExtrudeGeometry(ehShape, { depth: ehD, bevelEnabled: true, bevelThickness: ehB, bevelSize: ehB, bevelSegments: 5, curveSegments: 12 });
   for (const s of [-1, 1]) {
     const e = detail(new T.Mesh(ehGeo, matIntake), car);
     e.rotation.y = -Math.PI / 2;
-    e.position.x = s > 0 ? xm + PX / 2 - 2 : xm - PX / 2 + ehD + 2;   // extrusion runs toward -x; outer face flush with the plenum end
+    e.position.x = s > 0 ? xm + PX / 2 - ehB : xm - PX / 2 + ehD + ehB;   // extrusion runs toward -x; outer face flush with the plenum end
   }
 
   // Runners: flattened-oval tubes (r 7, x2: 28 wide, 14 thick) off the port rising 30 deg, over the crest, down the outer
