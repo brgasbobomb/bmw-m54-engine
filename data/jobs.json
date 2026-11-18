@@ -42,5 +42,13 @@
       "ccv",
       "ignition-coils"
     ]
+  },
+  "oil-filter-housing-gasket": {
+    "name": "Oil filter housing gasket",
+    "target": "oil-filter",
+    "remove": [
+      "serpentine-belt",
+      "alternator"
+    ]
   }
 }
