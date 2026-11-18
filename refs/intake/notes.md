@@ -225,3 +225,8 @@ photo's FOV/roll needs a closer fit.
 - 2026-11-18 (spine ends): spine bar is now run + 10 long with a half-ellipsoid cap (6 × 1.7 × 3.5) at each end, so it rounds off in plan and height instead of ending
   square 3 short of the outer runners' edges; same overall length as before. Seen in a zoomed oblique shot (both ends round, no stubs). Close-up of the
   cap-to-bar seam not inspected; spine is still a plain bar between the caps.
+
+- 2026-11-18 (cap-to-bar seam, close-up): zoomed on the end of the spine (scratch script, camera 22 from the cap): the rounded-box bar's rectangular
+  corners stuck out of the ellipsoid cap's elliptical section, leaving a visible lip at the seam. Bar is now an elliptical rod (CylinderGeometry
+  along X scaled 1.7 × 3.5, length run + 10), so it joins the caps exactly; re-checked close-up, one continuous rounded bar. Trade-off: the
+  spine is a rod rather than a flat strip. Only the first (+X-side / first found) cap was inspected; the other is the same geometry mirrored.

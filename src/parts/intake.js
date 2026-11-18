@@ -166,8 +166,9 @@ export function build(c) {
     detail(new T.Mesh(nipGeo, matIntake), car).position.set(cx(i), surf(0, 24) + 1.5, 24);
   }
   // Spine along the crest, half sunk into the runner tops (top 47)
-  detail(roundedBox(run + 10, 3.4, 7, 1.3, matIntake), car).position.set(xm, 46.5, 37);
-  // ends: half-ellipsoid caps (6 long, same 3.4 x 7 section) so the spine rounds off and sinks into the end runners' tops
+  // elliptical rod (3.4 x 7) so it matches the end caps' section exactly (a rounded box left a lip at the seam)
+  detail(new T.Mesh(new T.CylinderGeometry(1, 1, run + 10, 24).rotateZ(Math.PI / 2).scale(1, 1.7, 3.5), matIntake), car).position.set(xm, 46.5, 37);
+  // ends: half-ellipsoid caps (6 long, same 3.4 x 7 elliptical section as the rod) so the spine rounds off and sinks into the end runners' tops
   const capGeo = new T.SphereGeometry(1, 20, 12).scale(6, 1.7, 3.5);
   for (const sgn of [-1, 1]) detail(new T.Mesh(capGeo, matIntake), car).position.set(xm + sgn * (run / 2 + 5), 46.5, 37);
 
