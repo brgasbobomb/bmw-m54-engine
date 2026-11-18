@@ -984,7 +984,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         frameView();
 
         startRenderLoop();
-        window.__shot = { scene, frameView, isolate: handlePartIsolate }; // used by scripts/shot.mjs
+        window.__shot = { scene, frameView, isolate: handlePartIsolate, model: engineModel }; // used by scripts/shot.mjs
       } catch (err) {
         console.error('Error during initialization:', err);
         alert('Error: ' + err.message);

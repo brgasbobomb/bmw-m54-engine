@@ -1,4 +1,4 @@
-// npm run shot -- <view> [--only <part-id>] [--run]  (--run: Run engine ticked)  ->  shots/<view>.png
+// npm run shot -- <view> [--only <part-id>] [--focus <part-id> [--zoom N]] [--run]  (--run: Run engine ticked)  ->  shots/<view>.png
 import http from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
@@ -22,6 +22,10 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/jav
 const args = process.argv.slice(2);
 const oi = args.indexOf('--only');
 const only = oi >= 0 ? args.splice(oi, 2)[1] : null;
+const fi = args.indexOf('--focus');
+const focus = fi >= 0 ? args.splice(fi, 2)[1] : null;
+const zi = args.indexOf('--zoom');
+const zoom = zi >= 0 ? Number(args.splice(zi, 2)[1]) : 3;
 const ri = args.indexOf('--run'), run = ri >= 0 && !!args.splice(ri, 1);
 const view = args[0];
 if (!(view in VIEWS)) { console.error('usage: npm run shot -- <' + Object.keys(VIEWS).join('|') + '> [--only <part-id>]'); process.exit(1); }
@@ -59,6 +63,23 @@ else if (VIEWS[view]) await page.evaluate(d => {
   cam.lookAt(t);
 }, VIEWS[view]);
 
+if (focus) await page.evaluate(([id, z]) => { // aim at the part's bounding box, z times closer
+  const { scene, model } = window.__shot;
+  const obj = model.parts3D.get(id);
+  obj.updateWorldMatrix(true, true);
+  const cam = scene.getCamera(), t = scene.controls.target;
+  const min = { x: 1e9, y: 1e9, z: 1e9 }, max = { x: -1e9, y: -1e9, z: -1e9 };
+  obj.traverse(o => { if (o.geometry) { o.geometry.computeBoundingBox(); const bb = o.geometry.boundingBox;
+    for (const x of [bb.min.x, bb.max.x]) for (const y of [bb.min.y, bb.max.y]) for (const zz of [bb.min.z, bb.max.z]) {
+      const v = new cam.position.constructor(x, y, zz).applyMatrix4(o.matrixWorld);
+      min.x = Math.min(min.x, v.x); min.y = Math.min(min.y, v.y); min.z = Math.min(min.z, v.z);
+      max.x = Math.max(max.x, v.x); max.y = Math.max(max.y, v.y); max.z = Math.max(max.z, v.z); } } });
+  const c = new cam.position.constructor((min.x + max.x) / 2, (min.y + max.y) / 2, (min.z + max.z) / 2);
+  const dir = cam.position.clone().sub(t).normalize();
+  const size = Math.max(max.x - min.x, max.y - min.y, max.z - min.z);
+  t.copy(c); cam.position.copy(c).addScaledVector(dir, Math.max(size * 2.2, 40) / (z > 1 ? 1 : z));
+  cam.lookAt(c);
+}, [focus, zoom]);
 await page.waitForTimeout(3000); // removal/explode animations are ~1.5s; swiftshader frames are slow
 await mkdir(join(ROOT, 'shots'), { recursive: true });
 const out = join(ROOT, 'shots', view + '.png');

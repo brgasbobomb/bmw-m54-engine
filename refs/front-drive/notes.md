@@ -47,3 +47,5 @@ Idler (r 9), tensioner (r 11), AC pulleys left as eyeballed.
 - Water pump moved up (y +66); thermostat/hoses/radiator fan follow it via fanMount but were not re-checked for clearance.
 - Fan clutch (~100 mm) size is radiator.js's; not checked.
 - Alternator cooling duct shape is a guess (see above).
+
+- Close-up 2026-11-18 (`--focus thermostat`, intake side): pulleys, belt, thermostat housing and hoses are densely packed; no obvious part-through-part clipping, but the view is dark and hard to judge. A side-on view with the belt cover off would be a better check.

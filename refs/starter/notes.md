@@ -14,3 +14,5 @@ ring tip r40 + pinion r5. Checked in one rear-corner view only.
 - Starter body (z 43.4 +/-12.5) still overlaps the block side by ~8 mm in Z; real one nests behind the bellhousing. No bellhousing.
 - No crank sensor; no motor-end bearing cap detail; pinion has no teeth.
 - Cable is a stub, no harness routing.
+
+- Close-up 2026-11-18 (`npm run shot -- intake --focus starter-motor --zoom 1`, new option): motor + solenoid read as a cylinder pair bolted to the block side by a flat plate, nose pointing at the flywheel; no visible clipping, but the flywheel ring gear is fully exposed because there is no bellhousing. Adding the bellhousing (block.js flange is only lugs) is the next visible gap here.
