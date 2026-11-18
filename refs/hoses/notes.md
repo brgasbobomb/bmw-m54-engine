@@ -20,3 +20,5 @@ Sources: refs/hoses/hoses-1.webp (bmwfans exploded diagram: upper hose 3 with se
 - Hose has constant radius, no moulded bulge or quick-release clip.
 - Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
   - Two hoses meet at the thermostat housing and run to the radiator end points; no kinks. Upper hose end looks lifted above the lower one, plausible. Hose ends sit at the radiator's connection side only in the full engine; check the radiator tank necks line up with them at Explode 0%.
+
+- Close-ups 2026-11-18 (`--focus thermostat` from top/intake/exhaust, full engine, auto side): hoses leave the thermostat housing cleanly, clamps seated, no kinks, and the upper hose runs past the front pulley/belt plane without visibly cutting through the pulleys or fan clutch. It does pass very close to the fan-clutch disc edge right behind the thermostat clamp (can't tell by eye if it touches). Expansion-tank thin hoses seen only partly. No numeric clearance test was done (no bounding-box check) — if it matters, sample the hose centreline against the front-drive meshes.
