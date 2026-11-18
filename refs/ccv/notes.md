@@ -21,3 +21,5 @@ to a separator on the intake manifold, short return hose into the plenum.
 - Hose radius and box dimensions are unmeasured.
 - Visual check 2026-11-14 (isolated, intake view, swiftshader; shows only that part, so cross-part clashes can't be seen):
   - Top view: box with cap hole plus one curved hose; reads fine, but only one hose is visible (the second short hose to the plenum seems absent or hidden). Everything is pure black, so no detail visible in the intake view. Box looks tiny/flat compared with the hose.
+
+- 2026-11-18: single nipple now. valve-cover.js builds it (r 4.6 stem, r 5.4 barb, pointing mostly +Z and slightly up per the user's reference photo; tip at cover-local (130, 4.3, 44.3)); ccv.js's own stub is removed and its hose starts at that tip (`tip = P(130, coverY + 4.3, 44.3)`). Seen in the full-engine exhaust and intake close-ups: hose leaves the front intake corner and arches over the head; the exact junction at the tip is not clearly visible from either angle. Separator box still not seen. Old 16 mm stem was too fat for the 10.4 mm hose.

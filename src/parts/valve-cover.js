@@ -35,13 +35,14 @@ export function build(c) {
   const nose = detail(new T.Mesh(new T.SphereGeometry(1, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), matCover), coverGrp);
   nose.scale.set(16, 20, 34);
   nose.position.set(128, -10, 0);
-  // CCV nipple on the front intake corner, pointing up and out (+Z); see notes.md for coordinates
+  // CCV nipple on the front intake corner, pointing mostly outboard (+Z) and slightly up (reference photo); ccv.js starts its hose at the tip.
+  // Tip centre in cover-local coords = (130, 4.3, 44.3): base (130,-2,28) + 17.5 * (0, cos 1.2, sin 1.2).
   const ccv = new T.Group();
-  const stem = new T.Mesh(new T.CylinderGeometry(8, 8, 18, 20), matCover); stem.position.y = 9;
-  const barb = new T.Mesh(new T.CylinderGeometry(9.5, 8, 3, 20), matCover); barb.position.y = 16.5;
+  const stem = new T.Mesh(new T.CylinderGeometry(4.6, 4.6, 16, 16), matCover); stem.position.y = 8;
+  const barb = new T.Mesh(new T.CylinderGeometry(5.4, 4.6, 3, 16), matCover); barb.position.y = 15.5;
   ccv.add(stem, barb);
-  ccv.rotation.x = Math.PI / 4;
-  ccv.position.set(126, 3, 26);
+  ccv.rotation.x = 1.2;
+  ccv.position.set(130, -2, 28);
   detail(ccv, coverGrp);
   // Oil filler cap: front third of the plateau, between the 2nd and 3rd coil from the front
   const oilCap = detail(new T.Mesh(new T.CylinderGeometry(7, 8, 6, 24), matCover), coverGrp);

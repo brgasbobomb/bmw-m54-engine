@@ -9,11 +9,8 @@ export function build(c) {
   // Intake.js draws the plenum upright (car frame: out from head face, up); convert to this slanted frame.
   const car = (x, up, out) => P(x, headY + up * C - out * S, BW / 2 + 1 + up * S + out * C);
 
-  const nipY = coverY + 2, nipZ = BW / 2 - 12, nipX = LEN / 2 - 2;   // front intake corner of the cover nose
-  const nip = detail(new T.Mesh(new T.CylinderGeometry(4.2, 4.6, 12, 14), matCover), g);
-  nip.rotation.z = -Math.PI / 2; nip.position.set(nipX + 4, nipY, nipZ);
-  const lip = detail(new T.Mesh(new T.TorusGeometry(4.4, 0.9, 6, 14), matCover), g);   // barb ridge
-  lip.rotation.y = Math.PI / 2; lip.position.set(nipX + 8, nipY, nipZ);
+  const nipY = coverY + 2, nipZ = BW / 2 - 12, nipX = LEN / 2 - 2;
+  const tip = P(130, coverY + 4.3, 44.3);   // barb tip of the nipple built in valve-cover.js
 
   // Separator box on the plenum top, front end (plenum ends ~x 128, top at car-frame up 22).
   const bx = cx(5) + 12, bUp = 30, bOut = 62;
@@ -39,7 +36,7 @@ export function build(c) {
       screw.position.copy(P(0, r + 1.2, 0).applyQuaternion(q).add(band.position)); screw.quaternion.copy(q);
     }
   };
-  hose([P(nipX + 4, nipY, nipZ), P(nipX + 15, nipY, nipZ + 6), P(nipX + 20, nipY - 8, nipZ + 24),
+  hose([tip, P(138, coverY + 4, 50), P(nipX + 20, nipY - 8, nipZ + 24),
         P(nipX + 15, nipY - 22, nipZ + 50), inlet.clone().add(P(8, 4, 0)), inlet.clone().add(P(3, 0, 0))], 5.2);
   // Short hose from the box underside into the plenum top.
   const bot = car(bx - 4, 22, bOut), top = car(bx - 4, bUp - 7, bOut);
