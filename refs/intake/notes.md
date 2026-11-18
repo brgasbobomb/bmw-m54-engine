@@ -277,3 +277,8 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   of the boot is forward of the throttle, the valve is behind it, so starting there would have made the hose ~120 long, against "shorter"; I kept the shorter
   goal and started at the throttle end. Valve itself unchanged (xT-34, up pl.u0-8, out 66). Seen in one zoomed `below --focus` shot (framing poor: hose/valve
   only partly in frame). Not checked from the side.
+
+- 2026-11-18 (idle hose at the MAF end, user's choice, reverts the short route above): hose now leaves the boot's rear (-x) side at t 0.85 (`bs`, near the MAF end),
+  runs back under the plenum and ends at the idle valve's front end (xT - 21). It is longer than the 61 route (estimated ~110-120, not measured) as expected,
+  since the valve is behind the throttle and the MAF end is ahead of it. Seen in `shot front|below --only intake-manifold --focus`: leaves the boot, corrugated run
+  to the valve bar, no gaps. Not checked: that the hose clears the plenum's underside along its whole length, or the airbox (hidden by --only).
