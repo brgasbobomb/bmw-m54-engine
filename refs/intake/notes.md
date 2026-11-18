@@ -230,3 +230,6 @@ photo's FOV/roll needs a closer fit.
   corners stuck out of the ellipsoid cap's elliptical section, leaving a visible lip at the seam. Bar is now an elliptical rod (CylinderGeometry
   along X scaled 1.7 × 3.5, length run + 10), so it joins the caps exactly; re-checked close-up, one continuous rounded bar. Trade-off: the
   spine is a rod rather than a flat strip. Only the first (+X-side / first found) cap was inspected; the other is the same geometry mirrored.
+
+- 2026-11-18 (other end cap): inspected the second spine cap close-up (camera 22 from it): clean rounded end, no lip; only a faint hairline where cap meets rod
+  (normal shading change at the join, not a step). Both caps now checked.
