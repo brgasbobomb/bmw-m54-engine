@@ -271,3 +271,9 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   polyline ≈ 81 long (tube r 2.8, ≈ 15 hose diameters); its last point equals the valve's rear end (xT-47, up pl.u0-8, out 66), i.e. 0 gap, valve top
   touches the plenum floor (r 5 at up -11). Seen in `shot below|front --only intake-manifold --focus`: leaves the boot, loops under the plenum, meets the valve.
   No code change. Long for a real idle hose; the photo doesn't show the underside, so the length is unverified. The corrugation rings follow the curve.
+
+- 2026-11-18 (idle hose shortened): hose now starts on the boot's throttle end (x -12 of the bore) and runs straight down-and-back to the idle valve's FRONT end
+  (xT - 21; was the rear end xT - 47 via a loop out to out 112): polyline ≈ 61 (was ≈ 81). Asked to "move it back end" / join the boot's rear end: the MAF end
+  of the boot is forward of the throttle, the valve is behind it, so starting there would have made the hose ~120 long, against "shorter"; I kept the shorter
+  goal and started at the throttle end. Valve itself unchanged (xT-34, up pl.u0-8, out 66). Seen in one zoomed `below --focus` shot (framing poor: hose/valve
+  only partly in frame). Not checked from the side.

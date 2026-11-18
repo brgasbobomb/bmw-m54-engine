@@ -220,8 +220,8 @@ export function build(c) {
   detail(new T.Mesh(new T.BoxGeometry(10, 7, 3), matIntake), car).position.set(xT, uT - 17.5, b0 + 4);
   onBoot(new T.Mesh(new T.TorusGeometry(rB(1) + 0.3, 1.4, 6, 28), matSteelDk), 0.96);
   // Idle-air hose: corrugated, from the boot's rear side round to the idle valve's rear end
-  const icv = new T.CatmullRomCurve3([V(xT - 14, uT - 8, b0 + 2), V(xT - 28, uT - 16, b0 - 8), V(xT - 46, pl.u0 - 14, 92),
-                                      V(xT - 56, pl.u0 - 10, 74), V(xT - 47, pl.u0 - 8, 66)]);
+  const icv = new T.CatmullRomCurve3([V(xT - 12, uT - 8, b0 + 2), V(xT - 17, uT - 16, b0 - 12), V(xT - 20, pl.u0 - 12, 88),
+                                      V(xT - 21, pl.u0 - 11, 74), V(xT - 21, pl.u0 - 8, 66)]);   // to the valve's front end (xT - 21): short run
   detail(new T.Mesh(new T.TubeGeometry(icv, 40, 2.8, 10, false), matIntake), car);
   const corrGeo = new T.TorusGeometry(3.1, 0.8, 5, 12);
   for (let t = 0.12; t < 0.86; t += 0.035) {
