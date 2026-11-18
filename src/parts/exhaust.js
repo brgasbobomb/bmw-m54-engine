@@ -87,6 +87,18 @@ export function build(c) {
   // S-bend spread over even steps: its tightest bend (~15) must stay above the pipe radius 6.5 or the inner wall folds
   pipe([outA, outA.clone().addScaledVector(dA, 6), V(-36, -6, -63), V(-52, -20, -74), V(-68, -35, -86),
     V(-84, -40, -89), V(-100, -40, -89), V(-150, -40, -89)]);
+  // Tan heat-shield sleeve over the front bank's S-bend (refs/exhaust/notes.md: "tan S-bend heat-shield sleeve")
+  const matShield = new T.MeshStandardMaterial({ color: 0xb59b6a, metalness: 0.5, roughness: 0.6, side: T.DoubleSide });
+  detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(
+    [V(-36, -6, -63), V(-52, -20, -74), V(-68, -35, -86), V(-84, -40, -89)]), 24, 9.5, 16, false), matShield), exGrp);
+  // Downpipes past the outlet flanges: mating flange, two pipes merging into one (shape guessed, no photo)
+  const mate = z => detail(roundedBox(3, 30, 15, 0.5, matRust), exGrp).position.set(-153, -40, z);
+  mate(-70); mate(-89);
+  const mergeZ = -79.5;
+  [-70, -89].forEach(z => detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(
+    [V(-154, -40, z), V(-166, -40, z), V(-184, -40, mergeZ), V(-204, -40, mergeZ)]), 24, 6.5, 14, false), matExhaust), exGrp));
+  detail(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(
+    [V(-204, -40, mergeZ), V(-240, -40, mergeZ)]), 4, 7.5, 14, false), matExhaust), exGrp);
   reg(exGrp, 'exhaust-manifold');
 
   // ----- O2 SENSORS (4: before and after each cat) -----

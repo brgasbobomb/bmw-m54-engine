@@ -46,3 +46,5 @@ No ruler in any photo, so proportions only. The notes below cover both photos; n
 - Front/rear assembly assignment (A = cyl 1–3) is assumed; the cat offset (Z −70 / −89) comes from clearing the block boss, not from photos.
 - Pipes simply stop at X −150 with a box flange; no downpipe continuation, hangers or flex joint.
 - Still missing refs: exhaust-side head elevation, view from below, labeled pre/post-cat sensors, downpipe flange detail.
+
+- 2026-11-18: added the tan heat-shield sleeve over the front bank S-bend (tube r 9.5, DoubleSide) and downpipes past the outlet flanges (mating flange at x -153, two pipes merging at z -79.5 into one pipe to x -240). The merge shape/length is a guess (no photo). Seen once in the full-engine exhaust shot: reads fine; not checked close-up. Cat heat shields, O2 clip, sensor cables, port holes still missing.
