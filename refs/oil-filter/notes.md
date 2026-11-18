@@ -27,3 +27,7 @@ Looked at: `oil-filter-1.webp` (bmwfans exploded parts diagram), `oil-filter-2.j
   **alternator 0.18 at (140.2,39,-30.6) = TOUCHES a 14x5x12 box of the alternator (child 4, a mounting ear)**; engine-block 6.6 at (139.4,44,-24.3); power-steering-pump 10.1; pulleys 14.4;
   water-pump 27.8; oil-pan 44.3; cylinder-head 61.3. `vanos`/`intake`/`front-drive`/`starter` ids returned null (no object with that partId, not "far"). The vanos.js hose junction was not tested.
   Fix idea: reroute the line's last points (local ~50..58) away from the alternator ear, or move the ear. Not done.
+- Fix attempt 2026-11-18 (reverted, not a line problem): `--clear` only samples surfaces, so it can't see a tube *inside* a solid. Arithmetic in the shared pre-mirror frame:
+  alternator body = cylinder along X, centre y=blockY+36, z=52, r19, x 102..140; drive-end housing disc r19.5, x 140..146 (front-drive.js:105-106); lower lug x 126..140, y 13.5..18.5, z 46..58.
+  The VANOS hose end (vanos.js, x=140, z=44.5, y≈24..26) is 12.5 from the alternator axis, i.e. INSIDE its silhouette (r19) at the body's front face. So the line's end/riser sits in the alternator
+  whatever route it takes (under the lug, over it, or in front of the face); the 0.18 "touch" was only the lug. Needs the endpoint moved: alternator down/out (+Z), or the VANOS feed fitting/hose (vanos.js) shifted so it lands outside r19 of the alternator axis.
