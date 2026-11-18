@@ -43,7 +43,7 @@ export function build(c) {
   const bossGeo2 = new T.CylinderGeometry(2.2, 2.6, 5, 10);
   for (let i = 0; i < 6; i++) {
     const r = detail(new T.Mesh(tubeGeo, matIntake), car);
-    r.scale.x = 1.5;
+    r.scale.x = 1.3;
     r.position.x = cx(i);
     detail(new T.Mesh(bossGeo2, matIntake), car).position.set(cx(i) + 6, 48, 46);    // vacuum stub on the crest
   }
@@ -73,13 +73,20 @@ export function build(c) {
   // dark pocket seen from above.
   detail(roundedBox(run + W + 24, 22, 4, 1.5, matIntake), intakeGrp).position.set(xm, headY + 5, zF + 1);   // bottom 1 over the oil filter
   const nutGeo = new T.CylinderGeometry(2.9, 2.9, 2.4, 6), collarGeo = new T.CylinderGeometry(3.5, 3.5, 0.8, 16);
-  for (const x of [cx(0) - W / 2 - 6, ...gaps, cx(5) + W / 2 + 6]) for (const y of [-3.5, 13.5]) {
-    for (const [geo, z] of [[nutGeo, 4.6], [collarGeo, 3.4]]) {
+  // Port rims (user photos: oval ports, 7 bolts alternating high/low between and outside the ports)
+  const rimShape = new T.Shape().absellipse(0, 0, 15, 12, 0, Math.PI * 2);
+  rimShape.holes.push(new T.Path().absellipse(0, 0, 12.4, 9.2, 0, Math.PI * 2, true));
+  const rimGeo = new T.ExtrudeGeometry(rimShape, { depth: 2, bevelEnabled: false, curveSegments: 24 });
+  for (let i = 0; i < 6; i++) {
+    detail(new T.Mesh(rimGeo, matIntake), intakeGrp).position.set(cx(i), headY + 5, zF + 3);
+  }
+  [cx(0) - W / 2 - 6, ...gaps, cx(5) + W / 2 + 6].forEach((x, k) => { const y = k % 2 ? -3.5 : 13.5;
+    for (const [geo, z] of [[nutGeo, 5.4], [collarGeo, 4.2]]) {
       const n = detail(new T.Mesh(geo, matSteelDk), intakeGrp);
       n.rotation.x = Math.PI / 2;
       n.position.set(x, headY + y, zF + z);
     }
-  }
+  });
 
   // Idle-air distribution frame (3D scans): a spine along the runner crests and one U per runner lying on the
   // runner top, legs 17 apart, round end toward the head; an idle-air nipple stands inside each U.

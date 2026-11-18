@@ -111,3 +111,8 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - Still off: runners are round tubes, photo shows flattened/oval-section runners ending in a flange with 6 oval ports
   and 7 bolts (flange not reworked); plenum is a plain box, photo shows a hammerhead U with two upturned ends (not
   modelled); DISA box size/position by eye; label is tiny and edge-on from this angle.
+
+- 2026-11-18 (second pass, photos): runners narrowed (scale.x 1.5 -> 1.3, 26 wide) so gaps show between them; each port
+  on the head flange has an oval rim (15×12 outer, 12.4×9.2 hole); 7 flange bolts alternating high/low (was 14).
+  Checked from the head side with --only. Port ovals are not tilted with the 30° runners and the flange is still a
+  plain slab (photo: bumps around each port). Hammerhead plenum still not modelled; rim hole shows runner, not a dark port.
