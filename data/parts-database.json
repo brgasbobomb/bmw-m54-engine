@@ -519,10 +519,10 @@
     "relationships": [
       "Serpentine Belt"
     ],
-    "partNumber": "64526918751",
+    "partNumber": "64526918751 (alt: 64526910458)",
     "source": "unverified",
     "verified": false,
-    "partSource": "https://catatwo.github.io/e46vault/hvac/ac-compressor/"
+    "partSource": "e46vault + user-supplied Perplexity table, unconfirmed"
   },
   "vanosActuators": {
     "id": "vanos-actuators",
@@ -535,10 +535,10 @@
     "relationships": [
       "Camshafts"
     ],
-    "partNumber": "11317511408 (intake solenoid), 11317511409 (exhaust solenoid)",
+    "partNumber": "11367506142 (intake), 11367506143 (exhaust)",
     "source": "unverified",
     "verified": false,
-    "partSource": "https://catatwo.github.io/e46vault/reference/parts/engine-parts/"
+    "partSource": "user-supplied Perplexity table, unconfirmed"
   },
   "flywheel": {
     "id": "flywheel",
