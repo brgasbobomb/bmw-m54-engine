@@ -104,3 +104,10 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
 - Spine/rib not checked close-up in the viewer (screenshot was a side view).
 
 - 2026-11-18: `matIntake` lightened (0x18181a -> 0x34353a, roughness 0.62 -> 0.5) because runners read as flat black blobs in the assembled intake shot. Runner outlines and ridges now visible; boot/hoses share the material so they got lighter too (check they still read as rubber). Not checked close-up.
+
+- 2026-11-18 (user photos, DISA close-up + engine-bay top): DISA replaced: boxy black housing 70×24×18 on the outer wall
+  at mid-length low, lid seam, round actuator can + plug at the front end, small plug on top, white label on the
+  plenum behind it. Seen from the intake side in one shot; looks like the photo.
+- Still off: runners are round tubes, photo shows flattened/oval-section runners ending in a flange with 6 oval ports
+  and 7 bolts (flange not reworked); plenum is a plain box, photo shows a hammerhead U with two upturned ends (not
+  modelled); DISA box size/position by eye; label is tiny and edge-on from this angle.

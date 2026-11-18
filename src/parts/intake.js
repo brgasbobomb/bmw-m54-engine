@@ -52,14 +52,17 @@ export function build(c) {
   detail(new T.Mesh(new T.BoxGeometry(PX + 2, 2.4, 3), matCover), car).position.set(xm, pl.u0 + 1, pl.o1 + 3.5);
   detail(new T.Mesh(new T.BoxGeometry(2, pl.u1 - pl.u0 + 6, 2), matCover), car).position.set(xm, plU, pl.o1 + 3);
 
-  // DISA adjuster on the outer wall at mid-length near the bottom: round flange, body, actuator box with connector
-  for (const [r, h, o, mat] of [[9.6, 1.4, 0.7, matIntake], [8, 6, 3.4, matCover]]) {
-    const d = detail(new T.Mesh(new T.CylinderGeometry(r, r, h, 24), mat), car);
-    d.rotation.x = Math.PI / 2;
-    d.position.set(xm, 8, pl.o1 + 3 + o);
-  }
-  detail(new T.Mesh(new T.BoxGeometry(11, 9, 7), matCover), car).position.set(xm + 12.5, 8, pl.o1 + 7);
-  detail(new T.Mesh(new T.BoxGeometry(4, 4, 4), matCoil), car).position.set(xm + 12.5, 14.5, pl.o1 + 7);
+  // DISA valve (user photos 2026-11-18): boxy black housing ~70 long on the outer wall at mid-length near the bottom,
+  // lid seam, round actuator can on its front end with a plug above it; white label on the plenum behind it.
+  const dX = xm - 4, dO = pl.o1 + 3 + 9;
+  detail(roundedBox(70, 24, 18, 4, matCover), car).position.set(dX, 7, dO);
+  detail(roundedBox(72, 2, 19, 1, matIntake), car).position.set(dX, 14, dO);
+  const can = detail(new T.Mesh(new T.CylinderGeometry(9, 9, 12, 24).rotateZ(Math.PI / 2), matCover), car);
+  can.position.set(dX + 41, 5, dO - 2);
+  detail(new T.Mesh(new T.CylinderGeometry(5.5, 5.5, 3, 20).rotateZ(Math.PI / 2), matCoil), car).position.set(dX + 48, 5, dO - 2);
+  detail(new T.Mesh(new T.BoxGeometry(6, 6, 7), matCoil), car).position.set(dX + 36, 15, dO - 2);
+  const label = detail(new T.Mesh(new T.PlaneGeometry(26, 9), new T.MeshStandardMaterial({ color: 0xe8e8e4, roughness: 0.6 })), car);
+  label.rotation.y = Math.PI / 2; label.position.set(xm - 52, 12, pl.o1 + 3.2);
 
   // Intake air temperature sensor: on the plenum top at the rear end, past runner 1
   const xI = xm - PX / 2 + 5;
