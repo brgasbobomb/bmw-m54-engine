@@ -32,15 +32,15 @@ export function build(c) {
   plenum.rotation.y = -Math.PI / 2;           // shape x -> out, extrusion -> x
   plenum.position.x = xm;
 
-  // Runners: round tubes (r 10, flattened to 30 wide) off the port rising 30 deg, over the crest, down the outer
+  // Runners: flattened-oval tubes (r 7, x2: 28 wide, 14 thick) off the port rising 30 deg, over the crest, down the outer
   // side, ending inside the plenum. The outer drop stands ~5 proud of the plenum wall, as the ribbed outer face.
-  const path = new T.CatmullRomCurve3([[-2, 4.5], [10, 13], [22, 31], [36, 37], [58, 37], [78, 32], [88, 20], [86, 7], [72, 6]]
+  const path = new T.CatmullRomCurve3([[-2, 4.5], [10, 13], [22, 33], [36, 40], [58, 40], [78, 35], [91, 21], [88, 7], [72, 6]]
     .map(([o, u]) => P(o, u)), false, 'centripetal');
-  const tubeGeo = new T.TubeGeometry(path, 120, 10, 18, false);
+  const tubeGeo = new T.TubeGeometry(path, 120, 7, 18, false);
   const bossGeo2 = new T.CylinderGeometry(2.2, 2.6, 5, 10);
   for (let i = 0; i < 6; i++) {
     const r = detail(new T.Mesh(tubeGeo, matIntake), car);
-    r.scale.x = 1.3;
+    r.scale.x = 2;
     r.position.x = cx(i);
     detail(new T.Mesh(bossGeo2, matIntake), car).position.set(cx(i) + 6, 48, 46);    // vacuum stub on the crest
   }
@@ -92,9 +92,9 @@ export function build(c) {
   // Idle-air distribution frame (3D scans): a spine along the runner crests and one U per runner lying on the
   // runner top, legs 17 apart, round end toward the head; an idle-air nipple stands inside each U.
   // Moulded into the runner skin (stand photo: a low ridge on each hump), so the rib follows the runner top surface.
-  // surf(x, o): up of the runner top at lateral offset x (scaled-ellipse section, r 10 × 15) and out o, rising arch.
+  // surf(x, o): up of the runner top at lateral offset x (scaled-ellipse section, 7 thick × 14 half-wide) and out o, rising arch.
   const rise = path.getPoints(240), surf = (x, o) => {
-    const h = 10 * Math.sqrt(1 - (x / 15) ** 2);
+    const h = 7 * Math.sqrt(1 - (x / 14) ** 2);
     let best = -1e9;
     for (let k = 1; k < rise.length; k++) {
       const a = rise[k - 1], b = rise[k], dz = b.z - a.z, dy = b.y - a.y, l = Math.hypot(dz, dy);

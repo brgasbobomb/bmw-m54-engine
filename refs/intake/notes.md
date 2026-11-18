@@ -140,3 +140,8 @@ Preset camera dir is (0.5, 1, -1.1) from the current target at the current dista
 photo's FOV/roll needs a closer fit.
 
 - Still off: overlay only checked in one narrow-window shot; preset angle is by eye, not solved from the photo.
+
+- 2026-11-18 (flattened runners): runner section is now an oval 28 wide × 14 thick (TubeGeometry r 7, scale.x 2; was r 10 × 1.3).
+  Crest raised 3 so the top stays ≈ 47 (ribs/spine/stubs unchanged); outer drop centre moved to out 91 to stay ~5 proud of
+  the plenum wall. Checked in one intake-side shot only (humps read as flat ovals); no close-up, rib fit on the thinner top not checked.
+- Still off: hammerhead plenum, flange bumps around ports, runner section is constant (photo humps swell toward the crest).
