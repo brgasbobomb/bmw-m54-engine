@@ -19,7 +19,7 @@ export function build(c) {
   // Airbox (multi-angle catalog photos, refs/airbox/notes.md): deep lower housing whose side profile tapers to a
   // rounded chamfer under the far end, flat lid plate overhanging on top, clips on the seam, round outlet neck high on
   // the MAF end, louvred inlet grille low on the far end, vertical channel rib on the outer side, bolt tab with grommets.
-  const A = { x0: x0 + L + 6, x1: x0 + L + 6 + 0.36 * 6 * span, y0: 0, y1: 66, z0: z - 20, z1: z - 20 + 1.1 * BW }, seam = 54;
+  const A = { x0: x0 + L + 6, x1: x0 + L + 6 + 0.36 * 6 * span, y0: 0, y1: 57, z0: z - 14, z1: z - 14 + 1.1 * BW }, seam = 45;
   const ax = (A.x0 + A.x1) / 2, az = (A.z0 + A.z1) / 2, aw = A.x1 - A.x0, ad = A.z1 - A.z0;
   const ab = new T.Group();
   const prof = new T.Shape();   // side profile in X-Y, extruded across Z
@@ -44,15 +44,15 @@ export function build(c) {
   detail(roundedBox(aw + 5, 3, ad + 5, 1.5, matIntake), ab).position.set(ax, seam, az);                       // seam lip
   // lid: overhanging plate tilted down toward the far end, raised rim, bracket on the neck-end corner
   const lid = new T.Group();
-  detail(roundedBox(aw + 12, 3, ad + 12, 3, matCover), lid);
-  detail(roundedBox(aw + 6, 2, ad + 6, 2, matCover), lid).position.y = 2;
-  detail(roundedBox(aw - 10, 1.5, ad - 10, 2, matCoil), lid).position.y = 3.5;
-  detail(roundedBox(16, 8, 10, 1.5, matCover), lid).position.set(-aw / 2 + 6, 6, ad / 2 - 8);
-  lid.position.set(ax, A.y1 + 2, az);
-  lid.rotation.z = -0.07;
+  const matLid = new T.MeshStandardMaterial({ color: 0x141416, roughness: 0.92 });   // matte: matCover's sheen washed the flat top out to grey
+  detail(roundedBox(aw + 6, 3, ad + 4, 3, matLid), lid);   // kept flat and low: intake runner #1 arches ~3 above it
+  detail(roundedBox(aw - 10, 0.6, ad - 14, 0.3, matCoil), lid).position.y = 1.4;
+  detail(roundedBox(16, 4, 10, 1.5, matLid), lid).position.set(-aw / 2 + 8, 2.5, ad / 2 - 4);
+  lid.position.set(ax + 3, A.y1 + 1.5, az + 2);
+  lid.rotation.z = -0.03;
   ab.add(lid);
   // outlet: flat boss on the end face, long ribbed neck
-  detail(roundedBox(4, 46, 46, 4, matIntake), ab).position.set(A.x0 - 2, y, z);
+  detail(roundedBox(4, 30, 40, 4, matIntake), ab).position.set(A.x0 - 2, y, z);
   detail(new T.Mesh(alongX(new T.CylinderGeometry(18, 20, 16, 28)), matIntake), ab).position.set(A.x0 - 10, y, z);
   detail(new T.Mesh(new T.TorusGeometry(20.5, 1.6, 8, 28).rotateY(Math.PI / 2), matSteelDk), ab).position.set(A.x0 - 15, y, z);   // clamp: MAF flange to airbox neck
   for (const dx of [-8, -5]) detail(new T.Mesh(new T.TorusGeometry(19.8, 1.2, 6, 28).rotateY(Math.PI / 2), matIntake), ab).position.set(A.x0 + dx, y, z);

@@ -61,3 +61,12 @@ Catalog `image_36.jpg` (Z4 M54 bay from the front-left, viewed). Findings below;
   grommet reaches down under the neck end.
 - Still off: lid top reads light grey under top light; arm and grommet tab placement by eye; bottom (y0 0, arm to −25)
   not clearance-checked against subframe/radiator.
+
+## 2026-11-18 (4th pass, follow-up) lid colour + clearance
+- Lid: local matte material (0x141416, roughness 0.92); matCover's sheen made the flat top read grey.
+- Clearance (`npm run shot -- intake --clear airbox <ids>`): intake runner #1 arches over the box top, so the box
+  is now y 0…57 (seam 45), lid flat and low (tilt −0.03, overhang trimmed on the inner and neck sides), box moved
+  6 outboard (z0 = z − 14), outlet boss 30×40. Gaps now: intake-manifold 1.4, PS pump 7.5, throttle body 21,
+  belt 25, engine block 41, alternator 44, coolant tank 51, oil pan 52, radiator 66. MAF 0.1 = intended neck joint.
+- No subframe/body in the model, so the bottom (y 0, arm to −25) has nothing to clear yet.
+- Still off: runner #1 gap is only 1.4; lid tilt smaller than the photos because of it.
