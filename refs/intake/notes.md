@@ -254,3 +254,10 @@ Still off: all of the above; overlay compared by eye in one render, alignment is
   Clearance (`shot --clear airbox radiator,coolant-tank,pulleys`): was radiator 66 / tank 51; at out 108 it hit the tank (0.5), at 128: radiator 41, tank 16.8,
   pulleys 59. Overlay: boot and throttle now land near the photo's (front, low, curving down-left). Not checked: airbox look from outside, the boot
   shape on its new, longer-bend route, idle hose route, DISA vs the new throttle position.
+
+- 2026-11-18 (boot on the new route, inspected: `shot intake|front --only intake-manifold --focus intake-manifold`): the boot leaves the throttle cuff at the
+  front end and runs almost straight DOWN, ~85 long (≈3 diameters) before a slight outward/forward bend into the MAF end. Reason: the MAF/airbox
+  height (`bootEnd` up 42, upright frame) did not change while the throttle rose to plenum level (~118), so the drop is ~75. Reads as a long pipe, not
+  the photo's short fat elbow curving down-left; the four hoops/cage ribs are stretched along it. Cuff + tab and the clamp ring at the end look fine.
+  Idle-air hose now leaves the boot's rear and loops under the plenum; it looks plausible but is short of the valve in the intake-side shot.
+  Fix options (not done): raise `bootEnd` up (airbox.js follows) toward ~80, or put the throttle lower on the end face so the drop shortens.
