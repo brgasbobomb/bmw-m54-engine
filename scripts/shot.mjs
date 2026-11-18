@@ -63,22 +63,28 @@ else if (VIEWS[view]) await page.evaluate(d => {
   cam.lookAt(t);
 }, VIEWS[view]);
 
-if (focus) await page.evaluate(([id, z]) => { // aim at the part's bounding box, z times closer
+if (focus) await page.evaluate(async ([id, z]) => { // aim at the part; step back along the clearest side so the camera isn't inside other parts
+  const THREE = await import('three');
   const { scene, model } = window.__shot;
-  const obj = model.parts3D.get(id);
-  obj.updateWorldMatrix(true, true);
+  const obj = model.parts3D.get(id), root = model.getEngineGroup();
+  root.updateWorldMatrix(true, true);
   const cam = scene.getCamera(), t = scene.controls.target;
-  const min = { x: 1e9, y: 1e9, z: 1e9 }, max = { x: -1e9, y: -1e9, z: -1e9 };
-  obj.traverse(o => { if (o.geometry) { o.geometry.computeBoundingBox(); const bb = o.geometry.boundingBox;
-    for (const x of [bb.min.x, bb.max.x]) for (const y of [bb.min.y, bb.max.y]) for (const zz of [bb.min.z, bb.max.z]) {
-      const v = new cam.position.constructor(x, y, zz).applyMatrix4(o.matrixWorld);
-      min.x = Math.min(min.x, v.x); min.y = Math.min(min.y, v.y); min.z = Math.min(min.z, v.z);
-      max.x = Math.max(max.x, v.x); max.y = Math.max(max.y, v.y); max.z = Math.max(max.z, v.z); } } });
-  const c = new cam.position.constructor((min.x + max.x) / 2, (min.y + max.y) / 2, (min.z + max.z) / 2);
-  const dir = cam.position.clone().sub(t).normalize();
-  const size = Math.max(max.x - min.x, max.y - min.y, max.z - min.z);
-  t.copy(c); cam.position.copy(c).addScaledVector(dir, Math.max(size * 2.2, 40) / (z > 1 ? 1 : z));
-  cam.lookAt(c);
+  const box = new THREE.Box3().setFromObject(obj), c = box.getCenter(new THREE.Vector3());
+  const want = Math.max(box.getSize(new THREE.Vector3()).length() * 1.6, 40) / Math.max(z, 1);
+  const cur = cam.position.clone().sub(t).normalize();
+  const cands = [cur, ...[[1,0,0],[-1,0,0],[0,0,1],[0,0,-1],[0,1,0],[0,-1,0],[1,.4,1],[1,.4,-1],[-1,.4,1],[-1,.4,-1]].map(v => new THREE.Vector3(...v).normalize())];
+  const inPart = o => { for (; o; o = o.parent) if (o === obj) return true; return false; };
+  const rc = new THREE.Raycaster();
+  let best = null;
+  for (const d of cands) {
+    rc.set(c, d);
+    const hit = rc.intersectObject(root, true).find(h => !inPart(h.object) && h.object.visible);
+    const clear = hit ? hit.distance : Infinity;
+    const score = Math.min(clear * 0.85, want) + 0.01 * d.dot(cur);
+    if (!best || score > best.score) best = { d, clear, score };
+  }
+  const dist = Math.min(best.clear * 0.85, want);
+  t.copy(c); cam.position.copy(c).addScaledVector(best.d, dist); cam.lookAt(c);
 }, [focus, zoom]);
 await page.waitForTimeout(3000); // removal/explode animations are ~1.5s; swiftshader frames are slow
 await mkdir(join(ROOT, 'shots'), { recursive: true });
