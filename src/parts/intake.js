@@ -34,12 +34,9 @@ export function build(c) {
 
   // Runners: round tubes (r 10, flattened to 30 wide) off the port rising 30 deg, over the crest, down the outer
   // side, ending inside the plenum. The outer drop stands ~5 proud of the plenum wall, as the ribbed outer face.
-  const path = new T.CurvePath();
-  for (const seg of [[[-2, 4.5], [10, 11.5], [22, 37], [36, 37]],
-                     [[36, 37], [58, 37], [88, 34], [88, 14]],
-                     [[88, 14], [88, 4], [82, 4], [72, 6]]])
-    path.add(new T.CubicBezierCurve3(...seg.map(([o, u]) => P(o, u))));
-  const tubeGeo = new T.TubeGeometry(path, 64, 10, 18, false);
+  const path = new T.CatmullRomCurve3([[-2, 4.5], [10, 13], [22, 31], [36, 37], [58, 37], [78, 32], [88, 20], [86, 7], [72, 6]]
+    .map(([o, u]) => P(o, u)), false, 'centripetal');
+  const tubeGeo = new T.TubeGeometry(path, 120, 10, 18, false);
   const bossGeo2 = new T.CylinderGeometry(2.2, 2.6, 5, 10);
   for (let i = 0; i < 6; i++) {
     const r = detail(new T.Mesh(tubeGeo, matIntake), car);
@@ -54,15 +51,19 @@ export function build(c) {
 
   // DISA valve (user photos 2026-11-18): boxy black housing ~70 long on the outer wall at mid-length near the bottom,
   // lid seam, round actuator can on its front end with a plug above it; white label on the plenum behind it.
+  const disaGrp = new T.Group();
+  disaGrp.rotation.x = Math.PI / 6; disaGrp.position.set(0, headY, zF);   // same upright frame as `car`
   const dX = xm - 4, dO = pl.o1 + 3 + 9;
-  detail(roundedBox(70, 24, 18, 4, matCover), car).position.set(dX, 7, dO);
-  detail(roundedBox(72, 2, 19, 1, matIntake), car).position.set(dX, 14, dO);
-  const can = detail(new T.Mesh(new T.CylinderGeometry(9, 9, 12, 24).rotateZ(Math.PI / 2), matCover), car);
+  detail(roundedBox(70, 24, 18, 4, matCover), disaGrp).position.set(dX, 7, dO);
+  detail(roundedBox(72, 2, 19, 1, matIntake), disaGrp).position.set(dX, 14, dO);
+  const can = detail(new T.Mesh(new T.CylinderGeometry(9, 9, 12, 24).rotateZ(Math.PI / 2), matCover), disaGrp);
   can.position.set(dX + 41, 5, dO - 2);
-  detail(new T.Mesh(new T.CylinderGeometry(5.5, 5.5, 3, 20).rotateZ(Math.PI / 2), matCoil), car).position.set(dX + 48, 5, dO - 2);
-  detail(new T.Mesh(new T.BoxGeometry(6, 6, 7), matCoil), car).position.set(dX + 36, 15, dO - 2);
-  const label = detail(new T.Mesh(new T.PlaneGeometry(26, 9), new T.MeshStandardMaterial({ color: 0xe8e8e4, roughness: 0.6 })), car);
+  detail(new T.Mesh(new T.CylinderGeometry(5.5, 5.5, 3, 20).rotateZ(Math.PI / 2), matCoil), disaGrp).position.set(dX + 48, 5, dO - 2);
+  detail(new T.Mesh(new T.BoxGeometry(6, 6, 7), matCoil), disaGrp).position.set(dX + 36, 15, dO - 2);
+  const label = detail(new T.Mesh(new T.PlaneGeometry(26, 9), new T.MeshStandardMaterial({ color: 0xe8e8e4, roughness: 0.6 })), disaGrp);
   label.rotation.y = Math.PI / 2; label.position.set(xm - 52, 12, pl.o1 + 3.2);
+
+  reg(disaGrp, 'disa-valve');
 
   // Intake air temperature sensor: on the plenum top at the rear end, past runner 1
   const xI = xm - PX / 2 + 5;
@@ -92,7 +93,7 @@ export function build(c) {
   // runner top, legs 17 apart, round end toward the head; an idle-air nipple stands inside each U.
   // Moulded into the runner skin (stand photo: a low ridge on each hump), so the rib follows the runner top surface.
   // surf(x, o): up of the runner top at lateral offset x (scaled-ellipse section, r 10 × 15) and out o, rising arch.
-  const rise = path.curves[0].getPoints(60), surf = (x, o) => {
+  const rise = path.getPoints(240), surf = (x, o) => {
     const h = 10 * Math.sqrt(1 - (x / 15) ** 2);
     let best = -1e9;
     for (let k = 1; k < rise.length; k++) {
@@ -116,11 +117,10 @@ export function build(c) {
   detail(new T.Mesh(new T.BoxGeometry(run + 22, 3, 7), matIntake), car).position.set(xm, 46.5, 37);
 
   // Throttle mount (3D scans): a neck under the plenum at mid-length, a little toward the front, ending in a square
-  // 4-bolt flange that faces outward; a sheet bracket hangs from its foot toward the block.
+  // 4-bolt flange that faces outward; (no sheet bracket: it read as a floating panel).
   const xT = xm + 8, uT = pl.u0 - 15, oT = 66;  // throttle bore centre (car frame); flange face at oT + 7
   detail(roundedBox(34, 30, 22, 4, matIntake), car).position.set(xT, uT + 4, oT - 4);
   detail(roundedBox(36, 36, 3, 3, matIntake), car).position.set(xT, uT, oT + 5.5);
-  detail(new T.Mesh(new T.BoxGeometry(22, 26, 1.6), matIntake), car).position.set(xT + 4, uT - 28, oT + 2);
 
   // Idle valve under the plenum behind the throttle neck, on its rubber-mounted bracket
   const iv = detail(new T.Mesh(new T.CylinderGeometry(5, 5, 26, 14), matCover), car);

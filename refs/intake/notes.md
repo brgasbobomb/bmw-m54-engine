@@ -116,3 +116,11 @@ Catalog (section "Intake manifold and DISA" in `refs/catalog/photo-set.md`):
   on the head flange has an oval rim (15×12 outer, 12.4×9.2 hole); 7 flange bolts alternating high/low (was 14).
   Checked from the head side with --only. Port ovals are not tilted with the 30° runners and the flange is still a
   plain slab (photo: bumps around each port). Hammerhead plenum still not modelled; rim hole shows runner, not a dark port.
+
+- 2026-11-18 (session 3 on intake): runners are now one CatmullRomCurve3 (centripetal) through 9 points in (out, up),
+  same route as the old Beziers, ending inside the plenum; `surf()` samples the whole curve. DISA is its own group,
+  registered `disa-valve` (new entry in parts-database.json). Sheet bracket under the throttle flange removed
+  (it was the floating panel). Material stays `matIntake`: there is no separate "satin" material, it is the satin black plastic.
+- Still off: the task mentioned "domes", but the code already had tube runners (no domes were found); the runners are
+  still round tubes, not flattened ovals; hammerhead plenum not modelled; DISA size/position by eye; checked in one
+  intake-side shot only, not close-up.

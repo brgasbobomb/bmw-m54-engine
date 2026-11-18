@@ -141,6 +141,20 @@
     "source": "https://catatwo.github.io/e46vault/engine/intake/intake-manifold",
     "partNumber": "unverified"
   },
+  "disaValve": {
+    "id": "disa-valve",
+    "name": "DISA Valve",
+    "type": "Intake System",
+    "weight": "unverified",
+    "material": "Plastic housing, vacuum actuator",
+    "assembly": "Intake",
+    "specs": "Switches intake runner length (dual-stage resonance flap)",
+    "relationships": [
+      "Intake Manifold"
+    ],
+    "partNumber": "unverified",
+    "source": "unverified"
+  },
   "fuelInjectors": {
     "id": "fuel-injectors",
     "name": "Fuel Injectors (6 pcs)",
