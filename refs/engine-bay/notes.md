@@ -61,3 +61,10 @@ only). Other parts: see their own folders.
 - Expansion tank: cap, level sensor block, bleed screw and hose spigots missing.
 - Upper radiator hose end: +Z corner vs. −Z top unresolved.
 - Conduit/vacuum hoses and dipstick are not modelled.
+
+- Assembled-engine check 2026-11-18 (`npm run shot -- intake|exhaust|front`, full engine, swiftshader — this DOES render, unlike the isolated preview pane):
+  - Expansion tank is a flat cream/white box with no detail; it is the most out-of-place object in every view (next to radiator, upper corner). Give it a proper material + cap/neck.
+  - Intake view: manifold runners and most of the intake side read as flat black blobs; no detail visible. Needs lighter material or highlights.
+  - Exhaust view looks coherent (manifold, cats, pipe, radiator, hoses); pipe ends in a bare box flange far past the block.
+  - Front view is dominated by the radiator (expected); engine behind it is not checked.
+  - No obvious part-through-part clashes seen at these angles; starter/block overlap and hose-vs-pulley clearance still need a close-up.
