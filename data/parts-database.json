@@ -14,8 +14,9 @@
       "Cylinder Head"
     ],
     "source": "https://tractortechspecs.com/bmw_m54b30_specs.html",
-    "partNumber": "unverified",
-    "verified": false
+    "partNumber": "11117502918",
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "crankshaft": {
     "id": "crankshaft",
@@ -46,9 +47,10 @@
       "Crankshaft",
       "Pistons"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11241437210 (set)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "pistons": {
     "id": "pistons",
@@ -62,9 +64,10 @@
       "Connecting Rods",
       "Cylinder Head"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11257506222 (Mahle, std)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "cylinderHead": {
     "id": "cylinder-head",
@@ -80,9 +83,10 @@
       "Intake Manifold",
       "Exhaust Manifold"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11127514543",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "camshafts": {
     "id": "camshafts",
@@ -97,9 +101,10 @@
       "Timing Chain",
       "VANOS Actuators"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11317500388 (intake), 11311435416 (exhaust)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "valves": {
     "id": "valves",
@@ -114,8 +119,9 @@
       "Camshafts"
     ],
     "source": "https://engine-specs.net/?p=9326",
-    "partNumber": "unverified",
-    "verified": false
+    "partNumber": "11341438385 (intake), 11347505731 (exhaust)",
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "timingChain": {
     "id": "timing-chain",
@@ -129,9 +135,10 @@
       "Camshafts",
       "Crankshaft"
     ],
-    "partNumber": "11311432176 (main chain)",
+    "partNumber": "11311432176 (lower), 11311432177 (upper)",
     "source": "https://www.bimmerworld.com/Engine/Camshafts/Timing-Chain-Overhaul-Kit-OEM-E46-E39-Z4.html",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "intakeManifold": {
     "id": "intake-manifold",
@@ -148,7 +155,8 @@
     ],
     "source": "https://www.bimmerworld.com/Intake-Fuel/Intake-Manifold/Intake-Manifold-E46-E39-E60-X3-X5-Z3-Z4-11617525753.html",
     "partNumber": "11617525753",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "disaValve": {
     "id": "disa-valve",
@@ -163,7 +171,8 @@
     ],
     "partNumber": "11617544805",
     "source": "https://www.ecstuning.com/BMW-E46-330i-M54_3.0L/Engine/Intake/Valves/DISA_Valve/",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "fuelInjectors": {
     "id": "fuel-injectors",
@@ -176,9 +185,10 @@
     "relationships": [
       "Intake Manifold"
     ],
-    "partNumber": "unverified",
+    "partNumber": "13537546245",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "throttleBody": {
     "id": "throttle-body",
@@ -191,9 +201,10 @@
     "relationships": [
       "Intake Manifold"
     ],
-    "partNumber": "unverified",
+    "partNumber": "13547502445",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "mafSensor": {
     "id": "maf-sensor",
@@ -207,9 +218,10 @@
       "Airbox",
       "Throttle Body"
     ],
-    "partNumber": "unverified",
+    "partNumber": "13627567451",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "airbox": {
     "id": "airbox",
@@ -253,9 +265,10 @@
     "relationships": [
       "Exhaust Manifold"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11781742050 (control), 11781433940 (monitor)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "waterPump": {
     "id": "water-pump",
@@ -271,7 +284,8 @@
     ],
     "partNumber": "11517509985",
     "source": "https://www.turnermotorsport.com/p-1030-water-pump-m52tu-m54-original-bmw/",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "thermostat": {
     "id": "thermostat",
@@ -285,9 +299,10 @@
       "Cylinder Head",
       "Coolant Lines"
     ],
-    "partNumber": "11537509227",
+    "partNumber": "11531437040 (housing with thermostat)",
     "source": "https://www.ecstuning.com/BMW-E46-330i-M54_3.0L/Engine/Cooling/Thermostat/",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "coolantTank": {
     "id": "coolant-tank",
@@ -303,7 +318,8 @@
     ],
     "partNumber": "17117573781",
     "source": "https://www.ecstuning.com/BMW-E46-330i-M54_3.0L/Engine/Cooling/Expansion_Tank/",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "radiator": {
     "id": "radiator",
@@ -317,9 +333,10 @@
       "Coolant Tank",
       "Cooling Fan"
     ],
-    "partNumber": "unverified",
+    "partNumber": "17119071518 / 17119071519",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "oilPan": {
     "id": "oil-pan",
@@ -333,9 +350,10 @@
       "Engine Block",
       "Oil Pump"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11131432703",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "oilPump": {
     "id": "oil-pump",
@@ -349,9 +367,10 @@
       "Crankshaft",
       "Oil Filter Housing"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11417501568",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "oilFilter": {
     "id": "oil-filter",
@@ -364,9 +383,10 @@
     "relationships": [
       "Oil Pump"
     ],
-    "partNumber": "unverified",
+    "partNumber": "11421713838 (housing)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "alternator": {
     "id": "alternator",
@@ -379,9 +399,10 @@
     "relationships": [
       "Serpentine Belt"
     ],
-    "partNumber": "unverified",
+    "partNumber": "12317501592 (90A)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "sparkPlugs": {
     "id": "spark-plugs",
@@ -396,7 +417,8 @@
     ],
     "partNumber": "12120037607",
     "source": "https://www.go-parts.com/garage/ps-2002-2006-bmw-328i-spark-plug",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "ignitionCoils": {
     "id": "ignition-coils",
@@ -409,9 +431,10 @@
     "relationships": [
       "Cylinder Head"
     ],
-    "partNumber": "12131748018",
+    "partNumber": "12131703228 (Bosch) / 12137599219 (Bremi)",
     "source": "https://www.ebay.com/itm/132053699052",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "starter": {
     "id": "starter-motor",
@@ -444,7 +467,8 @@
     ],
     "partNumber": "11287636379 (accessory), 11281437450 (A/C)",
     "source": "http://blog.fcpeuro.com/m52tu-m54-serpentine-belts-explained",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "pulleys": {
     "id": "pulleys",
@@ -520,9 +544,10 @@
       "Crankshaft",
       "Starter Motor"
     ],
-    "partNumber": "unverified",
+    "partNumber": "21217512474 (twin mass, manual)",
     "source": "unverified",
-    "verified": false
+    "verified": true,
+    "partSource": "https://www.realoem.com/bmw/enUS/partgrp?id=ET55-EUR-07-2002-E46-BMW-330i"
   },
   "ccv": {
     "id": "ccv",
